@@ -7,15 +7,35 @@ interface Props {
   role: string;
   year: string;
   tags: string[];
+  slug: string;
 }
 
-const { title, description, role, year, tags } = Astro.props;
+const { title, description, role, year, tags, slug } = Astro.props;
+
+const ogTitle = `${title} — Austin Ban`;
+const ogDescription = description;
+
+const caseStudySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description,
+  url: `https://austinban.github.io/portfolio-v2/work/${slug}`,
+  author: {
+    '@type': 'Person',
+    name: 'Austin Ban',
+    url: 'https://austinban.github.io/portfolio-v2',
+  },
+  dateCreated: year,
+  keywords: tags.join(', '),
+};
 ---
 
-<Base title={`${title} — Austin Ban`}>
+<Base title={ogTitle} description={ogDescription} ogTitle={ogTitle} ogDescription={ogDescription} ogType="article" schema={caseStudySchema}>
+
   <div class="min-h-screen bg-dark text-cream font-sans">
     <nav class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-8 md:px-16 py-6">
-      <a href="/" class="text-muted text-sm uppercase tracking-widest hover:text-cream transition-colors duration-200">
+      <a href="/portfolio-v2/" class="text-muted text-sm uppercase tracking-widest hover:text-cream transition-colors duration-200">
         ← Back
       </a>
       <span class="text-muted text-sm">{year}</span>
@@ -41,15 +61,13 @@ const { title, description, role, year, tags } = Astro.props;
 
 <style>
   .prose-custom :global(h2) {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fffbf0;
     margin-top: 3rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 0.75rem;
     color: #7a7060;
+    font-weight: 700;
   }
 
   .prose-custom :global(p) {

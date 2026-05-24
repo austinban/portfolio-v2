@@ -13,8 +13,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const { title, description, role, year, tags } = entry.data;
+const slug = entry.id;
 ---
 
-<CaseStudy {title} {description} {role} {year} {tags}>
+<CaseStudy {title} {description} {role} {year} {tags} {slug}>
   <Content />
 </CaseStudy>

@@ -1,10 +1,58 @@
 ---
 import Base from '../layouts/Base.astro';
 import Portfolio from '../components/Portfolio';
+import { getCollection } from 'astro:content';
+
+const workEntries = await getCollection('work');
+const sortedWork = workEntries.sort((a, b) => a.data.order - b.data.order);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Austin Ban',
+  jobTitle: 'Product Designer & Developer',
+  url: 'https://austinban.github.io/portfolio-v2',
+  sameAs: [
+    'https://linkedin.com/in/austin-ban-4b719a89',
+    'https://github.com/austinban',
+  ],
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Thrive Global',
+  },
+  knowsAbout: ['Product Design', 'UX Design', 'Frontend Development', 'Design Systems', 'React', 'TypeScript'],
+};
 ---
 
-<Base title="Austin Ban">
+<Base
+  title="Austin Ban — Product Designer & Developer"
+  description="Product designer and developer at Thrive Global. I build things that are fast, opinionated, and a little hard to forget."
+  ogType="website"
+  schema={personSchema}
+>
+  <!-- SEO skeleton: visible to crawlers, covered visually by the fixed React overlay -->
+  <div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+    <h1>Austin Ban — Product Designer &amp; Developer</h1>
+    <p>Product designer and developer at Thrive Global. I build things that are fast, opinionated, and a little hard to forget.</p>
+    <nav>
+      <ul>
+        {sortedWork.map(entry => (
+          <li>
+            <a href={`/portfolio-v2/work/${entry.id}`}>
+              {entry.data.title} — {entry.data.description}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <p>Contact: <a href="mailto:austin@austinban.com">austin@austinban.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/austin-ban-4b719a89">linkedin.com/in/austin-ban-4b719a89</a></p>
+    <p>GitHub: <a href="https://github.com/austinban">github.com/austinban</a></p>
+  </div>
+
   <Portfolio client:load />
+
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 </Base>
 
 <script>
