@@ -3,6 +3,7 @@ import {
   Plane, Rocket, Atom, Music, ScrollText, Guitar,
   Sparkles, Zap, FlaskConical, Compass, Moon, Wand2, Bird, Flower2,
   Code2, Crown, Dna, Search, Flag, Star, Mic2, Landmark, Trophy, Heart, Users, Sun, PartyPopper,
+  Snowflake, Terminal, HeartHandshake,
   Lightbulb, Telescope, Orbit, Globe, Waves, Microscope, Cpu, Monitor,
   Satellite, Palette, Stethoscope, Wrench, Calculator, Swords, Sword,
   Megaphone, Leaf, Shield, Scroll, BookOpen, Flame, Map, Music2,
@@ -197,9 +198,72 @@ export const EASTER_EGGS: EasterEggConfig[] = [
   { id: 'euler',            names: ['euler'],                              Icon: Pi,         type: 'float-up',  count: 10, size: 2.5, quip: "e to the i-pi plus one equals a great name." },
   { id: 'babbage',          names: ['babbage', 'charles babbage'],         Icon: Cpu,        type: 'rain',      count: 10, size: 2.5, quip: 'The original computer. Still impressive.' },
 
+  // ── More Musicians ───────────────────────────────────────────────────────────
+  { id: 'taylor-swift',     names: ['taylor swift', 'taylor'],           Icon: Music2,      type: 'rain',       count: 15, size: 2,   quip: "We're getting that feeling again. And again." },
+  { id: 'michael-jackson',  names: ['michael jackson'],                  Icon: Music2,      type: 'fly-up',     count: 1,  size: 5,   quip: 'Hee-hee! The king of pop arrives.' },
+  { id: 'freddie-mercury',  names: ['freddie mercury', 'freddie'],       Icon: Music2,      type: 'fly-up',     count: 1,  size: 5,   quip: 'Is this the real name? Is it just fantasy?' },
+  { id: 'bob-marley',       names: ['bob marley', 'marley'],             Icon: Music2,      type: 'float-up',   count: 12, size: 2.5, quip: "Every little thing gonna be alright." },
+  { id: 'stevie',           names: ['stevie wonder', 'stevie'],          Icon: Music2,      type: 'rain',       count: 12, size: 2,   quip: "Isn't she lovely. The name, I mean." },
+  { id: 'dolly',            names: ['dolly parton', 'dolly'],            Icon: Music2,      type: 'float-up',   count: 12, size: 2.5, quip: 'Working 9 to 5 to earn this welcome.' },
+  { id: 'amy',              names: ['amy winehouse', 'amy'],             Icon: Music2,      type: 'float-up',   count: 12, size: 2.5, quip: "They tried to make her leave. She wouldn't." },
+  { id: 'dylan',            names: ['bob dylan', 'dylan'],               Icon: Feather,     type: 'float-up',   count: 10, size: 2.5, quip: "The answer is blowin' through this name." },
+  { id: 'drake',            names: ['drake'],                            Icon: Music2,      type: 'rain',       count: 12, size: 2,   quip: "Started from the name screen, now we're here." },
+  { id: 'gaga',             names: ['lady gaga', 'gaga'],                Icon: Sparkles,    type: 'rain',       count: 15, size: 2,   quip: 'Born this way. Into this portfolio.' },
+
+  // ── More Scientists ───────────────────────────────────────────────────────────
+  { id: 'hubble',           names: ['hubble', 'edwin hubble'],           Icon: Telescope,   type: 'float-up',   count: 8,  size: 3,   quip: 'The universe is expanding. So is your taste.' },
+  { id: 'heisenberg',       names: ['heisenberg'],                       Icon: BrainCircuit,type: 'rain',       count: 10, size: 2.5, quip: "We know the name. Not its velocity." },
+  { id: 'mendel',           names: ['mendel', 'gregor mendel'],          Icon: Sprout,      type: 'float-up',   count: 12, size: 2.5, quip: 'Your name passed all the dominant traits.' },
+  { id: 'kepler',           names: ['kepler', 'johannes kepler'],        Icon: Orbit,       type: 'float-up',   count: 8,  size: 3,   quip: 'Elliptically great name.' },
+  { id: 'planck',           names: ['planck', 'max planck'],             Icon: Atom,        type: 'rain',       count: 12, size: 2.5, quip: 'Quantum of excellent taste.' },
+  { id: 'berners-lee',      names: ['tim berners-lee', 'berners-lee'],   Icon: Globe,       type: 'float-up',   count: 10, size: 2.5, quip: 'Without you, none of this exists.' },
+  { id: 'linus',            names: ['linus torvalds', 'linus'],          Icon: Terminal,    type: 'rain',       count: 12, size: 2,   quip: "Talk is cheap. Show me the name." },
+
+  // ── More Historical ───────────────────────────────────────────────────────────
+  { id: 'spartacus',        names: ['spartacus'],                        Icon: Sword,       type: 'fly-across', count: 1,  size: 5,   quip: 'I am Spartacus. Also, great name.' },
+  { id: 'marcus-aurelius',  names: ['marcus aurelius'],                  Icon: Scroll,      type: 'float-up',   count: 10, size: 2.5, quip: 'You have power over your name. Use it wisely.' },
+  { id: 'boudicca',         names: ['boudicca'],                         Icon: Flame,       type: 'fly-across', count: 1,  size: 5,   quip: 'Warrior. Legend. Name icon.' },
+  { id: 'hannibal-hist',    names: ['hannibal'],                         Icon: Swords,      type: 'fly-across', count: 1,  size: 5,   quip: "Not the cannibal one. We hope." },
+  { id: 'ramesses',         names: ['ramesses', 'ramses'],               Icon: Crown,       type: 'fly-across', count: 1,  size: 5,   quip: 'Pharaoh-level name drop.' },
+  { id: 'tutankhamun',      names: ['tutankhamun', 'tut'],               Icon: Crown,       type: 'float-up',   count: 10, size: 3,   quip: 'The golden name lives again.' },
+  { id: 'catherine',        names: ['catherine the great', 'catherine'], Icon: Crown,       type: 'float-up',   count: 10, size: 2.5, quip: 'The Great? Clearly.' },
+  { id: 'lao-tzu',          names: ['lao tzu'],                          Icon: Scroll,      type: 'float-up',   count: 10, size: 2.5, quip: 'The name that can be named is eternally great.' },
+
+  // ── Mythology ─────────────────────────────────────────────────────────────────
+  { id: 'zeus',             names: ['zeus'],                             Icon: Zap,         type: 'rain',       count: 12, size: 3,   quip: 'Lightning-level name drop.' },
+  { id: 'poseidon',         names: ['poseidon'],                         Icon: Waves,       type: 'float-up',   count: 12, size: 2.5, quip: 'Lord of the seas. And this portfolio.' },
+  { id: 'apollo',           names: ['apollo'],                           Icon: Star,        type: 'float-up',   count: 12, size: 2.5, quip: 'The god of good taste has arrived.' },
+  { id: 'athena',           names: ['athena'],                           Icon: Shield,      type: 'float-up',   count: 10, size: 2.5, quip: 'Wisdom detected. Obviously.' },
+  { id: 'hercules',         names: ['hercules'],                         Icon: Dumbbell,    type: 'fly-up',     count: 1,  size: 5,   quip: 'Twelve labours. Zero boring names.' },
+  { id: 'loki',             names: ['loki'],                             Icon: Swords,      type: 'rain',       count: 10, size: 2.5, quip: 'God of mischief. God of great names.' },
+  { id: 'achilles',         names: ['achilles'],                         Icon: Sword,       type: 'fly-up',     count: 1,  size: 5,   quip: "Heel yeah, that's a great name." },
+  { id: 'odysseus',         names: ['odysseus', 'ulysses'],              Icon: Sailboat,    type: 'fly-across', count: 1,  size: 5,   quip: 'Long journey. Worth it.' },
+  { id: 'merlin',           names: ['merlin'],                           Icon: Star,        type: 'float-up',   count: 12, size: 2.5, quip: 'The wizard approves of your name.' },
+
+  // ── More Fiction & Film ───────────────────────────────────────────────────────
+  { id: 'king-arthur',      names: ['king arthur'],                      Icon: Sword,       type: 'fly-up',     count: 1,  size: 5,   quip: 'The once and future visitor.' },
+  { id: 'mulan',            names: ['mulan'],                            Icon: Sword,       type: 'fly-across', count: 1,  size: 5,   quip: 'Dishonor on your cow. Honor on your name.' },
+  { id: 'elsa',             names: ['elsa'],                             Icon: Snowflake,   type: 'float-up',   count: 15, size: 2.5, quip: "Let it go... into this portfolio." },
+  { id: 'simba',            names: ['simba'],                            Icon: Star,        type: 'fly-up',     count: 1,  size: 5,   quip: 'Remember who you are.' },
+  { id: 'tom-hanks',        names: ['tom hanks'],                        Icon: Film,        type: 'float-up',   count: 10, size: 2.5, quip: 'Life is like a box of great names.' },
+  { id: 'dicaprio',         names: ['dicaprio', 'leonardo dicaprio'],    Icon: Film,        type: 'float-up',   count: 10, size: 2.5, quip: "I'm king of the world... of portfolios." },
+  { id: 'keanu',            names: ['keanu reeves', 'keanu'],            Icon: Film,        type: 'fly-across', count: 1,  size: 5,   quip: "What if I told you this was a great name." },
+  { id: 'tom-cruise',       names: ['tom cruise'],                       Icon: Plane,       type: 'fly-across', count: 1,  size: 5,   quip: 'Feels the need. The need for this portfolio.' },
+  { id: 'robin-hood',       names: ['robin hood'],                       Icon: TreePine,    type: 'float-up',   count: 12, size: 2.5, quip: 'Stealing the show since the Middle Ages.' },
+  { id: 'wonder-woman',     names: ['wonder woman', 'diana prince'],     Icon: Shield,      type: 'fly-up',     count: 1,  size: 5,   quip: 'Themyscira sends their regards.' },
+
+  // ── More Athletes ─────────────────────────────────────────────────────────────
+  { id: 'kobe',             names: ['kobe', 'kobe bryant'],              Icon: Star,        type: 'fly-up',     count: 1,  size: 5,   quip: 'Mamba mentality. Mamba name.' },
+  { id: 'lebron',           names: ['lebron', 'lebron james'],           Icon: Trophy,      type: 'fly-up',     count: 1,  size: 5,   quip: 'The king has logged in.' },
+  { id: 'tyson',            names: ['mike tyson', 'tyson'],              Icon: Dumbbell,    type: 'fly-up',     count: 1,  size: 5,   quip: 'Everyone has a plan until they see this portfolio.' },
+  { id: 'maradona',         names: ['maradona'],                         Icon: Trophy,      type: 'float-up',   count: 10, size: 2.5, quip: 'The hand of... a great name.' },
+  { id: 'pele',             names: ['pele'],                             Icon: Trophy,      type: 'fly-up',     count: 1,  size: 5,   quip: 'O rei. The king of names.' },
+  { id: 'ronaldo',          names: ['ronaldo', 'cristiano ronaldo'],     Icon: Trophy,      type: 'fly-up',     count: 1,  size: 5,   quip: 'SIUUUUU! What a name!' },
+
   // ── Personal ─────────────────────────────────────────────────────────────────
   { id: 'austin',           names: ['austin'],                             Icon: PartyPopper, type: 'float-up',  count: 16, size: 2.5, quip: "No way. We have the same name." },
   { id: 'marianne',         names: ['marianne'],                           Icon: Heart,      type: 'float-up',  count: 18, size: 2.5, quip: "That's my mom's name!" },
   { id: 'ban',              names: [' ban'],                               Icon: Users,      type: 'float-up',  count: 14, size: 2.5, quip: 'Wait, are we related?' },
-  { id: 'goldie',           names: ['goldie'],                             Icon: Sun,        type: 'float-up',  count: 16, size: 2.5, quip: "Hi, Goldie! (that's my daughter's name)" },
+  { id: 'goldie',           names: ['goldie'],                             Icon: Sun,          type: 'float-up',   count: 16, size: 2.5, quip: "Hi, Goldie! (that's my daughter's name)" },
+  { id: 'callie',           names: ['callie'],                             Icon: HeartHandshake, type: 'float-up', count: 16, size: 2.5, quip: "Are you my wife? Awkward if not..." },
 ];
