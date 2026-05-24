@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Portfolio from '../components/Portfolio';
+---
+
+<Base title="Austin Ban">
+  <Portfolio client:load />
+</Base>
+
+<script>
+  document.documentElement.classList.add('scene-mode');
+</script>

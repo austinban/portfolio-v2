@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Cooper Hewitt', system-ui, sans-serif;
+
+  --color-yellow: #eeab12;
+  --color-yellow-light: #f5c842;
+  --color-yellow-dim: #c48e0e;
+  --color-pink: #fe826a;
+  --color-pink-light: #ff9f8a;
+  --color-pink-dim: #d4604a;
+  --color-cream: #fffbf0;
+  --color-dark: #0c0b09;
+  --color-dark-surface: #161410;
+  --color-muted: #7a7060;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('/cooperhewitt-light-webfont.woff2') format('woff2'),
+       url('/cooperhewitt-light-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('/cooperhewitt-book-webfont.woff2') format('woff2'),
+       url('/cooperhewitt-book-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('/cooperhewitt-medium-webfont.woff2') format('woff2'),
+       url('/cooperhewitt-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('/cooperhewitt-heavy-webfont.woff2') format('woff2'),
+       url('/cooperhewitt-heavy-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-dark);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+}
+
+html.scene-mode,
+html.scene-mode body {
+  height: 100%;
+  overflow: hidden;
+}
+
+::selection {
+  background-color: var(--color-yellow);
+  color: var(--color-dark);
+}
