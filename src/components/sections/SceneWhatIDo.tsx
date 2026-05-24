@@ -3,9 +3,9 @@ import { useScene } from '../../context/SceneEngine';
 import EditableName from '../ui/EditableName';
 
 const disciplines = [
-  { label: 'Product Design', detail: 'Systems thinking, 0→1 products, and interaction design that earns trust' },
-  { label: 'Frontend Dev', detail: 'React, TypeScript, performance obsession, design systems that ship' },
-  { label: 'Design Systems', detail: 'Tokens, components, and documentation people actually read' },
+  { label: 'Frontend Engineering', detail: 'React, TypeScript, and performance-first code — built to scale from startup to production' },
+  { label: 'UX Engineering', detail: 'The seam between design and code: interaction patterns, design systems, and products that just click' },
+  { label: 'Team Scaling', detail: 'Grown engineering teams from 4 to 20+, mentored junior devs, and shipped amid ambiguity' },
 ];
 
 const container = {
@@ -50,8 +50,8 @@ export default function SceneWhatIDo() {
 
         <motion.p variants={item} className="text-muted text-sm mt-8">
           Currently{' '}
-          <span className="text-cream font-medium">Head of Design at Thrive Global</span>
-          {' '}— helping people build resilience through better habits and tools.
+          <span className="text-cream font-medium">Senior UX Engineer at Thrive Global</span>
+          {' '}— building tools that help people beat burnout and build better habits.
         </motion.p>
       </div>
     </motion.div>

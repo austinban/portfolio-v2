@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function EditableName({ className = '' }: Props) {
-  const { visitorName, setName, isRandomName } = useScene();
+  const { visitorName, setName } = useScene();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState('');
   const [error, setError] = useState('');
@@ -28,7 +28,7 @@ export default function EditableName({ className = '' }: Props) {
     if (!trimmed) { setEditing(false); return; }
 
     if (trimmed.length > MAX_NAME_LENGTH) {
-      setError(`That's still too long. Keep it under ${MAX_NAME_LENGTH} characters.`);
+      setError(`Keep it under ${MAX_NAME_LENGTH} characters.`);
       inputRef.current?.focus();
       return;
     }
@@ -49,51 +49,73 @@ export default function EditableName({ className = '' }: Props) {
     if (e.key === 'Escape') setEditing(false);
   };
 
-  if (editing) {
-    return (
-      <span className="inline-flex flex-col">
-        <input
-          ref={inputRef}
-          type="text"
-          value={draft}
-          onChange={e => { setDraft(e.target.value); setError(''); }}
-          onBlur={commit}
-          onKeyDown={handleKeyDown}
-          maxLength={40}
-          className={`bg-transparent border-b-2 border-yellow outline-none text-yellow font-bold leading-none ${className}`}
-          style={{ width: `${Math.max(draft.length, 4)}ch` }}
-        />
-        <AnimatePresence>
-          {error && (
-            <motion.span
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="text-pink text-xs mt-1 font-normal normal-case tracking-normal"
-            >
-              {error}
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </span>
-    );
-  }
-
   return (
-    <motion.button
-      onClick={() => setEditing(true)}
-      className={`group relative inline-flex items-baseline gap-1.5 cursor-pointer ${className}`}
-      whileHover={{ opacity: 0.85 }}
-      title="Click to edit your name"
-    >
-      {visitorName}
-      <motion.span
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileHover={{ opacity: 1, scale: 1 }}
-        className="opacity-0 group-hover:opacity-60 text-[0.45em] font-normal uppercase tracking-widest text-muted transition-opacity duration-150 select-none"
+    <>
+      <span
+        onClick={() => setEditing(true)}
+        className={`cursor-pointer hover:opacity-75 transition-opacity duration-150 ${className}`}
+        title="Click to edit"
       >
-        edit
-      </motion.span>
-    </motion.button>
+        {visitorName}
+      </span>
+
+      <AnimatePresence>
+        {editing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-dark"
+            onClick={() => setEditing(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-center gap-6 px-8"
+              onClick={e => e.stopPropagation()}
+            >
+              <p className="text-muted text-xs uppercase tracking-widest">Edit name</p>
+
+              <input
+                ref={inputRef}
+                type="text"
+                value={draft}
+                onChange={e => { setDraft(e.target.value); setError(''); }}
+                onKeyDown={handleKeyDown}
+                maxLength={40}
+                className="bg-transparent border-b-2 border-yellow outline-none text-cream font-bold text-5xl md:text-7xl text-center leading-none"
+                style={{ width: `${Math.max(draft.length, 6)}ch` }}
+              />
+
+              <AnimatePresence mode="wait">
+                {error ? (
+                  <motion.span
+                    key="error"
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="text-pink text-sm"
+                  >
+                    {error}
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="hint"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-muted text-xs uppercase tracking-widest"
+                  >
+                    Enter to save · Esc to cancel
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

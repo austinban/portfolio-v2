@@ -34,13 +34,13 @@ export default function SceneAbout() {
 
         <motion.div variants={item} className="flex flex-col gap-5 text-lg text-muted font-light leading-relaxed max-w-lg">
           <p>
-            I've spent the last decade at the intersection of design and engineering — shipping products in fintech, healthcare, and wellness. I work best at the seam between the two: close enough to the code to know what's hard, close enough to users to know what matters.
+            I've spent the last decade building at the intersection of frontend engineering and UX — shipping products across fintech, SaaS, and wellness. I work best at the seam between the two: close enough to the code to know what's hard, close enough to users to know what matters.
           </p>
           <p>
-            Right now I'm at Thrive Global, building tools that help people be less burnt out. Before that: Alpaca, Venture360, and a handful of things that didn't make it to the portfolio.
+            Right now I'm a Senior UX Engineer at Thrive Global, building tools that help people beat burnout. Before that: Firstbase, Azura, Athena Advisory, and a handful of things that didn't make it to the portfolio.
           </p>
           <p>
-            When I'm not working, I'm hiking, reading something I probably won't finish, or insisting my coffee order is not complicated.
+            When I'm not working, I'm hiking in Maine, reading something I probably won't finish, or insisting my coffee order is not complicated.
           </p>
         </motion.div>
       </div>

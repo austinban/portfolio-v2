@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { MAX_NAME_LENGTH } from '../utils/nameConfig';
+import { isProfane } from '../utils/profanity';
 
 const RANDOM_NAMES = [
   'Captain Waffles',
@@ -52,18 +54,41 @@ export function SceneProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
+    const urlScene = (() => {
+      const p = new URLSearchParams(window.location.search).get('scene');
+      if (p === null) return null;
+      const n = parseInt(p, 10);
+      return n >= 0 && n < TOTAL_SCENES ? n : null;
+    })();
+
     if (stored) {
       try {
         const { name, isRandom } = JSON.parse(stored);
+        if (
+          typeof name !== 'string' ||
+          name.trim().length === 0 ||
+          name.trim().length > MAX_NAME_LENGTH ||
+          isProfane(name)
+        ) {
+          localStorage.removeItem(STORAGE_KEY);
+          return;
+        }
         setVisitorName(name);
         setIsRandomName(isRandom ?? false);
         setHasEnteredName(true);
-        setCurrentScene(0);
+        setCurrentScene(urlScene ?? 0);
       } catch {
         localStorage.removeItem(STORAGE_KEY);
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (currentScene < 0) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('scene', String(currentScene));
+    window.history.replaceState(null, '', url.toString());
+  }, [currentScene]);
 
   const setName = useCallback((name: string, isRandom = false) => {
     setVisitorName(name);

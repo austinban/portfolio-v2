@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
 import EditableName from '../ui/EditableName';
+import NameParticles from '../ui/NameParticles';
 
 const container = {
   hidden: {},
@@ -19,9 +20,11 @@ const links = [
 ];
 
 export default function SceneContact() {
-  const { isRandomName } = useScene();
+  const { isRandomName, visitorName } = useScene();
 
   return (
+    <>
+    <NameParticles name={visitorName} />
     <motion.div
       className="fixed inset-0 flex items-center px-8 md:px-20 bg-dark"
       variants={container}
@@ -61,5 +64,6 @@ export default function SceneContact() {
         </div>
       </div>
     </motion.div>
+    </>
   );
 }
