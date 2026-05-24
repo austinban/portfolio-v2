@@ -20,7 +20,7 @@ export default function SceneGreeting() {
     ? 'Bold choice, embracing the alias. I respect it.'
     : visitorName.trim().toLowerCase() === 'austin'
       ? 'Might I just say, what a beautiful name you have.'
-      : 'Good to meet you. If that is your real name.';
+      : 'Good to meet you. If that is your real name...';
 
   return (
     <>

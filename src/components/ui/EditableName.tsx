@@ -102,14 +102,24 @@ export default function EditableName({ className = '' }: Props) {
                     {error}
                   </motion.span>
                 ) : (
-                  <motion.span
+                  <motion.div
                     key="hint"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-muted text-xs uppercase tracking-widest"
+                    className="flex flex-col items-center gap-3"
                   >
-                    Enter to save · Esc to cancel
-                  </motion.span>
+                    <span className="text-muted text-xs uppercase tracking-widest">
+                      Enter to save · Esc to cancel
+                    </span>
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                      className="text-muted/50 text-xs tracking-wide italic"
+                    >
+                      Psst — certain names come with a surprise.
+                    </motion.span>
+                  </motion.div>
                 )}
               </AnimatePresence>
             </motion.div>
