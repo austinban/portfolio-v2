@@ -300,6 +300,7 @@ export const it: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "Non ci posso credere. Abbiamo lo stesso nome.",
     marianne: "È il nome di mia madre!",
+    trevor: "Ehi, è il nome di mio fratello!",
     ban: "Aspetta, siamo parenti?",
     goldie: "Ciao Goldie! (è il nome di mia figlia)",
     callie: "Sei mia moglie? Imbarazzante se non lo sei...",

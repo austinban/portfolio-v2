@@ -297,6 +297,7 @@ export const zh: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "不会吧。我们同名？",
     marianne: "这是我妈妈的名字！",
+    trevor: "这是我兄弟的名字！",
     ban: "等等，我们是亲戚吗？",
     goldie: "嗨，Goldie！（那是我女儿的名字）",
     callie: "你是我妻子吗？如果不是就有点尴尬……",

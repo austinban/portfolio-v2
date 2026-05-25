@@ -62,7 +62,7 @@ export default function SceneGreeting() {
             className="text-cream mb-2 text-6xl leading-none font-bold md:text-8xl"
           >
             {headingBefore}
-            <EditableName className="text-cream" />
+            <EditableName className="text-pink" />
             {headingAfter}
           </motion.h1>
 

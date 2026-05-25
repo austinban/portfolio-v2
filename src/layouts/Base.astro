@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SiteChrome from "../components/ui/SiteChrome";
 
 interface Props {
   title?: string;
@@ -12,6 +13,7 @@ interface Props {
   lang?: string;
   dir?: "ltr" | "rtl";
   extraFonts?: string[];
+  showChrome?: boolean;
 }
 
 const {
@@ -25,6 +27,7 @@ const {
   lang = "en",
   dir = "ltr",
   extraFonts = [],
+  showChrome = true,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -103,6 +106,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   -->
   <body>
+    {showChrome && <SiteChrome client:load locale={lang} />}
     <slot />
   </body>
   <script>

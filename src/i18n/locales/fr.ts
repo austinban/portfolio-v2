@@ -301,6 +301,7 @@ export const fr: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "Non, pas possible. On a le même prénom.",
     marianne: "C'est le prénom de ma mère !",
+    trevor: "Hé, c'est le prénom de mon frère !",
     ban: "Attends, on est de la même famille ?",
     goldie: "Coucou Goldie ! (c'est le prénom de ma fille)",
     callie: "Tu es ma femme ? Gênant si ce n'est pas le cas...",

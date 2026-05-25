@@ -299,6 +299,7 @@ export const es: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "No puede ser. Tenemos el mismo nombre.",
     marianne: "¡Ese es el nombre de mi madre!",
+    trevor: "¡Ese es el nombre de mi hermano!",
     ban: "Espera, ¿somos familia?",
     goldie: "¡Hola, Goldie! (ese es el nombre de mi hija)",
     callie: "¿Eres mi esposa? Incómodo si no lo eres...",

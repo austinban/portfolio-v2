@@ -303,6 +303,7 @@ export const de: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "Kein Weg. Wir haben denselben Namen.",
     marianne: "Das ist der Name meiner Mutter!",
+    trevor: "Hey, das ist der Name meines Bruders!",
     ban: "Warte, sind wir verwandt?",
     goldie: "Hallo, Goldie! (das ist der Name meiner Tochter)",
     callie: "Bist du meine Frau? Unangenehm, wenn nicht...",

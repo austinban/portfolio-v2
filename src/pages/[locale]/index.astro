@@ -32,6 +32,7 @@ const fontMap: Record<string, string[]> = {
   lang={locale}
   dir={t.dir}
   extraFonts={fontMap[locale] ?? []}
+  showChrome={false}
 >
   <Portfolio client:load locale={locale} translations={t} />
 </Base>

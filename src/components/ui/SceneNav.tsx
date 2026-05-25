@@ -5,13 +5,16 @@ import { useScene, TOTAL_SCENES } from "../../context/SceneEngine";
 interface Props {
   drawerOpen?: boolean;
   drawerWidth?: number;
+  onAdvance?: () => void;
 }
 
 export default function SceneNav({
   drawerOpen = false,
   drawerWidth = 0,
+  onAdvance,
 }: Props) {
   const { currentScene, advance, retreat, t } = useScene();
+  const handleAdvance = onAdvance ?? advance;
   const [bouncing, setBouncing] = useState(false);
 
   const isFirst = currentScene === 0;
@@ -83,7 +86,7 @@ export default function SceneNav({
 
       {!isLast ? (
         <motion.button
-          onClick={advance}
+          onClick={handleAdvance}
           animate={bouncing ? { y: [0, -6, 0] } : { y: 0 }}
           transition={
             bouncing

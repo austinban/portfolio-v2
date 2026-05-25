@@ -30,6 +30,11 @@ const links = [
     href: "https://github.com/austinban",
     display: "austinban",
   },
+  {
+    label: "This site",
+    href: "/portfolio-v2/about-this-site",
+    display: "About this site",
+  },
 ];
 
 export default function SceneContact() {
@@ -91,13 +96,7 @@ export default function SceneContact() {
               className="text-cream mb-4 text-5xl leading-none font-bold md:text-7xl"
             >
               {headingBefore}
-              <EditableName
-                className={
-                  isRandomName
-                    ? "text-pink text-5xl md:text-7xl"
-                    : "text-cream text-5xl md:text-7xl"
-                }
-              />
+              <EditableName className="text-pink text-5xl md:text-7xl" />
               {headingAfter}
             </motion.h1>
 

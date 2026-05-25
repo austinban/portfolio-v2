@@ -46,12 +46,17 @@ const sceneVariants: Variants = {
 };
 
 function PortfolioInner() {
-  const { currentScene, direction, hasEnteredName, advance, retreat, t } =
+  const { currentScene, direction, hasEnteredName, advance, retreat, goTo, locale, t } =
     useScene();
   const announcerId = useId();
   const touchStartX = useRef<number | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [actualDrawerWidth, setActualDrawerWidth] = useState(DRAWER_WIDTH);
+
+  const advanceAndClose = () => {
+    setDrawerOpen(false);
+    advance();
+  };
 
   useEffect(() => {
     const update = () =>
@@ -74,16 +79,17 @@ function PortfolioInner() {
       if (currentScene < 0) return;
       if (e.key === "ArrowRight") {
         e.preventDefault();
-        advance();
+        advanceAndClose();
       }
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        retreat();
+        if (currentScene === 0) setDrawerOpen(true);
+        else retreat();
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [currentScene, advance, retreat, drawerOpen]);
+  }, [currentScene, advanceAndClose, retreat, drawerOpen]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -94,7 +100,7 @@ function PortfolioInner() {
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
     touchStartX.current = null;
     if (Math.abs(deltaX) < 50) return;
-    if (deltaX < 0) advance();
+    if (deltaX < 0) advanceAndClose();
     else retreat();
   };
 
@@ -107,7 +113,7 @@ function PortfolioInner() {
 
   return (
     <div role="main" className="relative h-full w-full overflow-hidden">
-      <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} onGoTo={goTo} />
 
       {/* Scene content panel — slides right to reveal drawer */}
       <motion.div
@@ -165,13 +171,21 @@ function PortfolioInner() {
       </AnimatePresence>
 
       {hasEnteredName && (
-        <SceneNav drawerOpen={drawerOpen} drawerWidth={actualDrawerWidth} />
+        <SceneNav
+          drawerOpen={drawerOpen}
+          drawerWidth={actualDrawerWidth}
+          onAdvance={advanceAndClose}
+        />
       )}
       {hasEnteredName && <HintToast />}
       <NamePeek />
 
       <div className="pointer-events-auto fixed top-6 right-8 z-50">
-        <LanguageSwitcher />
+        <LanguageSwitcher
+          locale={locale}
+          currentScene={currentScene}
+          label={t.ui.langSwitcher.label}
+        />
       </div>
 
       {/* Hamburger — fixed but slides to stay at top-left of the content panel */}

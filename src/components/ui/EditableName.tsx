@@ -16,7 +16,7 @@ export default function EditableName({ className = "" }: Props) {
   const [draft, setDraft] = useState("");
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const triggerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLSpanElement>(null);
   const wasEditingRef = useRef(false);
   const openedViaKeyboardRef = useRef(false);
   const dialogTitleId = useId();
@@ -76,17 +76,19 @@ export default function EditableName({ className = "" }: Props) {
 
   return (
     <>
-      <span
+      <motion.span
         ref={triggerRef}
         role="button"
         tabIndex={0}
         onClick={() => setEditing(true)}
         onKeyDown={handleTriggerKeyDown}
         aria-label={`${en.label}: ${visitorName}`}
-        className={`cursor-pointer transition-opacity duration-150 hover:opacity-75 ${className}`}
+        className={`inline-block cursor-pointer ${className}`}
+        whileHover={{ y: -4 }}
+        transition={{ type: "spring", stiffness: 400, damping: 15 }}
       >
         {visitorName}
-      </span>
+      </motion.span>
 
       <AnimatePresence>
         {editing && (

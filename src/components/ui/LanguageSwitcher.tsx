@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useScene } from "../../context/SceneEngine";
 import { SUPPORTED_LOCALES } from "../../i18n";
 
 const BASE = "/portfolio-v2";
@@ -12,8 +11,17 @@ function localeHref(locale: string, currentScene: number) {
   return `${BASE}/${locale}/${sceneParam}`;
 }
 
-export default function LanguageSwitcher() {
-  const { locale, t, currentScene } = useScene();
+interface Props {
+  locale: string;
+  currentScene?: number;
+  label?: string;
+}
+
+export default function LanguageSwitcher({
+  locale,
+  currentScene = -1,
+  label = "Language",
+}: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -37,7 +45,7 @@ export default function LanguageSwitcher() {
     <div ref={ref} className="relative" onKeyDown={handleKeyDown}>
       <button
         onClick={() => setOpen((o) => !o)}
-        aria-label={t.ui.langSwitcher.label}
+        aria-label={label}
         aria-expanded={open}
         aria-haspopup="menu"
         className="text-muted hover:text-cream flex items-center gap-1.5 text-xs tracking-widest uppercase transition-colors duration-200"
@@ -52,7 +60,7 @@ export default function LanguageSwitcher() {
         {open && (
           <motion.div
             role="menu"
-            aria-label={t.ui.langSwitcher.label}
+            aria-label={label}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}

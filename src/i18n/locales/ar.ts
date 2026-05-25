@@ -298,6 +298,7 @@ export const ar: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "لا يصدَّق. لنا الاسم ذاته.",
     marianne: "هذا اسم أمي!",
+    trevor: "هذا اسم أخي!",
     ban: "هل نحن من عائلة واحدة؟",
     goldie: "مرحباً يا جولدي! (هذا اسم ابنتي)",
     callie: "هل أنت زوجتي؟ سيكون محرجاً إن لم تكن…",

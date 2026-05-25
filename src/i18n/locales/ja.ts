@@ -298,6 +298,7 @@ export const ja: Translations = {
     "mysterious-dave": "Dave's here. Everything else: unclear.",
     austin: "まさか。同じ名前ですね。",
     marianne: "それは私の母親の名前です！",
+    trevor: "それは私の兄弟の名前です！",
     ban: "親戚ですか？",
     goldie: "ゴールディ、こんにちは！（それは私の娘の名前です）",
     callie: "私の妻ですか？違ったら気まずいですね…",

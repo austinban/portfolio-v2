@@ -2055,6 +2055,15 @@ export const EASTER_EGGS: EasterEggConfig[] = [
     quip: "That's my mom's name!",
   },
   {
+    id: "trevor",
+    names: ["trevor"],
+    Icon: Users,
+    type: "float-up",
+    count: 14,
+    size: 2.5,
+    quip: "Hey, that's my brother's name!",
+  },
+  {
     id: "ban",
     names: [" ban"],
     Icon: Users,

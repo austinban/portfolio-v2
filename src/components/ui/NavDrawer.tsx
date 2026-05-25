@@ -1,11 +1,11 @@
 import { type Variants, motion, AnimatePresence } from "framer-motion";
 import { Lock } from "lucide-react";
-import { useScene } from "../../context/SceneEngine";
 
 export const DRAWER_WIDTH = 280;
 
 // Links that navigate to a scene within the SPA (no page reload)
 const SCENE_LINKS: { label: string; scene: number }[] = [
+  { label: "Home", scene: 0 },
   { label: "About", scene: 3 },
   { label: "Work", scene: 2 },
   { label: "Contact", scene: 4 },
@@ -13,14 +13,13 @@ const SCENE_LINKS: { label: string; scene: number }[] = [
 
 // Regular href links
 const HREF_LINKS = [
-  { label: "Resume", href: "#" },
   { label: "About this site", href: "/portfolio-v2/about-this-site" },
 ];
 
 const SOCIAL_LINKS = [
+  { label: "Resume", href: "#" },
   { label: "GitHub", href: "https://github.com/austinban" },
   { label: "LinkedIn", href: "https://linkedin.com/in/austin-ban-4b719a89" },
-  { label: "Dribbble", href: "#" },
 ];
 
 const itemVariants: Variants = {
@@ -39,13 +38,12 @@ const itemVariants: Variants = {
 interface Props {
   open: boolean;
   onClose: () => void;
+  onGoTo: (scene: number) => void;
 }
 
-export default function NavDrawer({ open, onClose }: Props) {
-  const { goTo } = useScene();
-
+export default function NavDrawer({ open, onClose, onGoTo }: Props) {
   const handleSceneNav = (scene: number) => {
-    goTo(scene);
+    onGoTo(scene);
     onClose();
   };
 

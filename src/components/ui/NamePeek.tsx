@@ -181,7 +181,7 @@ export default function NamePeek() {
             onClick={handleClick}
           >
             <span
-              className="text-muted/50 flex overflow-hidden font-bold select-none"
+              className="text-pink/50 flex overflow-hidden font-bold select-none"
               style={{
                 fontSize: `${peek.fontSize}rem`,
                 maxWidth: "min(70vw, 520px)",
