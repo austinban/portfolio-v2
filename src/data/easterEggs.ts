@@ -267,3 +267,6 @@ export const EASTER_EGGS: EasterEggConfig[] = [
   { id: 'goldie',           names: ['goldie'],                             Icon: Sun,          type: 'float-up',   count: 16, size: 2.5, quip: "Hi, Goldie! (that's my daughter's name)" },
   { id: 'callie',           names: ['callie'],                             Icon: HeartHandshake, type: 'float-up', count: 16, size: 2.5, quip: "Are you my wife? Awkward if not..." },
 ];
+
+/** Union of every valid easter egg ID — used to enforce complete translations */
+export type EggId = typeof EASTER_EGGS[number]['id'];

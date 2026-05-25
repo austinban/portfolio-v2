@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Portfolio from '../components/Portfolio';
 import { getCollection } from 'astro:content';
+import { en } from '../i18n';
 
 const workEntries = await getCollection('work');
 const sortedWork = workEntries.sort((a, b) => a.data.order - b.data.order);
@@ -50,11 +51,35 @@ const personSchema = {
     <p>GitHub: <a href="https://github.com/austinban">github.com/austinban</a></p>
   </div>
 
-  <Portfolio client:load />
+  <Portfolio client:load locale="en" translations={en} />
 
   <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 </Base>
 
 <script>
   document.documentElement.classList.add('scene-mode');
+
+  // Auto-detect browser locale on first visit.
+  // If the user has already picked a language (stored in localStorage), respect that.
+  // Only redirects if the browser language is one we support and it isn't English.
+  (function () {
+    const SUPPORTED = ['es', 'fr', 'it', 'de', 'zh', 'ja', 'ar'];
+    const PREF_KEY = 'portfolio_locale_pref';
+    const BASE = '/portfolio-v2';
+
+    // If user explicitly chose a language via the switcher, never auto-redirect again
+    const stored = localStorage.getItem(PREF_KEY);
+    if (stored) return;
+
+    // Parse browser language list (e.g. ["es-ES", "en-US"] → "es")
+    const preferred = (navigator.languages ?? [navigator.language])
+      .map(lang => lang.split('-')[0].toLowerCase())
+      .find(lang => SUPPORTED.includes(lang));
+
+    if (preferred) {
+      // Mark this as an auto-redirect so the switcher doesn't fight with us
+      localStorage.setItem(PREF_KEY, preferred);
+      window.location.replace(`${BASE}/${preferred}/`);
+    }
+  })();
 </script>

@@ -1,40 +1,34 @@
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
-import EditableName from '../ui/EditableName';
 
-const disciplines = [
-  { label: 'Frontend Engineering', detail: 'React, TypeScript, and performance-first code — built to scale from startup to production' },
-  { label: 'UX Engineering', detail: 'The seam between design and code: interaction patterns, design systems, and products that just click' },
-  { label: 'Team Scaling', detail: 'Grown engineering teams from 4 to 20+, mentored junior devs, and shipped amid ambiguity' },
-];
-
-const container = {
+const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, x: -24 },
   show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function SceneWhatIDo() {
-  const { isRandomName } = useScene();
+  const { isRandomName, t } = useScene();
+  const w = t.scenes.whatIDo;
 
   return (
     <motion.div
-      className="fixed inset-0 flex items-center px-8 md:px-20 bg-dark"
+      className="fixed inset-0 flex items-center px-12 md:px-24 bg-dark"
       variants={container}
       initial="hidden"
       animate="show"
     >
       <div className="max-w-2xl w-full">
         <motion.p variants={item} className="text-muted text-sm uppercase tracking-widest mb-8">
-          {isRandomName ? "Here's the pitch:" : "Here's what I do:"}
+          {isRandomName ? w.labelRandom : w.labelDefault}
         </motion.p>
 
         <div className="flex flex-col gap-px">
-          {disciplines.map(({ label, detail }) => (
+          {w.disciplines.map(({ label, detail }) => (
             <motion.div
               key={label}
               variants={item}
@@ -49,9 +43,7 @@ export default function SceneWhatIDo() {
         </div>
 
         <motion.p variants={item} className="text-muted text-sm mt-8">
-          Currently{' '}
-          <span className="text-cream font-medium">Senior UX Engineer at Thrive Global</span>
-          {' '}— building tools that help people beat burnout and build better habits.
+          {w.currently}
         </motion.p>
       </div>
     </motion.div>

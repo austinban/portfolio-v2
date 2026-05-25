@@ -80,3 +80,51 @@ html.scene-mode body {
   background-color: var(--color-yellow);
   color: var(--color-dark);
 }
+
+:lang(zh) {
+  font-family: 'Noto Sans SC', var(--font-sans), sans-serif;
+}
+
+:lang(ja) {
+  font-family: 'Noto Sans JP', var(--font-sans), sans-serif;
+}
+
+:lang(ar) {
+  font-family: 'Noto Sans Arabic', var(--font-sans), sans-serif;
+}
+
+/* Accessible focus ring — visible, high-contrast, consistent */
+:focus-visible {
+  outline: 2px solid var(--color-yellow);
+  outline-offset: 3px;
+}
+
+/* Remove default focus ring for mouse/touch users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* CSS-level reduced-motion fallback for browsers that don't expose the API to JS */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

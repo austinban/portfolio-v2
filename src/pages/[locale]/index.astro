@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Portfolio from '../../components/Portfolio';
+import { getTranslations, SUPPORTED_LOCALES } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return SUPPORTED_LOCALES
+    .filter(({ locale }) => locale !== 'en')
+    .map(({ locale }) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = getTranslations(locale);
+
+const fontMap: Record<string, string[]> = {
+  zh: ['https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap'],
+  ja: ['https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap'],
+  ar: ['https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&display=swap'],
+};
+---
+
+<Base
+  title="Austin Ban — Senior UX Engineer & Frontend Developer"
+  description="Senior UX Engineer at Thrive Global with 9+ years building scalable SaaS products."
+  lang={locale}
+  dir={t.dir}
+  extraFonts={fontMap[locale] ?? []}
+>
+  <Portfolio client:load locale={locale} translations={t} />
+</Base>
+
+<script>
+  document.documentElement.classList.add('scene-mode');
+</script>

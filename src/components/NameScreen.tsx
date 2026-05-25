@@ -1,20 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect, useId } from 'react';
+import { type Variants, motion, AnimatePresence } from 'framer-motion';
 import { useScene } from '../context/SceneEngine';
 import { isProfane, getProfanityResponse } from '../utils/profanity';
 import { MAX_NAME_LENGTH } from '../utils/nameConfig';
+import { t } from '../i18n';
 
-const TOO_LONG_RESPONSES = [
-  "That's a name, a nickname, and a backstory. Trim it down.",
-  "Your parents kept it shorter than that. Probably.",
-  "Is that a name or your WiFi password?",
-  "Wonderful. Now pick the part you actually go by.",
-  "I'd display that but we'd need a smaller font. A lot smaller.",
-  "That's a biography, not a name.",
-  "Even your email address is shorter than that.",
-];
-
-const container = {
+const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -23,18 +14,22 @@ const container = {
   exit: { opacity: 0, y: -16, transition: { duration: 0.3 } },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function NameScreen() {
-  const { setName, getRandomName } = useScene();
+  const { setName, getRandomName, t: tr } = useScene();
+  const ns = tr.ui.nameScreen;
   const [input, setInput] = useState('');
   const [randomName, setRandomName] = useState('');
   const [phase, setPhase] = useState<'input' | 'random'>('input');
   const [errorMsg, setErrorMsg] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const headingId = useId();
+  const errorId = useId();
+  const counterId = useId();
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -64,9 +59,9 @@ export default function NameScreen() {
     setInput(val);
     if (errorMsg) setErrorMsg('');
 
-    // Set a length-specific message once they go over (only on first breach)
     if (val.trim().length === MAX_NAME_LENGTH + 1) {
-      setErrorMsg(TOO_LONG_RESPONSES[Math.floor(Math.random() * TOO_LONG_RESPONSES.length)]!);
+      const responses = ns.tooLong;
+      setErrorMsg(responses[Math.floor(Math.random() * responses.length)]!);
     } else if (val.trim().length <= MAX_NAME_LENGTH) {
       setErrorMsg('');
     }
@@ -101,12 +96,12 @@ export default function NameScreen() {
               exit={{ opacity: 0, y: -12, transition: { duration: 0.25 } }}
             >
               <motion.p variants={item} className="text-muted text-sm uppercase tracking-widest mb-4">
-                Before we start
+                {ns.before}
               </motion.p>
 
-              <motion.h1 variants={item} className="text-5xl md:text-7xl font-bold text-cream leading-none mb-10">
-                What's your<br />
-                <span className="text-yellow">name?</span>
+              <motion.h1 id={headingId} variants={item} className="text-5xl md:text-7xl font-bold text-cream leading-none mb-10">
+                {ns.headingLine1}<br />
+                <span className="text-yellow">{ns.headingLine2}</span>
               </motion.h1>
 
               <motion.form variants={item} onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -116,13 +111,19 @@ export default function NameScreen() {
                     type="text"
                     value={input}
                     onChange={handleInputChange}
-                    placeholder="Type it here"
+                    placeholder={ns.placeholder}
+                    aria-labelledby={headingId}
+                    aria-describedby={[errorMsg ? errorId : '', showCounter ? counterId : ''].filter(Boolean).join(' ') || undefined}
+                    aria-invalid={hasError || isTooLong || undefined}
                     className={`w-full bg-transparent border-b-2 text-cream text-2xl md:text-3xl font-light py-3 outline-none placeholder:text-muted/40 transition-colors duration-200 ${borderColor}`}
                   />
 
                   <AnimatePresence>
                     {showCounter && (
                       <motion.span
+                        id={counterId}
+                        aria-live="polite"
+                        aria-atomic="true"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -130,7 +131,9 @@ export default function NameScreen() {
                           isTooLong ? 'text-pink' : 'text-muted/60'
                         }`}
                       >
-                        {isTooLong ? `${charsOver} over` : `${MAX_NAME_LENGTH - trimmed.length} left`}
+                        {isTooLong
+                          ? t(ns.charsOver, { n: charsOver })
+                          : t(ns.charsLeft, { n: MAX_NAME_LENGTH - trimmed.length })}
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -140,6 +143,8 @@ export default function NameScreen() {
                   {errorMsg && (
                     <motion.p
                       key={errorMsg}
+                      id={errorId}
+                      role="alert"
                       initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
@@ -157,7 +162,7 @@ export default function NameScreen() {
                     onClick={handleSkip}
                     className="text-muted text-sm hover:text-pink transition-colors duration-200 underline underline-offset-4"
                   >
-                    I'd rather not say
+                    {ns.skip}
                   </button>
 
                   <button
@@ -165,7 +170,7 @@ export default function NameScreen() {
                     disabled={!trimmed || isTooLong}
                     className="px-6 py-3 bg-yellow text-dark text-sm font-bold uppercase tracking-wider hover:bg-yellow-light disabled:opacity-30 disabled:cursor-not-allowed transition-colors duration-200"
                   >
-                    Let's go →
+                    {ns.submit}
                   </button>
                 </div>
               </motion.form>
@@ -179,46 +184,48 @@ export default function NameScreen() {
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
             >
               <motion.p variants={item} className="text-muted text-sm uppercase tracking-widest mb-4">
-                Fair enough.
+                {ns.random.label}
               </motion.p>
 
               <motion.h1 variants={item} className="text-4xl md:text-6xl font-bold text-cream leading-tight mb-3">
-                We'll call you
+                {ns.random.weCalled}
               </motion.h1>
 
-              <AnimatePresence mode="wait">
-                <motion.h2
-                  key={randomName}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="text-4xl md:text-6xl font-bold text-pink mb-10"
-                >
-                  {randomName}.
-                </motion.h2>
-              </AnimatePresence>
+              <div aria-live="polite" aria-atomic="true">
+                <AnimatePresence mode="wait">
+                  <motion.h2
+                    key={randomName}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25 }}
+                    className="text-4xl md:text-6xl font-bold text-pink mb-10"
+                  >
+                    {randomName}.
+                  </motion.h2>
+                </AnimatePresence>
+              </div>
 
               <motion.div variants={item} className="flex items-center gap-4 flex-wrap">
                 <button
                   onClick={handleAccept}
                   className="px-6 py-3 bg-yellow text-dark text-sm font-bold uppercase tracking-wider hover:bg-yellow-light transition-colors duration-200"
                 >
-                  that works actually →
+                  {ns.random.accept}
                 </button>
 
                 <button
                   onClick={handleReroll}
                   className="text-muted text-sm hover:text-cream transition-colors duration-200 underline underline-offset-4"
                 >
-                  try another
+                  {ns.random.reroll}
                 </button>
 
                 <button
                   onClick={() => setPhase('input')}
                   className="text-muted text-sm hover:text-cream transition-colors duration-200 underline underline-offset-4"
                 >
-                  wait, I'll tell you
+                  {ns.random.goBack}
                 </button>
               </motion.div>
             </motion.div>

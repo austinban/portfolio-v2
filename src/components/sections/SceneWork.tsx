@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
-import EditableName from '../ui/EditableName';
 
 const projects = [
   { slug: 'alpaca', title: 'Alpaca', tags: ['Product Design', 'Fintech'], year: '2022' },
@@ -9,28 +8,29 @@ const projects = [
   { slug: 'glorieta', title: 'Glorieta', tags: ['Mobile', 'React Native'], year: '2019' },
 ];
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
 };
 
-const card = {
+const card: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export default function SceneWork() {
-  const { isRandomName } = useScene();
+  const { isRandomName, t } = useScene();
+  const w = t.scenes.work;
 
   return (
     <motion.div
-      className="fixed inset-0 flex flex-col justify-center px-8 md:px-20 bg-dark"
+      className="fixed inset-0 flex flex-col justify-center px-12 md:px-24 bg-dark"
       variants={container}
       initial="hidden"
       animate="show"
     >
       <motion.h1 variants={card} className="text-5xl md:text-7xl font-bold text-cream mb-12 leading-none">
-        {isRandomName ? 'The work.' : 'Things I\'ve built.'}
+        {isRandomName ? w.headingRandom : w.headingDefault}
       </motion.h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px border border-muted/20">

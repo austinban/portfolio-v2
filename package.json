@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check:i18n": "npx tsx scripts/check-translations.mjs",
+    "check:types": "tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
@@ -25,5 +27,9 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
   }
 }

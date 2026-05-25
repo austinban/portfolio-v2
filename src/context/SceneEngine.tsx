@@ -1,29 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { MAX_NAME_LENGTH } from '../utils/nameConfig';
 import { isProfane } from '../utils/profanity';
-
-const RANDOM_NAMES = [
-  'Captain Waffles',
-  'Gerald From Accounting',
-  'A Concerned Citizen',
-  "Someone's Aunt Karen",
-  'The Mysterious Stranger',
-  'Biscuit McCloud',
-  'Professor Noodles',
-  'Definitely Not A Robot',
-  'Lord Fancypants',
-  'Just Browsing',
-  'The Algorithm',
-  'A Sentient Spreadsheet',
-  'Todd (You Know The One)',
-  'Beef Wellington',
-  'Your Future Employer',
-  'Anonymous Coward',
-  'Reginald Thicke III',
-  'A Golden Retriever',
-  'Mx. Potato Head',
-  'Mysterious Dave',
-];
+import type { Translations } from '../i18n/types';
+import { en } from '../i18n';
 
 export const TOTAL_SCENES = 5;
 const STORAGE_KEY = 'portfolio_visitor';
@@ -36,6 +15,8 @@ type SceneEngineState = {
   currentScene: number;
   direction: Direction;
   hasEnteredName: boolean;
+  locale: string;
+  t: Translations;
   setName: (name: string, isRandom?: boolean) => void;
   advance: () => void;
   retreat: () => void;
@@ -45,7 +26,13 @@ type SceneEngineState = {
 
 const SceneContext = createContext<SceneEngineState | null>(null);
 
-export function SceneProvider({ children }: { children: React.ReactNode }) {
+interface SceneProviderProps {
+  children: React.ReactNode;
+  locale?: string;
+  translations?: Translations;
+}
+
+export function SceneProvider({ children, locale = 'en', translations = en }: SceneProviderProps) {
   const [visitorName, setVisitorName] = useState('');
   const [isRandomName, setIsRandomName] = useState(false);
   const [currentScene, setCurrentScene] = useState(-1);
@@ -115,13 +102,14 @@ export function SceneProvider({ children }: { children: React.ReactNode }) {
   }, [currentScene]);
 
   const getRandomName = useCallback(
-    () => RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)]!,
-    []
+    () => translations.randomNames[Math.floor(Math.random() * translations.randomNames.length)]!,
+    [translations]
   );
 
   return (
     <SceneContext.Provider value={{
       visitorName, isRandomName, currentScene, direction, hasEnteredName,
+      locale, t: translations,
       setName, advance, retreat, goTo, getRandomName,
     }}>
       {children}

@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
 import EditableName from '../ui/EditableName';
 import NameParticles from '../ui/NameParticles';
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
@@ -20,30 +20,30 @@ const links = [
 ];
 
 export default function SceneContact() {
-  const { isRandomName, visitorName } = useScene();
+  const { isRandomName, visitorName, t } = useScene();
+  const c = t.scenes.contact;
+
+  const headingStr = isRandomName ? c.headingRandom : c.headingDefault;
+  const [headingBefore = '', headingAfter = ''] = headingStr.split('{name}');
 
   return (
     <>
     <NameParticles name={visitorName} />
     <motion.div
-      className="fixed inset-0 flex items-center px-8 md:px-20 bg-dark"
+      className="fixed inset-0 flex items-center px-12 md:px-24 bg-dark"
       variants={container}
       initial="hidden"
       animate="show"
     >
       <div className="max-w-2xl w-full">
         <motion.h1 variants={item} className="text-5xl md:text-7xl font-bold text-cream leading-none mb-4">
-          {isRandomName ? (
-            <>That's the tour,{' '}<EditableName className="text-pink text-5xl md:text-7xl" />.</>
-          ) : (
-            <>That's everything,{' '}<EditableName className="text-cream text-5xl md:text-7xl" />.</>
-          )}
+          {headingBefore}
+          <EditableName className={isRandomName ? 'text-pink text-5xl md:text-7xl' : 'text-cream text-5xl md:text-7xl'} />
+          {headingAfter}
         </motion.h1>
 
         <motion.p variants={item} className="text-xl text-muted font-light mb-14">
-          {isRandomName
-            ? 'Even mysterious strangers are welcome to reach out.'
-            : 'If something here resonated, let\'s talk.'}
+          {isRandomName ? c.bodyRandom : c.bodyDefault}
         </motion.p>
 
         <div className="flex flex-col gap-px border-t border-muted/20">
@@ -57,7 +57,7 @@ export default function SceneContact() {
             >
               <span className="text-muted text-sm uppercase tracking-widest">{label}</span>
               <span className="text-cream text-xl font-medium group-hover:text-yellow transition-colors duration-200">
-                {display} →
+                {label === 'Email' ? c.emailDisplay : display} →
               </span>
             </motion.a>
           ))}

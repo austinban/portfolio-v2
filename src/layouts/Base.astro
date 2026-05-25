@@ -9,6 +9,9 @@ interface Props {
   ogImage?: string;
   ogType?: 'website' | 'article';
   schema?: object;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+  extraFonts?: string[];
 }
 
 const {
@@ -19,13 +22,16 @@ const {
   ogImage = '/portfolio-v2/og-default.png',
   ogType = 'website',
   schema,
+  lang = 'en',
+  dir = 'ltr',
+  extraFonts = [],
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,6 +55,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Locale-specific fonts -->
+    {extraFonts.length > 0 && (
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+    )}
+    {extraFonts.length > 0 && (
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    )}
+    {extraFonts.map(href => (
+      <link rel="stylesheet" href={href} />
+    ))}
 
     <!-- Structured data -->
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}

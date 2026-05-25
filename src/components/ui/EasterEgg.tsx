@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { motion, type TargetAndTransition, type Transition } from 'framer-motion';
 import { EASTER_EGGS, type AnimationType, type EasterEggConfig } from '../../data/easterEggs';
+import { useScene } from '../../context/SceneEngine';
 
 function r(min: number, max: number) {
   return min + Math.random() * (max - min);
@@ -10,9 +11,9 @@ interface Particle {
   id: number;
   style: React.CSSProperties;
   iconSize: number;
-  initial: object;
-  animate: object;
-  transition: object;
+  initial: TargetAndTransition;
+  animate: TargetAndTransition;
+  transition: Transition;
 }
 
 function buildParticle(type: AnimationType, i: number, size: number): Particle {
@@ -62,8 +63,10 @@ function buildParticles(egg: EasterEggConfig): Particle[] {
 }
 
 export default function EasterEgg({ name }: { name: string }) {
+  const { t } = useScene();
   const [egg, setEgg] = useState<EasterEggConfig | null>(null);
   const [active, setActive] = useState(false);
+  const liveRef = useRef<HTMLParagraphElement>(null);
 
   const particles = useMemo(() => (egg ? buildParticles(egg) : []), [egg]);
 
@@ -84,29 +87,44 @@ export default function EasterEgg({ name }: { name: string }) {
   if (!active || !egg) return null;
 
   const Icon = egg.Icon;
+  const quip = t.eggs[egg.id] ?? egg.quip;
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-20">
-      {particles.map(p => (
-        <motion.span
-          key={p.id}
-          style={{ ...p.style, color: '#eeab12', display: 'block' } as React.CSSProperties}
-          initial={p.initial}
-          animate={p.animate}
-          transition={p.transition}
-        >
-          <Icon size={Math.round(p.iconSize)} strokeWidth={1.5} />
-        </motion.span>
-      ))}
+      {/* Decorative particles — hidden from assistive technology */}
+      <div aria-hidden="true">
+        {particles.map(p => (
+          <motion.span
+            key={p.id}
+            style={{ ...p.style, color: '#eeab12', display: 'block' } as React.CSSProperties}
+            initial={p.initial}
+            animate={p.animate}
+            transition={p.transition}
+          >
+            <Icon size={Math.round(p.iconSize)} strokeWidth={1.5} />
+          </motion.span>
+        ))}
+      </div>
 
-      <motion.p
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: [0, 1, 1, 0], y: 0 }}
-        transition={{ duration: 4, times: [0, 0.15, 0.75, 1], delay: 1 }}
+      {/* Quip announced to screen readers via live region */}
+      <p
+        ref={liveRef}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
         className="absolute bottom-32 inset-x-0 text-center text-muted text-xs uppercase tracking-widest"
       >
-        {egg.quip}
-      </motion.p>
+        <motion.span
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: [0, 1, 1, 0], y: 0 }}
+          transition={{ duration: 4, times: [0, 0.15, 0.75, 1], delay: 1 }}
+          aria-hidden="true"
+        >
+          {quip}
+        </motion.span>
+        {/* Static text for screen readers — opacity 0 visually but readable by AT */}
+        <span className="sr-only">{quip}</span>
+      </p>
     </div>
   );
 }
