@@ -17,9 +17,9 @@ const HREF_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "Resume", href: "#" },
-  { label: "GitHub", href: "https://github.com/austinban" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/austin-ban-4b719a89" },
+  { label: "Resume", href: "/AustinBanResume2024.pdf", target: "_blank" as const },
+  { label: "GitHub", href: "https://github.com/austinban", target: "_blank" as const },
+  { label: "LinkedIn", href: "https://linkedin.com/in/austin-ban-4b719a89", target: "_blank" as const },
 ];
 
 const itemVariants: Variants = {
@@ -138,10 +138,12 @@ export default function NavDrawer({ open, onClose, onGoTo }: Props) {
             transition={{ delay: 0.45, duration: 0.3 }}
             className="flex flex-col gap-3"
           >
-            {SOCIAL_LINKS.map(({ label, href }) => (
+            {SOCIAL_LINKS.map(({ label, href, target }) => (
               <a
                 key={label}
                 href={href}
+                target={target}
+                rel={target === "_blank" ? "noopener noreferrer" : undefined}
                 className="text-muted hover:text-cream text-xs tracking-widest uppercase transition-colors duration-150"
               >
                 {label} ↗
