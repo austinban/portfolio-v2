@@ -53,8 +53,12 @@ import Base from "../layouts/Base.astro";
                 { name: "Framer Motion", role: "Animations" },
                 { name: "TypeScript", role: "Type safety" },
                 { name: "MDX", role: "Case study content" },
+                { name: "Formspree", role: "Contact form" },
                 { name: "lucide-react", role: "Icons" },
+                { name: "Prettier", role: "Code formatting" },
+                { name: "GitHub Actions", role: "CI / CD" },
                 { name: "GitHub Pages", role: "Hosting" },
+                { name: "Cloudflare Analytics", role: "Privacy-first analytics" },
               ].map(({ name, role }) => (
                 <div class="border-muted/10 flex items-baseline justify-between gap-4 border-b py-2">
                   <span class="text-cream font-medium">{name}</span>
@@ -86,9 +90,12 @@ import Base from "../layouts/Base.astro";
               >
             </div>
             <p class="text-muted mt-2 text-sm leading-relaxed font-light">
-              Claude Code operated in an agentic loop — reading files, writing
-              code, running the dev server, and verifying changes in the browser
-              preview. I reviewed and directed each meaningful step.
+              Claude Code operated in an agentic loop across the full build —
+              reading files, writing components, resolving TypeScript errors,
+              running builds, and fixing whatever broke. I directed every
+              meaningful decision: the design, the UX model, the copy, and every
+              architectural call. Claude translated those decisions into
+              production code faster than I could have done alone.
             </p>
           </div>
         </section>
@@ -165,12 +172,12 @@ import Base from "../layouts/Base.astro";
           >
             {
               [
-                { value: "[TBD]", label: "Tokens used" },
-                { value: "[TBD]", label: "Initial load time" },
-                { value: "[TBD]", label: "JS bundle size" },
-                { value: "8", label: "Languages" },
                 { value: "5", label: "Portfolio scenes" },
+                { value: "8", label: "Languages" },
+                { value: "20+", label: "Easter eggs" },
+                { value: "14", label: "Pages built" },
                 { value: "WCAG AA", label: "Accessibility" },
+                { value: "0", label: "Cookie banners" },
               ].map(({ value, label }) => (
                 <div class="flex flex-col gap-1 p-6">
                   <span class="text-cream text-2xl leading-none font-bold md:text-3xl">
@@ -216,17 +223,37 @@ import Base from "../layouts/Base.astro";
                 {
                   date: "May 2025",
                   event: "Internationalisation",
-                  note: "8-language support with auto-detection and RTL.",
+                  note: "8-language support with auto-detection and RTL layout.",
                 },
                 {
                   date: "May 2025",
                   event: "Accessibility pass",
-                  note: "Full WCAG AA audit and fixes.",
+                  note: "ARIA roles, keyboard nav, focus management, reduced-motion support.",
                 },
                 {
                   date: "May 2025",
-                  event: "Nav drawer, padding, polish",
-                  note: "Final UI refinements before launch.",
+                  event: "Easter egg system",
+                  note: "Name recognition triggers personalised animations. 20+ names covered — try a few.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Contact form",
+                  note: "Formspree integration in a modal. Catches you if you submit under an alias.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Nav drawer & cross-page chrome",
+                  note: "Consistent hamburger, drawer, and language switcher on every page.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Deployed via GitHub Actions",
+                  note: "Automated build and deploy to GitHub Pages on every push to main.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Launched on austinban.com",
+                  note: "Custom domain via Namecheap. HTTPS enforced.",
                 },
               ].map(({ date, event, note }, i) => (
                 <div class="border-muted/10 group flex gap-6 border-b py-5">
