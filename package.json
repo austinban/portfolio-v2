@@ -11,7 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "check:i18n": "npx tsx scripts/check-translations.mjs",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
@@ -21,6 +23,7 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "astro": "^6.3.7",
+    "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.16.0",
     "obscenity": "^0.4.6",
@@ -30,6 +33,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@types/canvas-confetti": "^1.9.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript": "^6.0.3"
   }
 }

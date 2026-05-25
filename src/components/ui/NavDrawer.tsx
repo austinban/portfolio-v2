@@ -1,18 +1,24 @@
 import { type Variants, motion, AnimatePresence } from 'framer-motion';
+import { Lock } from 'lucide-react';
+import { useScene } from '../../context/SceneEngine';
 
 export const DRAWER_WIDTH = 280;
 
-const NAV_LINKS = [
-  { label: 'About', href: '#' },
-  { label: 'Work', href: '#' },
-  { label: 'Case Studies', href: '#' },
-  { label: 'Contact', href: '#' },
-  { label: 'Resume', href: '#' },
+// Links that navigate to a scene within the SPA (no page reload)
+const SCENE_LINKS: { label: string; scene: number }[] = [
+  { label: 'About',    scene: 3 },
+  { label: 'Work',     scene: 2 },
+  { label: 'Contact',  scene: 4 },
+];
+
+// Regular href links
+const HREF_LINKS = [
+  { label: 'Resume',         href: '#' },
   { label: 'About this site', href: '/portfolio-v2/about-this-site' },
 ];
 
 const SOCIAL_LINKS = [
-  { label: 'GitHub', href: 'https://github.com/austinban' },
+  { label: 'GitHub',   href: 'https://github.com/austinban' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/austin-ban-4b719a89' },
   { label: 'Dribbble', href: '#' },
 ];
@@ -28,13 +34,27 @@ const itemVariants: Variants = {
 
 interface Props {
   open: boolean;
+  onClose: () => void;
 }
 
-export default function NavDrawer({ open }: Props) {
+export default function NavDrawer({ open, onClose }: Props) {
+  const { goTo } = useScene();
+
+  const handleSceneNav = (scene: number) => {
+    goTo(scene);
+    onClose();
+  };
+
+  const allNavItems = [
+    ...SCENE_LINKS.map((l, i) => ({ ...l, type: 'scene' as const, index: i })),
+    ...HREF_LINKS.map((l, i) => ({ ...l, type: 'href' as const, index: SCENE_LINKS.length + i })),
+  ];
+
   return (
     <AnimatePresence>
       {open && (
         <motion.nav
+          id="site-nav"
           initial={{ x: -DRAWER_WIDTH }}
           animate={{ x: 0 }}
           exit={{ x: -DRAWER_WIDTH }}
@@ -53,22 +73,51 @@ export default function NavDrawer({ open }: Props) {
           </motion.p>
 
           <ul className="flex flex-col gap-5">
-            {NAV_LINKS.map(({ label, href }, i) => (
+            {allNavItems.map((item) => (
               <motion.li
-                key={label}
-                custom={i}
+                key={item.label}
+                custom={item.index}
                 variants={itemVariants}
                 initial="hidden"
                 animate="visible"
               >
-                <a
-                  href={href}
-                  className="text-cream text-2xl font-bold hover:text-yellow transition-colors duration-150 leading-none"
-                >
-                  {label}
-                </a>
+                {item.type === 'scene' ? (
+                  <button
+                    onClick={() => handleSceneNav(item.scene)}
+                    className="text-cream text-2xl font-bold hover:text-yellow transition-colors duration-150 leading-none text-left"
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="text-cream text-2xl font-bold hover:text-yellow transition-colors duration-150 leading-none"
+                  >
+                    {item.label}
+                  </a>
+                )}
               </motion.li>
             ))}
+
+            {/* Locked content — easter egg link */}
+            <motion.li
+              custom={allNavItems.length}
+              variants={itemVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <a
+                href="/portfolio-v2/lockpicking"
+                className="flex items-center gap-2 text-muted hover:text-yellow transition-colors duration-150 leading-none group"
+              >
+                <Lock
+                  size={14}
+                  strokeWidth={2}
+                  className="transition-colors duration-150"
+                />
+                <span className="text-sm uppercase tracking-widest">Locked content</span>
+              </a>
+            </motion.li>
           </ul>
 
           <motion.div

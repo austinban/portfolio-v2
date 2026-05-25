@@ -82,7 +82,7 @@ function PortfolioInner() {
 
   return (
     <div role="main" className="relative w-full h-full overflow-hidden">
-      <NavDrawer open={drawerOpen} />
+      <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       {/* Scene content panel — slides right to reveal drawer */}
       <motion.div
@@ -137,7 +137,7 @@ function PortfolioInner() {
         {!hasEnteredName && <NameScreen key="name-screen" />}
       </AnimatePresence>
 
-      {hasEnteredName && <SceneNav />}
+      {hasEnteredName && <SceneNav drawerOpen={drawerOpen} drawerWidth={actualDrawerWidth} />}
       {hasEnteredName && <HintToast />}
       <NamePeek />
 

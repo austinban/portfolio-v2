@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, type TargetAndTransition, type Transition } from 'framer-motion';
-import { EASTER_EGGS, type AnimationType, type EasterEggConfig } from '../../data/easterEggs';
+import { EASTER_EGGS, makeShortNameEgg, DEV_NAME_QUIPS, makeDevNameEgg, COMMON_NAME_QUIPS, makeCommonNameEgg, type AnimationType, type EasterEggConfig } from '../../data/easterEggs';
 import { useScene } from '../../context/SceneEngine';
 
 function r(min: number, max: number) {
@@ -76,14 +76,45 @@ export default function EasterEgg({ name, onQuip }: { name: string; onQuip?: (qu
     onQuip?.(null);
 
     const normalized = name.trim().toLowerCase();
-    const match = EASTER_EGGS.find(e => e.names.some(n => normalized.includes(n)));
-    if (!match) return;
 
-    setEgg(match);
-    const quip = t.eggs[match.id] ?? match.quip;
-    const showTimer = setTimeout(() => { setActive(true); onQuip?.(quip); }, 800);
-    const hideTimer = setTimeout(() => { setActive(false); onQuip?.(null); }, 10000);
-    return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+    // Short name check — fires before regular egg lookup
+    if (normalized.length > 0 && normalized.length < 2) {
+      const shortEgg = makeShortNameEgg();
+      setEgg(shortEgg);
+      const showTimer = setTimeout(() => { setActive(true); onQuip?.(shortEgg.quip); }, 800);
+      const hideTimer = setTimeout(() => { setActive(false); onQuip?.(null); }, 10000);
+      return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+    }
+
+    // Named easter egg check (random/fun names)
+    const match = EASTER_EGGS.find(e => e.names.some(n => normalized.includes(n)));
+    if (match) {
+      setEgg(match);
+      const quip = t.eggs[match.id] ?? match.quip;
+      const showTimer = setTimeout(() => { setActive(true); onQuip?.(quip); }, 800);
+      const hideTimer = setTimeout(() => { setActive(false); onQuip?.(null); }, 10000);
+      return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+    }
+
+    // Dev name check (test, hello world, foo, null, etc.)
+    const devQuip = DEV_NAME_QUIPS[normalized];
+    if (devQuip) {
+      const devEgg = makeDevNameEgg(devQuip);
+      setEgg(devEgg);
+      const showTimer = setTimeout(() => { setActive(true); onQuip?.(devQuip); }, 800);
+      const hideTimer = setTimeout(() => { setActive(false); onQuip?.(null); }, 10000);
+      return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+    }
+
+    // Common name check (~100 most common names with etymology quips)
+    const commonQuip = COMMON_NAME_QUIPS[normalized];
+    if (commonQuip) {
+      const commonEgg = makeCommonNameEgg(commonQuip);
+      setEgg(commonEgg);
+      const showTimer = setTimeout(() => { setActive(true); onQuip?.(commonQuip); }, 800);
+      const hideTimer = setTimeout(() => { setActive(false); onQuip?.(null); }, 10000);
+      return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
+    }
   }, [name]);
 
   if (!active || !egg) return null;

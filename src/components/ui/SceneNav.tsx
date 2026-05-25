@@ -2,7 +2,12 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useScene, TOTAL_SCENES } from '../../context/SceneEngine';
 
-export default function SceneNav() {
+interface Props {
+  drawerOpen?: boolean;
+  drawerWidth?: number;
+}
+
+export default function SceneNav({ drawerOpen = false, drawerWidth = 0 }: Props) {
   const { currentScene, advance, retreat, t } = useScene();
   const [bouncing, setBouncing] = useState(false);
 
@@ -30,12 +35,18 @@ export default function SceneNav() {
     return () => { clearTimeout(startTimer); clearTimeout(stopTimer); };
   }, [currentScene, isLast]);
 
+  const slideTransition = { duration: 0.4, ease: [0.22, 1, 0.36, 1] } as const;
+
   return (
     <motion.div
       className="fixed bottom-8 inset-x-0 flex items-center justify-between px-8 md:px-16 pointer-events-none z-30"
       initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6, duration: 0.5 }}
+      animate={{ opacity: 1, y: 0, x: drawerOpen ? drawerWidth : 0 }}
+      transition={{
+        opacity: { delay: 0.6, duration: 0.5 },
+        y:       { delay: 0.6, duration: 0.5 },
+        x:       slideTransition,
+      }}
     >
       <button
         onClick={retreat}
