@@ -102,6 +102,22 @@ textarea:focus-visible {
   outline: none;
 }
 
+/* Seamless marquee keyframes — used by the contact scene name wallpaper */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* Base duration scales up on wider screens so px/s stays comfortable */
+:root                        { --marquee-base: 50s; }
+@media (min-width: 768px)  { :root { --marquee-base: 90s;  } }
+@media (min-width: 1280px) { :root { --marquee-base: 130s; } }
+@media (min-width: 1536px) { :root { --marquee-base: 170s; } }
+
 /* Visually hidden but accessible to screen readers */
 .sr-only {
   position: absolute;

@@ -18,7 +18,7 @@ export default function SceneWrapper({ variants, align = 'center', children }: P
       initial="hidden"
       animate="show"
     >
-      <div className={`min-h-full ${flexClass} px-8 md:px-12 py-20 md:py-0`}>
+      <div className={`relative min-h-full ${flexClass} px-8 md:px-12 py-20 md:py-0`}>
         {children}
       </div>
     </motion.div>
