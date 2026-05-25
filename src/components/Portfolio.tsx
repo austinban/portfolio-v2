@@ -13,6 +13,7 @@ import SceneAbout from './sections/SceneAbout';
 import SceneContact from './sections/SceneContact';
 import LanguageSwitcher from './ui/LanguageSwitcher';
 import NavDrawer, { DRAWER_WIDTH } from './ui/NavDrawer';
+import NamePeek from './ui/NamePeek';
 
 const SCENES = [SceneGreeting, SceneWhatIDo, SceneWork, SceneAbout, SceneContact];
 
@@ -38,6 +39,14 @@ function PortfolioInner() {
   const announcerId = useId();
   const touchStartX = useRef<number | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [actualDrawerWidth, setActualDrawerWidth] = useState(DRAWER_WIDTH);
+
+  useEffect(() => {
+    const update = () => setActualDrawerWidth(Math.min(DRAWER_WIDTH, Math.round(window.innerWidth * 0.85)));
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -78,13 +87,13 @@ function PortfolioInner() {
       {/* Scene content panel — slides right to reveal drawer */}
       <motion.div
         animate={{
-          x: drawerOpen ? DRAWER_WIDTH : 0,
+          x: drawerOpen ? actualDrawerWidth : 0,
           boxShadow: drawerOpen
             ? '-20px 0 40px rgba(0,0,0,0.75)'
             : '-20px 0 40px rgba(0,0,0,0)',
         }}
         transition={slideTransition}
-        className="absolute inset-0 z-20 bg-dark overflow-hidden"
+        className="absolute inset-0 z-20 bg-dark overflow-x-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -130,6 +139,7 @@ function PortfolioInner() {
 
       {hasEnteredName && <SceneNav />}
       {hasEnteredName && <HintToast />}
+      <NamePeek />
 
       <div className="fixed top-6 right-8 z-50 pointer-events-auto">
         <LanguageSwitcher />
@@ -138,7 +148,7 @@ function PortfolioInner() {
       {/* Hamburger — fixed but slides to stay at top-left of the content panel */}
       <motion.button
         type="button"
-        animate={{ x: drawerOpen ? DRAWER_WIDTH : 0 }}
+        animate={{ x: drawerOpen ? actualDrawerWidth : 0 }}
         transition={slideTransition}
         onClick={() => setDrawerOpen(o => !o)}
         aria-label={drawerOpen ? 'Close navigation' : 'Open navigation'}

@@ -1,5 +1,6 @@
 import { type Variants, motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
+import SceneWrapper from '../ui/SceneWrapper';
 
 const container: Variants = {
   hidden: {},
@@ -16,12 +17,7 @@ export default function SceneWhatIDo() {
   const w = t.scenes.whatIDo;
 
   return (
-    <motion.div
-      className="fixed inset-0 flex items-center px-8 md:px-12 bg-dark"
-      variants={container}
-      initial="hidden"
-      animate="show"
-    >
+    <SceneWrapper variants={container}>
       <div className="max-w-2xl w-full">
         <motion.p variants={item} className="text-muted text-sm uppercase tracking-widest mb-8">
           {isRandomName ? w.labelRandom : w.labelDefault}
@@ -46,6 +42,6 @@ export default function SceneWhatIDo() {
           {w.currently}
         </motion.p>
       </div>
-    </motion.div>
+    </SceneWrapper>
   );
 }

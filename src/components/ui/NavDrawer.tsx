@@ -40,7 +40,7 @@ export default function NavDrawer({ open }: Props) {
           exit={{ x: -DRAWER_WIDTH }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="fixed left-0 top-0 bottom-0 z-10 flex flex-col justify-between py-10 px-10"
-          style={{ width: DRAWER_WIDTH, backgroundColor: 'var(--color-dark-surface)' }}
+          style={{ width: DRAWER_WIDTH, maxWidth: '85vw', backgroundColor: 'var(--color-dark-surface)' }}
           aria-label="Site navigation"
         >
           <motion.p

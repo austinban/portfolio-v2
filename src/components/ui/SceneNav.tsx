@@ -1,11 +1,34 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { useScene, TOTAL_SCENES } from '../../context/SceneEngine';
 
 export default function SceneNav() {
   const { currentScene, advance, retreat, t } = useScene();
+  const [bouncing, setBouncing] = useState(false);
 
   const isFirst = currentScene === 0;
   const isLast = currentScene === TOTAL_SCENES - 1;
+
+  useEffect(() => {
+    setBouncing(false);
+    if (isLast) return;
+
+    let startTimer: ReturnType<typeof setTimeout>;
+    let stopTimer: ReturnType<typeof setTimeout>;
+
+    const cycle = () => {
+      startTimer = setTimeout(() => {
+        setBouncing(true);
+        stopTimer = setTimeout(() => {
+          setBouncing(false);
+          cycle();
+        }, 2000);
+      }, 8000);
+    };
+
+    cycle();
+    return () => { clearTimeout(startTimer); clearTimeout(stopTimer); };
+  }, [currentScene, isLast]);
 
   return (
     <motion.div
@@ -17,7 +40,7 @@ export default function SceneNav() {
       <button
         onClick={retreat}
         disabled={isFirst}
-        className="pointer-events-auto text-muted text-sm uppercase tracking-widest hover:text-cream disabled:opacity-0 transition-all duration-200"
+        className="pointer-events-auto text-muted text-sm uppercase tracking-widest hover:text-cream disabled:opacity-0 transition-all duration-200 px-3 py-2 -mx-3 -my-2"
       >
         {t.ui.nav.back}
       </button>
@@ -42,12 +65,14 @@ export default function SceneNav() {
       </div>
 
       {!isLast ? (
-        <button
+        <motion.button
           onClick={advance}
-          className="pointer-events-auto text-sm uppercase tracking-widest font-bold text-cream hover:text-yellow transition-colors duration-200"
+          animate={bouncing ? { y: [0, -6, 0] } : { y: 0 }}
+          transition={bouncing ? { repeat: Infinity, duration: 0.7, ease: 'easeInOut' } : {}}
+          className="pointer-events-auto text-sm uppercase tracking-widest font-bold text-cream hover:text-yellow transition-colors duration-200 px-3 py-2 -mx-3 -my-2"
         >
           {t.ui.nav.next}
-        </button>
+        </motion.button>
       ) : (
         <div aria-hidden="true" className="pointer-events-auto" />
       )}

@@ -96,6 +96,12 @@ html.scene-mode body {
   outline: none;
 }
 
+/* Inputs use a custom border-bottom focus style — no outline needed */
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
 /* Visually hidden but accessible to screen readers */
 .sr-only {
   position: absolute;

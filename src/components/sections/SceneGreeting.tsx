@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { type Variants, motion, AnimatePresence } from 'framer-motion';
+import { type Variants, AnimatePresence, motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
 import EditableName from '../ui/EditableName';
 import EasterEgg from '../ui/EasterEgg';
+import SceneWrapper from '../ui/SceneWrapper';
 
 const container: Variants = {
   hidden: {},
@@ -35,12 +36,7 @@ export default function SceneGreeting() {
   return (
     <>
     <EasterEgg name={visitorName} onQuip={setActiveQuip} />
-    <motion.div
-      className="fixed inset-0 flex items-center px-8 md:px-12 bg-dark"
-      variants={container}
-      initial="hidden"
-      animate="show"
-    >
+    <SceneWrapper variants={container}>
       <div className="w-full">
         <motion.div variants={line} className="mb-6">
           <AnimatePresence mode="wait">
@@ -69,7 +65,7 @@ export default function SceneGreeting() {
           {g.body}
         </motion.p>
       </div>
-    </motion.div>
+    </SceneWrapper>
     </>
   );
 }

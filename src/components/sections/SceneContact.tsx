@@ -2,6 +2,7 @@ import { type Variants, motion } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
 import EditableName from '../ui/EditableName';
 import NameParticles from '../ui/NameParticles';
+import SceneWrapper from '../ui/SceneWrapper';
 
 const container: Variants = {
   hidden: {},
@@ -29,12 +30,7 @@ export default function SceneContact() {
   return (
     <>
     <NameParticles name={visitorName} />
-    <motion.div
-      className="fixed inset-0 flex items-center px-8 md:px-12 bg-dark"
-      variants={container}
-      initial="hidden"
-      animate="show"
-    >
+    <SceneWrapper variants={container}>
       <div className="max-w-2xl w-full">
         <motion.h1 variants={item} className="text-5xl md:text-7xl font-bold text-cream leading-none mb-4">
           {headingBefore}
@@ -63,7 +59,7 @@ export default function SceneContact() {
           ))}
         </div>
       </div>
-    </motion.div>
+    </SceneWrapper>
     </>
   );
 }
