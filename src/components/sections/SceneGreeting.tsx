@@ -1,4 +1,5 @@
-import { type Variants, motion } from 'framer-motion';
+import { useState } from 'react';
+import { type Variants, motion, AnimatePresence } from 'framer-motion';
 import { useScene } from '../../context/SceneEngine';
 import EditableName from '../ui/EditableName';
 import EasterEgg from '../ui/EasterEgg';
@@ -16,12 +17,15 @@ const line: Variants = {
 export default function SceneGreeting() {
   const { isRandomName, visitorName, t } = useScene();
   const g = t.scenes.greeting;
+  const [activeQuip, setActiveQuip] = useState<string | null>(null);
 
-  const sub = isRandomName
+  const defaultSub = isRandomName
     ? g.subtitleRandom
     : visitorName.trim().toLowerCase() === 'austin'
       ? g.subtitleAustin
       : g.subtitleDefault;
+
+  const sub = activeQuip ?? defaultSub;
 
   const isAustin = visitorName.trim().toLowerCase() === 'austin';
   const iAmStr = isAustin ? g.iAmToo : g.iAm;
@@ -30,17 +34,28 @@ export default function SceneGreeting() {
 
   return (
     <>
-    <EasterEgg name={visitorName} />
+    <EasterEgg name={visitorName} onQuip={setActiveQuip} />
     <motion.div
-      className="fixed inset-0 flex items-center px-12 md:px-24 bg-dark"
+      className="fixed inset-0 flex items-center px-8 md:px-12 bg-dark"
       variants={container}
       initial="hidden"
       animate="show"
     >
-      <div className="max-w-3xl">
-        <motion.p variants={line} className="text-muted text-sm uppercase tracking-widest mb-6">
-          {sub}
-        </motion.p>
+      <div className="w-full">
+        <motion.div variants={line} className="mb-6">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={sub}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-muted text-sm uppercase tracking-widest"
+            >
+              {sub}
+            </motion.p>
+          </AnimatePresence>
+        </motion.div>
 
         <motion.h1 variants={line} className="text-6xl md:text-8xl font-bold text-cream leading-none mb-2">
           {headingBefore}<EditableName className="text-cream" />{headingAfter}

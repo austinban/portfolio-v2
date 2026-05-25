@@ -7,6 +7,7 @@ export const zh: Translations = {
   ui: {
     nameScreen: {
       before: '开始之前',
+      disclaimer: '我不会用它做奇怪的事。它绝对不会...随机出现在意想不到的地方。',
       headingLine1: '你叫',
       headingLine2: '什么名字？',
       placeholder: '在这里输入',

@@ -7,6 +7,7 @@ export const it: Translations = {
   ui: {
     nameScreen: {
       before: 'Prima di iniziare',
+      disclaimer: 'Non ne farò nulla di strano. Di certo non... apparirà in posti inaspettati.',
       headingLine1: 'Come ti',
       headingLine2: 'chiami?',
       placeholder: 'Scrivilo qui',

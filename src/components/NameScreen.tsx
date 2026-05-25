@@ -80,7 +80,7 @@ export default function NameScreen() {
 
   return (
     <motion.div
-      className="fixed inset-0 flex items-center justify-center bg-dark px-6"
+      className="fixed inset-0 z-30 flex items-center justify-center bg-dark px-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
@@ -99,10 +99,14 @@ export default function NameScreen() {
                 {ns.before}
               </motion.p>
 
-              <motion.h1 id={headingId} variants={item} className="text-5xl md:text-7xl font-bold text-cream leading-none mb-10">
+              <motion.h1 id={headingId} variants={item} className="text-5xl md:text-7xl font-bold text-cream leading-none mb-4">
                 {ns.headingLine1}<br />
                 <span className="text-yellow">{ns.headingLine2}</span>
               </motion.h1>
+
+              <motion.p variants={item} className="text-muted/60 text-sm italic mb-8">
+                {ns.disclaimer}
+              </motion.p>
 
               <motion.form variants={item} onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <div className="relative">

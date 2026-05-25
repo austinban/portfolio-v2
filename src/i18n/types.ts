@@ -9,6 +9,7 @@ export interface Translations {
   ui: {
     nameScreen: {
       before: string;
+      disclaimer: string;
       headingLine1: string;
       headingLine2: string;
       placeholder: string;

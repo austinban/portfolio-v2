@@ -9,7 +9,7 @@ export default function SceneNav() {
 
   return (
     <motion.div
-      className="fixed bottom-8 inset-x-0 flex items-center justify-between px-8 md:px-16 pointer-events-none"
+      className="fixed bottom-8 inset-x-0 flex items-center justify-between px-8 md:px-16 pointer-events-none z-30"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 0.5 }}

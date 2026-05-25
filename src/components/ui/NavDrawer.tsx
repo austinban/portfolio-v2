@@ -8,11 +8,12 @@ const NAV_LINKS = [
   { label: 'Case Studies', href: '#' },
   { label: 'Contact', href: '#' },
   { label: 'Resume', href: '#' },
+  { label: 'About this site', href: '/portfolio-v2/about-this-site' },
 ];
 
 const SOCIAL_LINKS = [
-  { label: 'GitHub', href: '#' },
-  { label: 'LinkedIn', href: '#' },
+  { label: 'GitHub', href: 'https://github.com/austinban' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/austin-ban-4b719a89' },
   { label: 'Dribbble', href: '#' },
 ];
 

@@ -62,7 +62,7 @@ function buildParticles(egg: EasterEggConfig): Particle[] {
   return Array.from({ length: egg.count }, (_, i) => buildParticle(egg.type, i, egg.size));
 }
 
-export default function EasterEgg({ name }: { name: string }) {
+export default function EasterEgg({ name, onQuip }: { name: string; onQuip?: (quip: string | null) => void }) {
   const { t } = useScene();
   const [egg, setEgg] = useState<EasterEggConfig | null>(null);
   const [active, setActive] = useState(false);
@@ -73,14 +73,16 @@ export default function EasterEgg({ name }: { name: string }) {
   useEffect(() => {
     setActive(false);
     setEgg(null);
+    onQuip?.(null);
 
     const normalized = name.trim().toLowerCase();
     const match = EASTER_EGGS.find(e => e.names.some(n => normalized.includes(n)));
     if (!match) return;
 
     setEgg(match);
-    const showTimer = setTimeout(() => setActive(true), 800);
-    const hideTimer = setTimeout(() => setActive(false), 10000);
+    const quip = t.eggs[match.id] ?? match.quip;
+    const showTimer = setTimeout(() => { setActive(true); onQuip?.(quip); }, 800);
+    const hideTimer = setTimeout(() => { setActive(false); onQuip?.(null); }, 10000);
     return () => { clearTimeout(showTimer); clearTimeout(hideTimer); };
   }, [name]);
 
@@ -112,18 +114,9 @@ export default function EasterEgg({ name }: { name: string }) {
         role="status"
         aria-live="polite"
         aria-atomic="true"
-        className="absolute bottom-32 inset-x-0 text-center text-muted text-xs uppercase tracking-widest"
+        className="sr-only"
       >
-        <motion.span
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: [0, 1, 1, 0], y: 0 }}
-          transition={{ duration: 4, times: [0, 0.15, 0.75, 1], delay: 1 }}
-          aria-hidden="true"
-        >
-          {quip}
-        </motion.span>
-        {/* Static text for screen readers — opacity 0 visually but readable by AT */}
-        <span className="sr-only">{quip}</span>
+        {quip}
       </p>
     </div>
   );

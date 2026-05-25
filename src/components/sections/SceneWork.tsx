@@ -24,7 +24,7 @@ export default function SceneWork() {
 
   return (
     <motion.div
-      className="fixed inset-0 flex flex-col justify-center px-12 md:px-24 bg-dark"
+      className="fixed inset-0 flex flex-col justify-center px-8 md:px-12 bg-dark"
       variants={container}
       initial="hidden"
       animate="show"

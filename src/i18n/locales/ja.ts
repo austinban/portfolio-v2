@@ -7,6 +7,7 @@ export const ja: Translations = {
   ui: {
     nameScreen: {
       before: 'はじめる前に',
+      disclaimer: '変なことには使いません。絶対に...予期しない場所に現れたりしません。',
       headingLine1: 'お名前は',
       headingLine2: '何ですか？',
       placeholder: 'ここに入力',

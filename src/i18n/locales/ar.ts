@@ -7,6 +7,7 @@ export const ar: Translations = {
   ui: {
     nameScreen: {
       before: 'قبل أن نبدأ',
+      disclaimer: 'لن أفعل أي شيء غريب به. بالتأكيد لن يظهر فجأة... في أماكن غير متوقعة.',
       headingLine1: 'ما هو',
       headingLine2: 'اسمك؟',
       placeholder: 'اكتبه هنا',

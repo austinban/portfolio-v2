@@ -16,19 +16,25 @@ export default function EditableName({ className = '' }: Props) {
   const [draft, setDraft] = useState('');
   const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement>(null);
+  const wasEditingRef = useRef(false);
+  const openedViaKeyboardRef = useRef(false);
   const dialogTitleId = useId();
   const inputId = useId();
   const errorId = useId();
 
   useEffect(() => {
     if (editing) {
+      wasEditingRef.current = true;
       setDraft(visitorName);
       setError('');
       setTimeout(() => inputRef.current?.select(), 20);
-    } else {
-      // Return focus to trigger when dialog closes
-      triggerRef.current?.focus();
+    } else if (wasEditingRef.current) {
+      wasEditingRef.current = false;
+      if (openedViaKeyboardRef.current) {
+        triggerRef.current?.focus();
+      }
+      openedViaKeyboardRef.current = false;
     }
   }, [editing, visitorName]);
 
@@ -60,22 +66,24 @@ export default function EditableName({ className = '' }: Props) {
   const handleTriggerKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      openedViaKeyboardRef.current = true;
       setEditing(true);
     }
   };
 
   return (
     <>
-      <button
+      <span
         ref={triggerRef}
-        type="button"
+        role="button"
+        tabIndex={0}
         onClick={() => setEditing(true)}
         onKeyDown={handleTriggerKeyDown}
         aria-label={`${en.label}: ${visitorName}`}
-        className={`cursor-pointer hover:opacity-75 transition-opacity duration-150 bg-transparent border-none p-0 font-inherit ${className}`}
+        className={`cursor-pointer hover:opacity-75 transition-opacity duration-150 ${className}`}
       >
         {visitorName}
-      </button>
+      </span>
 
       <AnimatePresence>
         {editing && (

@@ -7,6 +7,7 @@ export const en: Translations = {
   ui: {
     nameScreen: {
       before: 'Before we start',
+      disclaimer: "I won't do anything weird with it. It definitely won't just... randomly appear at times.",
       headingLine1: "What's your",
       headingLine2: 'name?',
       placeholder: 'Type it here',
