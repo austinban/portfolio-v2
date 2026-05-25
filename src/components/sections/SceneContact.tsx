@@ -46,6 +46,16 @@ export default function SceneContact() {
   const headingStr = isRandomName ? c.headingRandom : c.headingDefault;
   const [headingBefore = "", headingAfter = ""] = headingStr.split("{name}");
 
+  // For short names, repeat the name within each wallpaper unit so the
+  // background stays visually dense regardless of character count.
+  const MIN_UNIT_LENGTH = 12;
+  const wallpaperUnit =
+    visitorName.length < MIN_UNIT_LENGTH
+      ? Array(Math.ceil(MIN_UNIT_LENGTH / visitorName.length))
+          .fill(visitorName)
+          .join(" ")
+      : visitorName;
+
   return (
     <>
       <NameParticles name={visitorName} />
@@ -74,7 +84,7 @@ export default function SceneContact() {
                     animationIterationCount: "infinite",
                   }}
                 >
-                  {Array(60).fill(visitorName).join("   ")}
+                  {Array(60).fill(wallpaperUnit).join("   ")}
                 </div>
               );
             })}

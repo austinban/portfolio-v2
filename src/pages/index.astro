@@ -41,12 +41,14 @@ const personSchema = {
   schema={personSchema}
   showChrome={false}
 >
-  <!-- SEO skeleton: visible to crawlers, covered visually by the fixed React overlay -->
+  <!-- Single page H1 — visually hidden but fully accessible to crawlers and screen readers -->
+  <h1 class="sr-only">Austin Ban — Senior UX Engineer &amp; Frontend Developer</h1>
+
+  <!-- Supporting SEO content — aria-hidden to avoid screen reader duplication with the React app -->
   <div
     aria-hidden="true"
     style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;"
   >
-    <h1>Austin Ban — Senior UX Engineer &amp; Frontend Developer</h1>
     <p>
       Senior UX Engineer at Thrive Global with 9+ years building scalable SaaS
       products. I build things that are fast, opinionated, and a little hard to

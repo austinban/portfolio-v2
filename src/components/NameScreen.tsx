@@ -107,7 +107,7 @@ export default function NameScreen() {
                 {ns.before}
               </motion.p>
 
-              <motion.h1
+              <motion.h2
                 id={headingId}
                 variants={item}
                 className="text-cream mb-4 text-5xl leading-none font-bold md:text-7xl"
@@ -115,7 +115,7 @@ export default function NameScreen() {
                 {ns.headingLine1}
                 <br />
                 <span className="text-yellow">{ns.headingLine2}</span>
-              </motion.h1>
+              </motion.h2>
 
               <motion.p
                 variants={item}
@@ -220,12 +220,12 @@ export default function NameScreen() {
                 {ns.random.label}
               </motion.p>
 
-              <motion.h1
+              <motion.h2
                 variants={item}
                 className="text-cream mb-3 text-4xl leading-tight font-bold md:text-6xl"
               >
                 {ns.random.weCalled}
-              </motion.h1>
+              </motion.h2>
 
               <div aria-live="polite" aria-atomic="true">
                 <AnimatePresence mode="wait">
