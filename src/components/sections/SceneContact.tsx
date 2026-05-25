@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { type Variants, motion } from "framer-motion";
 import { useScene } from "../../context/SceneEngine";
 import EditableName from "../ui/EditableName";
 import NameParticles from "../ui/NameParticles";
 import SceneWrapper from "../ui/SceneWrapper";
+import ContactModal from "../ui/ContactModal";
 
 const container: Variants = {
   hidden: {},
@@ -19,7 +21,6 @@ const item: Variants = {
 };
 
 const links = [
-  { label: "Email", href: "mailto:austin@austinban.com", display: "Say hello" },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/in/austin-ban-4b719a89",
@@ -40,6 +41,7 @@ const links = [
 export default function SceneContact() {
   const { isRandomName, visitorName, t } = useScene();
   const c = t.scenes.contact;
+  const [modalOpen, setModalOpen] = useState(false);
 
   const headingStr = isRandomName ? c.headingRandom : c.headingDefault;
   const [headingBefore = "", headingAfter = ""] = headingStr.split("{name}");
@@ -108,6 +110,22 @@ export default function SceneContact() {
             </motion.p>
 
             <div className="border-muted/20 flex flex-col gap-px border-t">
+              {/* Email row — opens contact modal */}
+              <motion.button
+                variants={item}
+                whileHover={{ x: 8 }}
+                onClick={() => setModalOpen(true)}
+                className="border-muted/20 group flex w-full items-center justify-between border-b py-5 transition-colors duration-200"
+              >
+                <span className="text-muted text-sm tracking-widest uppercase">
+                  Email
+                </span>
+                <span className="text-cream group-hover:text-yellow text-xl font-medium transition-colors duration-200">
+                  {c.emailDisplay} →
+                </span>
+              </motion.button>
+
+              {/* Remaining links */}
               {links.map(({ label, href, display }) => (
                 <motion.a
                   key={label}
@@ -120,11 +138,17 @@ export default function SceneContact() {
                     {label}
                   </span>
                   <span className="text-cream group-hover:text-yellow text-xl font-medium transition-colors duration-200">
-                    {label === "Email" ? c.emailDisplay : display} →
+                    {display} →
                   </span>
                 </motion.a>
               ))}
             </div>
+
+            <ContactModal
+              open={modalOpen}
+              onClose={() => setModalOpen(false)}
+              prefillName={isRandomName ? "" : visitorName}
+            />
           </div>
         </div>
       </SceneWrapper>

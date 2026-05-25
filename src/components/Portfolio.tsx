@@ -188,10 +188,11 @@ function PortfolioInner() {
         />
       </div>
 
-      {/* Hamburger — fixed but slides to stay at top-left of the content panel */}
+      {/* Hamburger — hidden on the name entry screen */}
       <motion.button
         type="button"
-        animate={{ x: drawerOpen ? actualDrawerWidth : 0 }}
+        animate={{ x: drawerOpen ? actualDrawerWidth : 0, opacity: hasEnteredName ? 1 : 0 }}
+        style={{ pointerEvents: hasEnteredName ? "auto" : "none" }}
         transition={slideTransition}
         onClick={() => setDrawerOpen((o) => !o)}
         aria-label={drawerOpen ? "Close navigation" : "Open navigation"}
