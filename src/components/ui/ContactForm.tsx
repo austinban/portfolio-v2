@@ -70,6 +70,15 @@ export default function ContactForm({ prefillName = "" }: Props) {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-6 py-2">
+      {/* Honeypot — invisible to humans, bots fill it in, Formspree rejects those */}
+      <input
+        type="text"
+        name="_gotcha"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <Field
           label="Name"
