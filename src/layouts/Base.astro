@@ -21,7 +21,7 @@ const {
   description = "Senior UX Engineer & frontend developer. I build things that are fast, opinionated, and a little hard to forget.",
   ogTitle = title,
   ogDescription = description,
-  ogImage = "/og-default.png",
+  ogImage,
   ogType = "website",
   schema,
   lang = "en",
@@ -43,21 +43,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0c0b09" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
     <meta property="og:site_name" content="Austin Ban" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
-    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+    {ogImage && <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />}
 
     <!-- Locale-specific fonts -->
     {

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://austinban.github.io/portfolio-v2/sitemap-index.xml
+Sitemap: https://austinban.com/sitemap-index.xml
