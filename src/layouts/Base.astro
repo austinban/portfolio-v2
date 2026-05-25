@@ -21,7 +21,7 @@ const {
   description = "Senior UX Engineer & frontend developer. I build things that are fast, opinionated, and a little hard to forget.",
   ogTitle = title,
   ogDescription = description,
-  ogImage,
+  ogImage = "/og/default.png",
   ogType = "website",
   schema,
   lang = "en",
@@ -54,14 +54,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
-    {ogImage && <meta property="og:image" content={new URL(ogImage, Astro.site)} />}
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
     <meta property="og:site_name" content="Austin Ban" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
-    {ogImage && <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />}
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 
     <!-- Locale-specific fonts -->
     {
