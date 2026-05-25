@@ -1,25 +1,36 @@
-import { useRef, useEffect, useId, useState } from 'react';
-import { type Variants, AnimatePresence, motion, MotionConfig } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { SceneProvider, useScene, TOTAL_SCENES } from '../context/SceneEngine';
-import type { Translations } from '../i18n/types';
-import NameScreen from './NameScreen';
-import SceneNav from './ui/SceneNav';
-import HintToast from './ui/HintToast';
-import SceneGreeting from './sections/SceneGreeting';
-import SceneWhatIDo from './sections/SceneWhatIDo';
-import SceneWork from './sections/SceneWork';
-import SceneAbout from './sections/SceneAbout';
-import SceneContact from './sections/SceneContact';
-import LanguageSwitcher from './ui/LanguageSwitcher';
-import NavDrawer, { DRAWER_WIDTH } from './ui/NavDrawer';
-import NamePeek from './ui/NamePeek';
+import { useRef, useEffect, useId, useState } from "react";
+import {
+  type Variants,
+  AnimatePresence,
+  motion,
+  MotionConfig,
+} from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { SceneProvider, useScene, TOTAL_SCENES } from "../context/SceneEngine";
+import type { Translations } from "../i18n/types";
+import NameScreen from "./NameScreen";
+import SceneNav from "./ui/SceneNav";
+import HintToast from "./ui/HintToast";
+import SceneGreeting from "./sections/SceneGreeting";
+import SceneWhatIDo from "./sections/SceneWhatIDo";
+import SceneWork from "./sections/SceneWork";
+import SceneAbout from "./sections/SceneAbout";
+import SceneContact from "./sections/SceneContact";
+import LanguageSwitcher from "./ui/LanguageSwitcher";
+import NavDrawer, { DRAWER_WIDTH } from "./ui/NavDrawer";
+import NamePeek from "./ui/NamePeek";
 
-const SCENES = [SceneGreeting, SceneWhatIDo, SceneWork, SceneAbout, SceneContact];
+const SCENES = [
+  SceneGreeting,
+  SceneWhatIDo,
+  SceneWork,
+  SceneAbout,
+  SceneContact,
+];
 
 const sceneVariants: Variants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? '100%' : '-100%',
+    x: direction > 0 ? "100%" : "-100%",
     opacity: 0,
   }),
   center: {
@@ -28,37 +39,50 @@ const sceneVariants: Variants = {
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
   exit: (direction: number) => ({
-    x: direction > 0 ? '-60%' : '60%',
+    x: direction > 0 ? "-60%" : "60%",
     opacity: 0,
     transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
 function PortfolioInner() {
-  const { currentScene, direction, hasEnteredName, advance, retreat, t } = useScene();
+  const { currentScene, direction, hasEnteredName, advance, retreat, t } =
+    useScene();
   const announcerId = useId();
   const touchStartX = useRef<number | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [actualDrawerWidth, setActualDrawerWidth] = useState(DRAWER_WIDTH);
 
   useEffect(() => {
-    const update = () => setActualDrawerWidth(Math.min(DRAWER_WIDTH, Math.round(window.innerWidth * 0.85)));
+    const update = () =>
+      setActualDrawerWidth(
+        Math.min(DRAWER_WIDTH, Math.round(window.innerWidth * 0.85)),
+      );
     update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && drawerOpen) { setDrawerOpen(false); return; }
+      if (e.key === "Escape" && drawerOpen) {
+        setDrawerOpen(false);
+        return;
+      }
       const active = document.activeElement;
-      if (active?.tagName === 'INPUT' || active?.tagName === 'TEXTAREA') return;
+      if (active?.tagName === "INPUT" || active?.tagName === "TEXTAREA") return;
       if (currentScene < 0) return;
-      if (e.key === 'ArrowRight') { e.preventDefault(); advance(); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); retreat(); }
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        advance();
+      }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        retreat();
+      }
     };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
   }, [currentScene, advance, retreat, drawerOpen]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -74,14 +98,15 @@ function PortfolioInner() {
     else retreat();
   };
 
-  const Scene = currentScene >= 0 && currentScene < TOTAL_SCENES
-    ? SCENES[currentScene]
-    : null;
+  const Scene =
+    currentScene >= 0 && currentScene < TOTAL_SCENES
+      ? SCENES[currentScene]
+      : null;
 
   const slideTransition = { duration: 0.4, ease: [0.22, 1, 0.36, 1] } as const;
 
   return (
-    <div role="main" className="relative w-full h-full overflow-hidden">
+    <div role="main" className="relative h-full w-full overflow-hidden">
       <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       {/* Scene content panel — slides right to reveal drawer */}
@@ -89,11 +114,11 @@ function PortfolioInner() {
         animate={{
           x: drawerOpen ? actualDrawerWidth : 0,
           boxShadow: drawerOpen
-            ? '-20px 0 40px rgba(0,0,0,0.75)'
-            : '-20px 0 40px rgba(0,0,0,0)',
+            ? "-20px 0 40px rgba(0,0,0,0.75)"
+            : "-20px 0 40px rgba(0,0,0,0)",
         }}
         transition={slideTransition}
-        className="absolute inset-0 z-20 bg-dark overflow-x-hidden"
+        className="bg-dark absolute inset-0 z-20 overflow-x-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -103,7 +128,9 @@ function PortfolioInner() {
           aria-atomic="true"
           className="sr-only"
         >
-          {hasEnteredName && currentScene >= 0 ? `${currentScene + 1} / ${TOTAL_SCENES}` : ''}
+          {hasEnteredName && currentScene >= 0
+            ? `${currentScene + 1} / ${TOTAL_SCENES}`
+            : ""}
         </div>
 
         <AnimatePresence mode="wait" custom={direction} initial={false}>
@@ -137,11 +164,13 @@ function PortfolioInner() {
         {!hasEnteredName && <NameScreen key="name-screen" />}
       </AnimatePresence>
 
-      {hasEnteredName && <SceneNav drawerOpen={drawerOpen} drawerWidth={actualDrawerWidth} />}
+      {hasEnteredName && (
+        <SceneNav drawerOpen={drawerOpen} drawerWidth={actualDrawerWidth} />
+      )}
       {hasEnteredName && <HintToast />}
       <NamePeek />
 
-      <div className="fixed top-6 right-8 z-50 pointer-events-auto">
+      <div className="pointer-events-auto fixed top-6 right-8 z-50">
         <LanguageSwitcher />
       </div>
 
@@ -150,11 +179,11 @@ function PortfolioInner() {
         type="button"
         animate={{ x: drawerOpen ? actualDrawerWidth : 0 }}
         transition={slideTransition}
-        onClick={() => setDrawerOpen(o => !o)}
-        aria-label={drawerOpen ? 'Close navigation' : 'Open navigation'}
+        onClick={() => setDrawerOpen((o) => !o)}
+        aria-label={drawerOpen ? "Close navigation" : "Open navigation"}
         aria-expanded={drawerOpen}
         aria-controls="site-nav"
-        className="fixed top-6 left-8 z-50 text-muted hover:text-cream transition-colors duration-150"
+        className="text-muted hover:text-cream fixed top-6 left-8 z-50 transition-colors duration-150"
       >
         <AnimatePresence mode="wait" initial={false}>
           {drawerOpen ? (
@@ -164,7 +193,7 @@ function PortfolioInner() {
               animate={{ opacity: 1, rotate: 0 }}
               exit={{ opacity: 0, rotate: 45 }}
               transition={{ duration: 0.15 }}
-              style={{ display: 'block' }}
+              style={{ display: "block" }}
             >
               <X size={18} strokeWidth={1.5} />
             </motion.span>
@@ -175,7 +204,7 @@ function PortfolioInner() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
-              style={{ display: 'block' }}
+              style={{ display: "block" }}
             >
               <Menu size={18} strokeWidth={1.5} />
             </motion.span>

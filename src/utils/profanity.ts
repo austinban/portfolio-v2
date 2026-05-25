@@ -2,7 +2,7 @@ import {
   RegExpMatcher,
   englishDataset,
   englishRecommendedTransformers,
-} from 'obscenity';
+} from "obscenity";
 
 const matcher = new RegExpMatcher({
   ...englishDataset.build(),

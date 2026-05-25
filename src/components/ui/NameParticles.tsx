@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
-const BURST_KEY = 'portfolio_name_burst';
+const BURST_KEY = "portfolio_name_burst";
 const COUNT = 60;
-const COLORS = ['#eeab12', '#eeab12', '#eeab12', '#f2ede4', '#fe826a'];
+const COLORS = ["#eeab12", "#eeab12", "#eeab12", "#f2ede4", "#fe826a"];
 
 interface Particle {
   id: number;
@@ -21,7 +21,7 @@ interface Particle {
 }
 
 function buildParticles(name: string): Particle[] {
-  const chars = name.toUpperCase().split('');
+  const chars = name.toUpperCase().split("");
   return Array.from({ length: COUNT }, (_, i) => {
     const fromCenter = i % 3 === 0;
     return {
@@ -47,19 +47,22 @@ export default function NameParticles({ name }: { name: string }) {
 
   useEffect(() => {
     if (sessionStorage.getItem(BURST_KEY)) return;
-    sessionStorage.setItem(BURST_KEY, '1');
+    sessionStorage.setItem(BURST_KEY, "1");
 
     // Small delay so the scene entrance animation finishes first
     const show = setTimeout(() => setShow(true), 600);
     const hide = setTimeout(() => setShow(false), 7500);
-    return () => { clearTimeout(show); clearTimeout(hide); };
+    return () => {
+      clearTimeout(show);
+      clearTimeout(hide);
+    };
   }, []);
 
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-30">
-      {particles.map(p => (
+    <div className="pointer-events-none fixed inset-0 z-30 overflow-hidden">
+      {particles.map((p) => (
         <motion.span
           key={p.id}
           initial={{ scale: 0, opacity: p.startOpacity, rotate: 0, x: 0, y: 0 }}
@@ -76,14 +79,14 @@ export default function NameParticles({ name }: { name: string }) {
             ease: [0.22, 1, 0.36, 1],
           }}
           style={{
-            position: 'absolute',
+            position: "absolute",
             left: `${p.left}%`,
             top: `${p.top}%`,
             fontSize: `${p.size}rem`,
             color: p.color,
             fontWeight: 700,
             lineHeight: 1,
-            userSelect: 'none',
+            userSelect: "none",
           }}
         >
           {p.char}

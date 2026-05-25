@@ -1,20 +1,20 @@
-import { useState, useRef, useEffect, useId } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useScene } from '../../context/SceneEngine';
-import { isProfane, getProfanityResponse } from '../../utils/profanity';
-import { MAX_NAME_LENGTH } from '../../utils/nameConfig';
-import { t as interpolate } from '../../i18n';
+import { useState, useRef, useEffect, useId } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useScene } from "../../context/SceneEngine";
+import { isProfane, getProfanityResponse } from "../../utils/profanity";
+import { MAX_NAME_LENGTH } from "../../utils/nameConfig";
+import { t as interpolate } from "../../i18n";
 
 interface Props {
   className?: string;
 }
 
-export default function EditableName({ className = '' }: Props) {
+export default function EditableName({ className = "" }: Props) {
   const { visitorName, setName, t } = useScene();
   const en = t.ui.editName;
   const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState('');
-  const [error, setError] = useState('');
+  const [draft, setDraft] = useState("");
+  const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const triggerRef = useRef<HTMLElement>(null);
   const wasEditingRef = useRef(false);
@@ -27,7 +27,7 @@ export default function EditableName({ className = '' }: Props) {
     if (editing) {
       wasEditingRef.current = true;
       setDraft(visitorName);
-      setError('');
+      setError("");
       setTimeout(() => inputRef.current?.select(), 20);
     } else if (wasEditingRef.current) {
       wasEditingRef.current = false;
@@ -40,7 +40,10 @@ export default function EditableName({ className = '' }: Props) {
 
   const commit = () => {
     const trimmed = draft.trim();
-    if (!trimmed) { setEditing(false); return; }
+    if (!trimmed) {
+      setEditing(false);
+      return;
+    }
 
     if (trimmed.length > MAX_NAME_LENGTH) {
       setError(interpolate(en.tooLong, { max: MAX_NAME_LENGTH }));
@@ -50,7 +53,7 @@ export default function EditableName({ className = '' }: Props) {
 
     if (isProfane(trimmed)) {
       setError(getProfanityResponse());
-      setDraft('');
+      setDraft("");
       inputRef.current?.focus();
       return;
     }
@@ -60,11 +63,11 @@ export default function EditableName({ className = '' }: Props) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') setEditing(false);
+    if (e.key === "Escape") setEditing(false);
   };
 
   const handleTriggerKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       openedViaKeyboardRef.current = true;
       setEditing(true);
@@ -80,7 +83,7 @@ export default function EditableName({ className = '' }: Props) {
         onClick={() => setEditing(true)}
         onKeyDown={handleTriggerKeyDown}
         aria-label={`${en.label}: ${visitorName}`}
-        className={`cursor-pointer hover:opacity-75 transition-opacity duration-150 ${className}`}
+        className={`cursor-pointer transition-opacity duration-150 hover:opacity-75 ${className}`}
       >
         {visitorName}
       </span>
@@ -95,9 +98,11 @@ export default function EditableName({ className = '' }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-dark"
+            className="bg-dark fixed inset-0 z-50 flex items-center justify-center"
             onClick={() => setEditing(false)}
-            onKeyDown={e => { if (e.key === 'Escape') setEditing(false); }}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setEditing(false);
+            }}
           >
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -105,28 +110,37 @@ export default function EditableName({ className = '' }: Props) {
               exit={{ opacity: 0, y: 16 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col items-center gap-6 px-8"
-              onClick={e => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
             >
               <p
                 id={dialogTitleId}
-                className="text-muted text-xs uppercase tracking-widest"
+                className="text-muted text-xs tracking-widest uppercase"
               >
                 {en.label}
               </p>
 
-              <form onSubmit={e => { e.preventDefault(); commit(); }} className="contents">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  commit();
+                }}
+                className="contents"
+              >
                 <input
                   ref={inputRef}
                   id={inputId}
                   type="text"
                   value={draft}
-                  onChange={e => { setDraft(e.target.value); setError(''); }}
+                  onChange={(e) => {
+                    setDraft(e.target.value);
+                    setError("");
+                  }}
                   onKeyDown={handleKeyDown}
                   maxLength={40}
                   aria-label={en.label}
                   aria-describedby={error ? errorId : undefined}
                   aria-invalid={!!error}
-                  className="bg-transparent border-b-2 border-yellow outline-none focus-visible:outline-none text-cream font-bold text-5xl md:text-7xl text-center leading-none"
+                  className="border-yellow text-cream border-b-2 bg-transparent text-center text-5xl leading-none font-bold outline-none focus-visible:outline-none md:text-7xl"
                   style={{ width: `${Math.max(draft.length, 6)}ch` }}
                 />
               </form>
@@ -151,7 +165,7 @@ export default function EditableName({ className = '' }: Props) {
                     animate={{ opacity: 1 }}
                     className="flex flex-col items-center gap-3"
                   >
-                    <span className="text-muted text-xs uppercase tracking-widest">
+                    <span className="text-muted text-xs tracking-widest uppercase">
                       {en.hint}
                     </span>
                     <motion.span

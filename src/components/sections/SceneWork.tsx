@@ -1,12 +1,32 @@
-import { type Variants, motion } from 'framer-motion';
-import { useScene } from '../../context/SceneEngine';
-import SceneWrapper from '../ui/SceneWrapper';
+import { type Variants, motion } from "framer-motion";
+import { useScene } from "../../context/SceneEngine";
+import SceneWrapper from "../ui/SceneWrapper";
 
 const projects = [
-  { slug: 'alpaca', title: 'Alpaca', tags: ['Product Design', 'Fintech'], year: '2022' },
-  { slug: 'venture360', title: 'Venture360', tags: ['UX', 'SaaS'], year: '2021' },
-  { slug: 'veripharm', title: 'Veripharm', tags: ['Design System', 'Healthcare'], year: '2020' },
-  { slug: 'glorieta', title: 'Glorieta', tags: ['Mobile', 'React Native'], year: '2019' },
+  {
+    slug: "alpaca",
+    title: "Alpaca",
+    tags: ["Product Design", "Fintech"],
+    year: "2022",
+  },
+  {
+    slug: "venture360",
+    title: "Venture360",
+    tags: ["UX", "SaaS"],
+    year: "2021",
+  },
+  {
+    slug: "veripharm",
+    title: "Veripharm",
+    tags: ["Design System", "Healthcare"],
+    year: "2020",
+  },
+  {
+    slug: "glorieta",
+    title: "Glorieta",
+    tags: ["Mobile", "React Native"],
+    year: "2019",
+  },
 ];
 
 const container: Variants = {
@@ -16,7 +36,11 @@ const container: Variants = {
 
 const card: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 export default function SceneWork() {
@@ -25,35 +49,41 @@ export default function SceneWork() {
 
   return (
     <SceneWrapper variants={container} align="col-center">
-        <motion.h1 variants={card} className="text-5xl md:text-7xl font-bold text-cream mb-12 leading-none">
-          {isRandomName ? w.headingRandom : w.headingDefault}
-        </motion.h1>
+      <motion.h1
+        variants={card}
+        className="text-cream mb-12 text-5xl leading-none font-bold md:text-7xl"
+      >
+        {isRandomName ? w.headingRandom : w.headingDefault}
+      </motion.h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px border border-muted/20">
-          {projects.map(({ slug, title, tags, year }) => (
-            <motion.a
-              key={slug}
-              href={`/work/${slug}`}
-              variants={card}
-              whileHover={{ backgroundColor: 'rgba(238,171,18,0.06)' }}
-              className="group flex flex-col justify-between p-8 border-muted/20 hover:border-yellow/30 transition-colors duration-200 min-h-40"
-            >
-              <div className="flex gap-2 flex-wrap">
-                {tags.map(tag => (
-                  <span key={tag} className="text-xs uppercase tracking-widest text-muted">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-end justify-between mt-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-cream group-hover:text-yellow transition-colors duration-200">
-                  {title}
-                </h2>
-                <span className="text-muted text-sm">{year} →</span>
-              </div>
-            </motion.a>
-          ))}
-        </div>
+      <div className="border-muted/20 grid grid-cols-1 gap-px border md:grid-cols-2">
+        {projects.map(({ slug, title, tags, year }) => (
+          <motion.a
+            key={slug}
+            href={`/work/${slug}`}
+            variants={card}
+            whileHover={{ backgroundColor: "rgba(238,171,18,0.06)" }}
+            className="group border-muted/20 hover:border-yellow/30 flex min-h-40 flex-col justify-between p-8 transition-colors duration-200"
+          >
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-muted text-xs tracking-widest uppercase"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div className="mt-6 flex items-end justify-between">
+              <h2 className="text-cream group-hover:text-yellow text-2xl font-bold transition-colors duration-200 md:text-3xl">
+                {title}
+              </h2>
+              <span className="text-muted text-sm">{year} →</span>
+            </div>
+          </motion.a>
+        ))}
+      </div>
     </SceneWrapper>
   );
 }

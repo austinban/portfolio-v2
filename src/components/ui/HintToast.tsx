@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useScene } from '../../context/SceneEngine';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useScene } from "../../context/SceneEngine";
 
 export default function HintToast() {
   const { t } = useScene();
@@ -8,7 +8,9 @@ export default function HintToast() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const mobile = window.matchMedia(
+      "(hover: none) and (pointer: coarse)",
+    ).matches;
     setIsMobile(mobile);
     setVisible(true);
     const timer = setTimeout(() => setVisible(false), 4000);
@@ -26,9 +28,9 @@ export default function HintToast() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-20 inset-x-0 flex justify-center pointer-events-none z-50"
+          className="pointer-events-none fixed inset-x-0 bottom-20 z-50 flex justify-center"
         >
-          <span className="px-5 py-2.5 bg-dark border border-muted/20 text-muted text-xs uppercase tracking-widest">
+          <span className="bg-dark border-muted/20 text-muted border px-5 py-2.5 text-xs tracking-widest uppercase">
             {isMobile ? t.ui.hint.mobile : t.ui.hint.desktop}
           </span>
         </motion.div>

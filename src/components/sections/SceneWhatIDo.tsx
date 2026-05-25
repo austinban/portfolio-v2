@@ -1,6 +1,6 @@
-import { type Variants, motion } from 'framer-motion';
-import { useScene } from '../../context/SceneEngine';
-import SceneWrapper from '../ui/SceneWrapper';
+import { type Variants, motion } from "framer-motion";
+import { useScene } from "../../context/SceneEngine";
+import SceneWrapper from "../ui/SceneWrapper";
 
 const container: Variants = {
   hidden: {},
@@ -9,7 +9,11 @@ const container: Variants = {
 
 const item: Variants = {
   hidden: { opacity: 0, x: -24 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 export default function SceneWhatIDo() {
@@ -18,8 +22,11 @@ export default function SceneWhatIDo() {
 
   return (
     <SceneWrapper variants={container}>
-      <div className="max-w-2xl w-full">
-        <motion.p variants={item} className="text-muted text-sm uppercase tracking-widest mb-8">
+      <div className="w-full max-w-2xl">
+        <motion.p
+          variants={item}
+          className="text-muted mb-8 text-sm tracking-widest uppercase"
+        >
           {isRandomName ? w.labelRandom : w.labelDefault}
         </motion.p>
 
@@ -28,9 +35,9 @@ export default function SceneWhatIDo() {
             <motion.div
               key={label}
               variants={item}
-              className="group flex flex-col gap-1 border-b border-muted/20 py-6 first:border-t"
+              className="group border-muted/20 flex flex-col gap-1 border-b py-6 first:border-t"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-cream group-hover:text-yellow transition-colors duration-200">
+              <h2 className="text-cream group-hover:text-yellow text-3xl font-bold transition-colors duration-200 md:text-5xl">
                 {label}
               </h2>
               <p className="text-muted text-base font-light">{detail}</p>
@@ -38,7 +45,7 @@ export default function SceneWhatIDo() {
           ))}
         </div>
 
-        <motion.p variants={item} className="text-muted text-sm mt-8">
+        <motion.p variants={item} className="text-muted mt-8 text-sm">
           {w.currently}
         </motion.p>
       </div>

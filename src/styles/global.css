@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Cooper Hewitt', system-ui, sans-serif;
+  --font-sans: "Cooper Hewitt", system-ui, sans-serif;
 
   --color-yellow: #eeab12;
   --color-yellow-light: #f5c842;
@@ -16,36 +16,40 @@
 }
 
 @font-face {
-  font-family: 'Cooper Hewitt';
-  src: url('/cooperhewitt-light-webfont.woff2') format('woff2'),
-       url('/cooperhewitt-light-webfont.woff') format('woff');
+  font-family: "Cooper Hewitt";
+  src:
+    url("/cooperhewitt-light-webfont.woff2") format("woff2"),
+    url("/cooperhewitt-light-webfont.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Cooper Hewitt';
-  src: url('/cooperhewitt-book-webfont.woff2') format('woff2'),
-       url('/cooperhewitt-book-webfont.woff') format('woff');
+  font-family: "Cooper Hewitt";
+  src:
+    url("/cooperhewitt-book-webfont.woff2") format("woff2"),
+    url("/cooperhewitt-book-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Cooper Hewitt';
-  src: url('/cooperhewitt-medium-webfont.woff2') format('woff2'),
-       url('/cooperhewitt-medium-webfont.woff') format('woff');
+  font-family: "Cooper Hewitt";
+  src:
+    url("/cooperhewitt-medium-webfont.woff2") format("woff2"),
+    url("/cooperhewitt-medium-webfont.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Cooper Hewitt';
-  src: url('/cooperhewitt-heavy-webfont.woff2') format('woff2'),
-       url('/cooperhewitt-heavy-webfont.woff') format('woff');
+  font-family: "Cooper Hewitt";
+  src:
+    url("/cooperhewitt-heavy-webfont.woff2") format("woff2"),
+    url("/cooperhewitt-heavy-webfont.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -74,15 +78,15 @@ html.scene-mode body {
 }
 
 :lang(zh) {
-  font-family: 'Noto Sans SC', var(--font-sans), sans-serif;
+  font-family: "Noto Sans SC", var(--font-sans), sans-serif;
 }
 
 :lang(ja) {
-  font-family: 'Noto Sans JP', var(--font-sans), sans-serif;
+  font-family: "Noto Sans JP", var(--font-sans), sans-serif;
 }
 
 :lang(ar) {
-  font-family: 'Noto Sans Arabic', var(--font-sans), sans-serif;
+  font-family: "Noto Sans Arabic", var(--font-sans), sans-serif;
 }
 
 /* Accessible focus ring — visible, high-contrast, consistent */
@@ -104,19 +108,41 @@ textarea:focus-visible {
 
 /* Seamless marquee keyframes — used by the contact scene name wallpaper */
 @keyframes marquee-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 @keyframes marquee-right {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* Base duration scales up on wider screens so px/s stays comfortable */
-:root                        { --marquee-base: 50s; }
-@media (min-width: 768px)  { :root { --marquee-base: 90s;  } }
-@media (min-width: 1280px) { :root { --marquee-base: 130s; } }
-@media (min-width: 1536px) { :root { --marquee-base: 170s; } }
+:root {
+  --marquee-base: 50s;
+}
+@media (min-width: 768px) {
+  :root {
+    --marquee-base: 90s;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --marquee-base: 130s;
+  }
+}
+@media (min-width: 1536px) {
+  :root {
+    --marquee-base: 170s;
+  }
+}
 
 /* Visually hidden but accessible to screen readers */
 .sr-only {

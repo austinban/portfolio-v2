@@ -1,27 +1,36 @@
 ---
-import Base from '../layouts/Base.astro';
-import Portfolio from '../components/Portfolio';
-import { getCollection } from 'astro:content';
-import { en } from '../i18n';
+import Base from "../layouts/Base.astro";
+import Portfolio from "../components/Portfolio";
+import { getCollection } from "astro:content";
+import { en } from "../i18n";
 
-const workEntries = await getCollection('work');
+const workEntries = await getCollection("work");
 const sortedWork = workEntries.sort((a, b) => a.data.order - b.data.order);
 
 const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Austin Ban',
-  jobTitle: 'Senior UX Engineer & Frontend Developer',
-  url: 'https://austinban.github.io/portfolio-v2',
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Austin Ban",
+  jobTitle: "Senior UX Engineer & Frontend Developer",
+  url: "https://austinban.github.io/portfolio-v2",
   sameAs: [
-    'https://linkedin.com/in/austin-ban-4b719a89',
-    'https://github.com/austinban',
+    "https://linkedin.com/in/austin-ban-4b719a89",
+    "https://github.com/austinban",
   ],
   worksFor: {
-    '@type': 'Organization',
-    name: 'Thrive Global',
+    "@type": "Organization",
+    name: "Thrive Global",
   },
-  knowsAbout: ['Frontend Engineering', 'UX Engineering', 'React', 'TypeScript', 'Design Systems', 'Redux', 'Vue.js', 'SaaS'],
+  knowsAbout: [
+    "Frontend Engineering",
+    "UX Engineering",
+    "React",
+    "TypeScript",
+    "Design Systems",
+    "Redux",
+    "Vue.js",
+    "SaaS",
+  ],
 };
 ---
 
@@ -32,23 +41,39 @@ const personSchema = {
   schema={personSchema}
 >
   <!-- SEO skeleton: visible to crawlers, covered visually by the fixed React overlay -->
-  <div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+  <div
+    aria-hidden="true"
+    style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;"
+  >
     <h1>Austin Ban — Senior UX Engineer &amp; Frontend Developer</h1>
-    <p>Senior UX Engineer at Thrive Global with 9+ years building scalable SaaS products. I build things that are fast, opinionated, and a little hard to forget.</p>
+    <p>
+      Senior UX Engineer at Thrive Global with 9+ years building scalable SaaS
+      products. I build things that are fast, opinionated, and a little hard to
+      forget.
+    </p>
     <nav>
       <ul>
-        {sortedWork.map(entry => (
-          <li>
-            <a href={`/portfolio-v2/work/${entry.id}`}>
-              {entry.data.title} — {entry.data.description}
-            </a>
-          </li>
-        ))}
+        {
+          sortedWork.map((entry) => (
+            <li>
+              <a href={`/portfolio-v2/work/${entry.id}`}>
+                {entry.data.title} — {entry.data.description}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
-    <p>Contact: <a href="mailto:austin@austinban.com">austin@austinban.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/austin-ban-4b719a89">linkedin.com/in/austin-ban-4b719a89</a></p>
-    <p>GitHub: <a href="https://github.com/austinban">github.com/austinban</a></p>
+    <p>
+      Contact: <a href="mailto:austin@austinban.com">austin@austinban.com</a>
+    </p>
+    <p>
+      LinkedIn: <a href="https://linkedin.com/in/austin-ban-4b719a89"
+        >linkedin.com/in/austin-ban-4b719a89</a>
+    </p>
+    <p>
+      GitHub: <a href="https://github.com/austinban">github.com/austinban</a>
+    </p>
   </div>
 
   <Portfolio client:load locale="en" translations={en} />
@@ -57,15 +82,15 @@ const personSchema = {
 </Base>
 
 <script>
-  document.documentElement.classList.add('scene-mode');
+  document.documentElement.classList.add("scene-mode");
 
   // Auto-detect browser locale on first visit.
   // If the user has already picked a language (stored in localStorage), respect that.
   // Only redirects if the browser language is one we support and it isn't English.
   (function () {
-    const SUPPORTED = ['es', 'fr', 'it', 'de', 'zh', 'ja', 'ar'];
-    const PREF_KEY = 'portfolio_locale_pref';
-    const BASE = '/portfolio-v2';
+    const SUPPORTED = ["es", "fr", "it", "de", "zh", "ja", "ar"];
+    const PREF_KEY = "portfolio_locale_pref";
+    const BASE = "/portfolio-v2";
 
     // If user explicitly chose a language via the switcher, never auto-redirect again
     const stored = localStorage.getItem(PREF_KEY);
@@ -73,8 +98,8 @@ const personSchema = {
 
     // Parse browser language list (e.g. ["es-ES", "en-US"] → "es")
     const preferred = (navigator.languages ?? [navigator.language])
-      .map(lang => lang.split('-')[0].toLowerCase())
-      .find(lang => SUPPORTED.includes(lang));
+      .map((lang) => lang.split("-")[0].toLowerCase())
+      .find((lang) => SUPPORTED.includes(lang));
 
     if (preferred) {
       // Mark this as an auto-redirect so the switcher doesn't fight with us

@@ -1,77 +1,90 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from "../layouts/Base.astro";
 ---
 
 <Base
   title="About this site — Austin Ban"
   description="How this portfolio was built: tools, AI, accessibility, timeline, and honest intentions."
 >
-  <div class="min-h-screen bg-dark text-cream font-sans">
-
-    <nav class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-8 md:px-16 py-6">
-      <a href="/portfolio-v2/" class="text-muted text-sm uppercase tracking-widest hover:text-cream transition-colors duration-200">
+  <div class="bg-dark text-cream min-h-screen font-sans">
+    <nav
+      class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-8 py-6 md:px-16"
+    >
+      <a
+        href="/portfolio-v2/"
+        class="text-muted hover:text-cream text-sm tracking-widest uppercase transition-colors duration-200"
+      >
         ← Back
       </a>
-      <span class="text-muted text-sm uppercase tracking-widest">Meta</span>
+      <span class="text-muted text-sm tracking-widest uppercase">Meta</span>
     </nav>
 
-    <main class="pt-32 pb-24 px-8 md:px-20 max-w-3xl mx-auto">
-
+    <main class="mx-auto max-w-3xl px-8 pt-32 pb-24 md:px-20">
       <!-- Header -->
-      <p class="text-muted text-sm uppercase tracking-widest mb-6">About this site</p>
-      <h1 class="text-5xl md:text-7xl font-bold text-cream leading-none mb-10">
+      <p class="text-muted mb-6 text-sm tracking-widest uppercase">
+        About this site
+      </p>
+      <h1 class="text-cream mb-10 text-5xl leading-none font-bold md:text-7xl">
         Made with<br /><span class="text-yellow">intention.</span>
       </h1>
 
       <!-- Honest intro -->
-      <div class="flex flex-col gap-5 text-lg text-muted font-light leading-relaxed mb-20 max-w-xl">
+      <div
+        class="text-muted mb-20 flex max-w-xl flex-col gap-5 text-lg leading-relaxed font-light"
+      >
         <p>
-          This site was built collaboratively with Claude Sonnet, Anthropic's AI coding assistant.
-          The design direction, content, copy, and every architectural decision are mine —
-          Claude helped translate them into production-quality code faster than I could have alone.
+          This site was built collaboratively with Claude Sonnet, Anthropic's AI
+          coding assistant. The design direction, content, copy, and every
+          architectural decision are mine — Claude helped translate them into
+          production-quality code faster than I could have alone.
         </p>
         <p>
-          I want to be upfront about that. AI was a real part of this build, not a shortcut
-          and not something to hide. I used it the same way I'd use any powerful tool:
-          deliberately, with judgment, and with full ownership of the outcome.
+          I want to be upfront about that. AI was a real part of this build, not
+          a shortcut and not something to hide. I used it the same way I'd use
+          any powerful tool: deliberately, with judgment, and with full
+          ownership of the outcome.
         </p>
         <p>
-          Every component, every animation, every accessibility decision was discussed,
-          reviewed, and intentional. The craft is still mine. The process was just faster.
+          Every component, every animation, every accessibility decision was
+          discussed, reviewed, and intentional. The craft is still mine. The
+          process was just faster.
         </p>
       </div>
 
-      <div class="flex flex-col gap-px border-t border-muted/20">
-
+      <div class="border-muted/20 flex flex-col gap-px border-t">
         <!-- Stack -->
-        <section class="py-10 border-b border-muted/20">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">Stack</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
-            {[
-              { name: 'Astro 5', role: 'Static site framework' },
-              { name: 'React 18', role: 'UI components / islands' },
-              { name: 'Tailwind CSS v4', role: 'Styling' },
-              { name: 'Framer Motion', role: 'Animations' },
-              { name: 'TypeScript', role: 'Type safety' },
-              { name: 'MDX', role: 'Case study content' },
-              { name: 'lucide-react', role: 'Icons' },
-              { name: 'GitHub Pages', role: 'Hosting' },
-            ].map(({ name, role }) => (
-              <div class="flex items-baseline justify-between gap-4 py-2 border-b border-muted/10">
-                <span class="text-cream font-medium">{name}</span>
-                <span class="text-muted text-sm text-right">{role}</span>
-              </div>
-            ))}
+        <section class="border-muted/20 border-b py-10">
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">Stack</p>
+          <div class="grid grid-cols-1 gap-x-16 gap-y-4 md:grid-cols-2">
+            {
+              [
+                { name: "Astro 5", role: "Static site framework" },
+                { name: "React 18", role: "UI components / islands" },
+                { name: "Tailwind CSS v4", role: "Styling" },
+                { name: "Framer Motion", role: "Animations" },
+                { name: "TypeScript", role: "Type safety" },
+                { name: "MDX", role: "Case study content" },
+                { name: "lucide-react", role: "Icons" },
+                { name: "GitHub Pages", role: "Hosting" },
+              ].map(({ name, role }) => (
+                <div class="border-muted/10 flex items-baseline justify-between gap-4 border-b py-2">
+                  <span class="text-cream font-medium">{name}</span>
+                  <span class="text-muted text-right text-sm">{role}</span>
+                </div>
+              ))
+            }
           </div>
         </section>
 
         <!-- AI -->
-        <section class="py-10 border-b border-muted/20">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">AI</p>
-          <div class="flex flex-col gap-4 max-w-xl">
+        <section class="border-muted/20 border-b py-10">
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">AI</p>
+          <div class="flex max-w-xl flex-col gap-4">
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Model</span>
-              <span class="text-muted text-sm">Claude Sonnet 4 (claude-sonnet-4-6)</span>
+              <span class="text-muted text-sm"
+                >Claude Sonnet 4 (claude-sonnet-4-6)</span
+              >
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Interface</span>
@@ -79,128 +92,197 @@ import Base from '../layouts/Base.astro';
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Tokens used</span>
-              <span class="text-muted text-sm">[TBD — tracking in progress]</span>
+              <span class="text-muted text-sm"
+                >[TBD — tracking in progress]</span
+              >
             </div>
-            <p class="text-muted text-sm font-light leading-relaxed mt-2">
-              Claude Code operated in an agentic loop — reading files, writing code, running
-              the dev server, and verifying changes in the browser preview. I reviewed
-              and directed each meaningful step.
+            <p class="text-muted mt-2 text-sm leading-relaxed font-light">
+              Claude Code operated in an agentic loop — reading files, writing
+              code, running the dev server, and verifying changes in the browser
+              preview. I reviewed and directed each meaningful step.
             </p>
           </div>
         </section>
 
         <!-- Accessibility -->
-        <section class="py-10 border-b border-muted/20">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">Accessibility</p>
-          <div class="flex flex-col gap-4 max-w-xl">
+        <section class="border-muted/20 border-b py-10">
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
+            Accessibility
+          </p>
+          <div class="flex max-w-xl flex-col gap-4">
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Target level</span>
-              <span class="text-yellow text-sm font-bold uppercase tracking-widest">WCAG 2.1 AA</span>
+              <span
+                class="text-yellow text-sm font-bold tracking-widest uppercase"
+                >WCAG 2.1 AA</span
+              >
             </div>
-            <ul class="flex flex-col gap-2 text-muted text-sm font-light leading-relaxed mt-1">
+            <ul
+              class="text-muted mt-1 flex flex-col gap-2 text-sm leading-relaxed font-light"
+            >
               <li>↳ ARIA roles, labels, and live regions throughout</li>
               <li>↳ Full keyboard navigation (arrow keys, Enter, Escape)</li>
               <li>↳ Focus management on modal open/close</li>
               <li>↳ Screen reader announcements for scene changes</li>
-              <li>↳ Reduced-motion support via <code class="text-cream/70 text-xs">prefers-reduced-motion</code></li>
+              <li>
+                ↳ Reduced-motion support via <code class="text-cream/70 text-xs"
+                  >prefers-reduced-motion</code>
+              </li>
               <li>↳ Colour contrast meets AA minimums</li>
             </ul>
           </div>
         </section>
 
         <!-- Languages -->
-        <section class="py-10 border-b border-muted/20">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">Languages</p>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { code: 'en', label: 'English', flag: '🇬🇧' },
-              { code: 'es', label: 'Spanish', flag: '🇪🇸' },
-              { code: 'fr', label: 'French', flag: '🇫🇷' },
-              { code: 'it', label: 'Italian', flag: '🇮🇹' },
-              { code: 'de', label: 'German', flag: '🇩🇪' },
-              { code: 'zh', label: 'Chinese', flag: '🇨🇳' },
-              { code: 'ja', label: 'Japanese', flag: '🇯🇵' },
-              { code: 'ar', label: 'Arabic', flag: '🇸🇦' },
-            ].map(({ code, label, flag }) => (
-              <div class="flex items-center gap-3 py-3 border-b border-muted/10">
-                <span aria-hidden="true">{flag}</span>
-                <div>
-                  <p class="text-cream text-sm font-medium">{label}</p>
-                  <p class="text-muted text-xs uppercase tracking-widest">{code}</p>
+        <section class="border-muted/20 border-b py-10">
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
+            Languages
+          </p>
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {
+              [
+                { code: "en", label: "English", flag: "🇬🇧" },
+                { code: "es", label: "Spanish", flag: "🇪🇸" },
+                { code: "fr", label: "French", flag: "🇫🇷" },
+                { code: "it", label: "Italian", flag: "🇮🇹" },
+                { code: "de", label: "German", flag: "🇩🇪" },
+                { code: "zh", label: "Chinese", flag: "🇨🇳" },
+                { code: "ja", label: "Japanese", flag: "🇯🇵" },
+                { code: "ar", label: "Arabic", flag: "🇸🇦" },
+              ].map(({ code, label, flag }) => (
+                <div class="border-muted/10 flex items-center gap-3 border-b py-3">
+                  <span aria-hidden="true">{flag}</span>
+                  <div>
+                    <p class="text-cream text-sm font-medium">{label}</p>
+                    <p class="text-muted text-xs tracking-widest uppercase">
+                      {code}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
-          <p class="text-muted text-xs font-light leading-relaxed mt-6">
-            Browser language is detected on first visit and redirects automatically.
-            RTL layout is fully supported for Arabic.
+          <p class="text-muted mt-6 text-xs leading-relaxed font-light">
+            Browser language is detected on first visit and redirects
+            automatically. RTL layout is fully supported for Arabic.
           </p>
         </section>
 
         <!-- Stats -->
-        <section class="py-10 border-b border-muted/20">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">Stats</p>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-px border border-muted/20">
-            {[
-              { value: '[TBD]', label: 'Tokens used' },
-              { value: '[TBD]', label: 'Initial load time' },
-              { value: '[TBD]', label: 'JS bundle size' },
-              { value: '8', label: 'Languages' },
-              { value: '5', label: 'Portfolio scenes' },
-              { value: 'WCAG AA', label: 'Accessibility' },
-            ].map(({ value, label }) => (
-              <div class="flex flex-col gap-1 p-6">
-                <span class="text-cream text-2xl md:text-3xl font-bold leading-none">{value}</span>
-                <span class="text-muted text-xs uppercase tracking-widest">{label}</span>
-              </div>
-            ))}
+        <section class="border-muted/20 border-b py-10">
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">Stats</p>
+          <div
+            class="border-muted/20 grid grid-cols-2 gap-px border md:grid-cols-3"
+          >
+            {
+              [
+                { value: "[TBD]", label: "Tokens used" },
+                { value: "[TBD]", label: "Initial load time" },
+                { value: "[TBD]", label: "JS bundle size" },
+                { value: "8", label: "Languages" },
+                { value: "5", label: "Portfolio scenes" },
+                { value: "WCAG AA", label: "Accessibility" },
+              ].map(({ value, label }) => (
+                <div class="flex flex-col gap-1 p-6">
+                  <span class="text-cream text-2xl leading-none font-bold md:text-3xl">
+                    {value}
+                  </span>
+                  <span class="text-muted text-xs tracking-widest uppercase">
+                    {label}
+                  </span>
+                </div>
+              ))
+            }
           </div>
         </section>
 
         <!-- Timeline -->
-        <section class="py-10 border-b border-muted/20">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">Timeline</p>
+        <section class="border-muted/20 border-b py-10">
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
+            Timeline
+          </p>
           <div class="flex flex-col gap-0">
-            {[
-              { date: 'Apr 2025', event: 'Decided to rebuild from scratch', note: 'Previous site was Express + EJS. Time to move on.' },
-              { date: 'Apr 2025', event: 'Migrated to Astro', note: 'Ported all existing pages, case studies, and assets.' },
-              { date: 'May 2025', event: 'Designed the scene-based UX', note: 'Name-gated entry, linear navigation, editorial aesthetic.' },
-              { date: 'May 2025', event: 'Built core portfolio experience', note: 'React islands, SceneEngine, 5 scenes, Framer Motion transitions.' },
-              { date: 'May 2025', event: 'Internationalisation', note: '8-language support with auto-detection and RTL.' },
-              { date: 'May 2025', event: 'Accessibility pass', note: 'Full WCAG AA audit and fixes.' },
-              { date: 'May 2025', event: 'Nav drawer, padding, polish', note: 'Final UI refinements before launch.' },
-            ].map(({ date, event, note }, i) => (
-              <div class="flex gap-6 py-5 border-b border-muted/10 group">
-                <span class="text-muted text-xs uppercase tracking-widest w-20 shrink-0 pt-1">{date}</span>
-                <div class="flex flex-col gap-1">
-                  <span class="text-cream font-medium">{event}</span>
-                  <span class="text-muted text-sm font-light">{note}</span>
+            {
+              [
+                {
+                  date: "Apr 2025",
+                  event: "Decided to rebuild from scratch",
+                  note: "Previous site was Express + EJS. Time to move on.",
+                },
+                {
+                  date: "Apr 2025",
+                  event: "Migrated to Astro",
+                  note: "Ported all existing pages, case studies, and assets.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Designed the scene-based UX",
+                  note: "Name-gated entry, linear navigation, editorial aesthetic.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Built core portfolio experience",
+                  note: "React islands, SceneEngine, 5 scenes, Framer Motion transitions.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Internationalisation",
+                  note: "8-language support with auto-detection and RTL.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Accessibility pass",
+                  note: "Full WCAG AA audit and fixes.",
+                },
+                {
+                  date: "May 2025",
+                  event: "Nav drawer, padding, polish",
+                  note: "Final UI refinements before launch.",
+                },
+              ].map(({ date, event, note }, i) => (
+                <div class="border-muted/10 group flex gap-6 border-b py-5">
+                  <span class="text-muted w-20 shrink-0 pt-1 text-xs tracking-widest uppercase">
+                    {date}
+                  </span>
+                  <div class="flex flex-col gap-1">
+                    <span class="text-cream font-medium">{event}</span>
+                    <span class="text-muted text-sm font-light">{note}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
         </section>
 
         <!-- Repo -->
         <section class="py-10">
-          <p class="text-muted text-xs uppercase tracking-widest mb-6">Source</p>
+          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
+            Source
+          </p>
           <a
             href="https://github.com/austinban/portfolio-v2"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-3 text-cream hover:text-yellow transition-colors duration-200 group"
+            class="text-cream hover:text-yellow group inline-flex items-center gap-3 transition-colors duration-200"
           >
-            <span class="text-xl font-bold">github.com/austinban/portfolio-v2</span>
-            <span class="text-muted group-hover:text-yellow transition-colors duration-200">↗</span>
+            <span class="text-xl font-bold"
+              >github.com/austinban/portfolio-v2</span
+            >
+            <span
+              class="text-muted group-hover:text-yellow transition-colors duration-200"
+              >↗</span
+            >
           </a>
-          <p class="text-muted text-sm font-light mt-4 max-w-lg">
-            MIT licensed. If something here is useful, take it.
-            If something is broken, <a href="mailto:austin@austinban.com" class="text-cream hover:text-yellow transition-colors duration-200">let me know</a>.
+          <p class="text-muted mt-4 max-w-lg text-sm font-light">
+            MIT licensed. If something here is useful, take it. If something is
+            broken, <a
+              href="mailto:austin@austinban.com"
+              class="text-cream hover:text-yellow transition-colors duration-200"
+              >let me know</a
+            >.
           </p>
         </section>
-
       </div>
-
     </main>
   </div>
 </Base>

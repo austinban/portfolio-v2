@@ -1,6 +1,6 @@
-import type { EggId } from '../data/easterEggs';
+import type { EggId } from "../data/easterEggs";
 
-export type Dir = 'ltr' | 'rtl';
+export type Dir = "ltr" | "rtl";
 
 export interface Translations {
   locale: string;

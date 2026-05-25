@@ -1,26 +1,26 @@
-import { type Variants, motion, AnimatePresence } from 'framer-motion';
-import { Lock } from 'lucide-react';
-import { useScene } from '../../context/SceneEngine';
+import { type Variants, motion, AnimatePresence } from "framer-motion";
+import { Lock } from "lucide-react";
+import { useScene } from "../../context/SceneEngine";
 
 export const DRAWER_WIDTH = 280;
 
 // Links that navigate to a scene within the SPA (no page reload)
 const SCENE_LINKS: { label: string; scene: number }[] = [
-  { label: 'About',    scene: 3 },
-  { label: 'Work',     scene: 2 },
-  { label: 'Contact',  scene: 4 },
+  { label: "About", scene: 3 },
+  { label: "Work", scene: 2 },
+  { label: "Contact", scene: 4 },
 ];
 
 // Regular href links
 const HREF_LINKS = [
-  { label: 'Resume',         href: '#' },
-  { label: 'About this site', href: '/portfolio-v2/about-this-site' },
+  { label: "Resume", href: "#" },
+  { label: "About this site", href: "/portfolio-v2/about-this-site" },
 ];
 
 const SOCIAL_LINKS = [
-  { label: 'GitHub',   href: 'https://github.com/austinban' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/austin-ban-4b719a89' },
-  { label: 'Dribbble', href: '#' },
+  { label: "GitHub", href: "https://github.com/austinban" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/austin-ban-4b719a89" },
+  { label: "Dribbble", href: "#" },
 ];
 
 const itemVariants: Variants = {
@@ -28,7 +28,11 @@ const itemVariants: Variants = {
   visible: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { delay: 0.08 + i * 0.06, duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+    transition: {
+      delay: 0.08 + i * 0.06,
+      duration: 0.3,
+      ease: [0.22, 1, 0.36, 1],
+    },
   }),
 };
 
@@ -46,8 +50,12 @@ export default function NavDrawer({ open, onClose }: Props) {
   };
 
   const allNavItems = [
-    ...SCENE_LINKS.map((l, i) => ({ ...l, type: 'scene' as const, index: i })),
-    ...HREF_LINKS.map((l, i) => ({ ...l, type: 'href' as const, index: SCENE_LINKS.length + i })),
+    ...SCENE_LINKS.map((l, i) => ({ ...l, type: "scene" as const, index: i })),
+    ...HREF_LINKS.map((l, i) => ({
+      ...l,
+      type: "href" as const,
+      index: SCENE_LINKS.length + i,
+    })),
   ];
 
   return (
@@ -59,15 +67,19 @@ export default function NavDrawer({ open, onClose }: Props) {
           animate={{ x: 0 }}
           exit={{ x: -DRAWER_WIDTH }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed left-0 top-0 bottom-0 z-10 flex flex-col justify-between py-10 px-10"
-          style={{ width: DRAWER_WIDTH, maxWidth: '85vw', backgroundColor: 'var(--color-dark-surface)' }}
+          className="fixed top-0 bottom-0 left-0 z-10 flex flex-col justify-between px-10 py-10"
+          style={{
+            width: DRAWER_WIDTH,
+            maxWidth: "85vw",
+            backgroundColor: "var(--color-dark-surface)",
+          }}
           aria-label="Site navigation"
         >
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.12, duration: 0.3 }}
-            className="text-muted text-xs uppercase tracking-widest"
+            className="text-muted text-xs tracking-widest uppercase"
           >
             Austin Ban
           </motion.p>
@@ -81,17 +93,17 @@ export default function NavDrawer({ open, onClose }: Props) {
                 initial="hidden"
                 animate="visible"
               >
-                {item.type === 'scene' ? (
+                {item.type === "scene" ? (
                   <button
                     onClick={() => handleSceneNav(item.scene)}
-                    className="text-cream text-2xl font-bold hover:text-yellow transition-colors duration-150 leading-none text-left"
+                    className="text-cream hover:text-yellow text-left text-2xl leading-none font-bold transition-colors duration-150"
                   >
                     {item.label}
                   </button>
                 ) : (
                   <a
                     href={item.href}
-                    className="text-cream text-2xl font-bold hover:text-yellow transition-colors duration-150 leading-none"
+                    className="text-cream hover:text-yellow text-2xl leading-none font-bold transition-colors duration-150"
                   >
                     {item.label}
                   </a>
@@ -108,14 +120,16 @@ export default function NavDrawer({ open, onClose }: Props) {
             >
               <a
                 href="/portfolio-v2/lockpicking"
-                className="flex items-center gap-2 text-muted hover:text-yellow transition-colors duration-150 leading-none group"
+                className="text-muted hover:text-yellow group flex items-center gap-2 leading-none transition-colors duration-150"
               >
                 <Lock
                   size={14}
                   strokeWidth={2}
                   className="transition-colors duration-150"
                 />
-                <span className="text-sm uppercase tracking-widest">Locked content</span>
+                <span className="text-sm tracking-widest uppercase">
+                  Locked content
+                </span>
               </a>
             </motion.li>
           </ul>
@@ -130,7 +144,7 @@ export default function NavDrawer({ open, onClose }: Props) {
               <a
                 key={label}
                 href={href}
-                className="text-muted text-xs uppercase tracking-widest hover:text-cream transition-colors duration-150"
+                className="text-muted hover:text-cream text-xs tracking-widest uppercase transition-colors duration-150"
               >
                 {label} ↗
               </a>

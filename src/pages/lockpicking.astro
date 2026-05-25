@@ -1,8 +1,11 @@
 ---
-import Base from '../layouts/Base.astro';
-import LockpickingGame from '../components/games/LockpickingGame';
+import Base from "../layouts/Base.astro";
+import LockpickingGame from "../components/games/LockpickingGame";
 ---
 
-<Base title="Lockpicking — Austin Ban" description="A Skyrim-style lockpicking mini game.">
+<Base
+  title="Lockpicking — Austin Ban"
+  description="A Skyrim-style lockpicking mini game."
+>
   <LockpickingGame client:load />
 </Base>

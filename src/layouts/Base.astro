@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
   title?: string;
@@ -7,23 +7,23 @@ interface Props {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
-  ogType?: 'website' | 'article';
+  ogType?: "website" | "article";
   schema?: object;
   lang?: string;
-  dir?: 'ltr' | 'rtl';
+  dir?: "ltr" | "rtl";
   extraFonts?: string[];
 }
 
 const {
-  title = 'Austin Ban',
-  description = 'Senior UX Engineer & frontend developer. I build things that are fast, opinionated, and a little hard to forget.',
+  title = "Austin Ban",
+  description = "Senior UX Engineer & frontend developer. I build things that are fast, opinionated, and a little hard to forget.",
   ogTitle = title,
   ogDescription = description,
-  ogImage = '/portfolio-v2/og-default.png',
-  ogType = 'website',
+  ogImage = "/portfolio-v2/og-default.png",
+  ogType = "website",
   schema,
-  lang = 'en',
-  dir = 'ltr',
+  lang = "en",
+  dir = "ltr",
   extraFonts = [],
 } = Astro.props;
 
@@ -57,18 +57,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 
     <!-- Locale-specific fonts -->
-    {extraFonts.length > 0 && (
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-    )}
-    {extraFonts.length > 0 && (
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    )}
-    {extraFonts.map(href => (
-      <link rel="stylesheet" href={href} />
-    ))}
+    {
+      extraFonts.length > 0 && (
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+      )
+    }
+    {
+      extraFonts.length > 0 && (
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      )
+    }
+    {extraFonts.map((href) => <link rel="stylesheet" href={href} />)}
 
     <!-- Structured data -->
-    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    {
+      schema && (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
   </head>
   <!--
 
@@ -101,13 +107,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </body>
   <script>
     const styles = [
-      'font-family: monospace',
-      'font-size: 11px',
-      'color: #eeab12',
-      'background: #0c0b09',
-      'padding: 12px 16px',
-      'line-height: 1.6',
-    ].join(';');
+      "font-family: monospace",
+      "font-size: 11px",
+      "color: #eeab12",
+      "background: #0c0b09",
+      "padding: 12px 16px",
+      "line-height: 1.6",
+    ].join(";");
 
     console.log(
       `%c
@@ -118,7 +124,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   │  austin ban — designer & developer  │
   │  austin@austinban.com               │
   └─────────────────────────────────────┘`,
-      styles
+      styles,
     );
   </script>
 </html>

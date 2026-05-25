@@ -10,37 +10,37 @@
  * Exit code 1 if any errors found — safe to run in CI.
  */
 
-import { createRequire } from 'module';
-import { pathToFileURL } from 'url';
-import { readdir } from 'fs/promises';
-import path from 'path';
+import { createRequire } from "module";
+import { pathToFileURL } from "url";
+import { readdir } from "fs/promises";
+import path from "path";
 
 // We need tsx/ts-node or to use the compiled output. Since Astro compiles TS,
 // we'll import via the TypeScript source using a simple inline approach.
 // Run with: npx tsx scripts/check-translations.mjs
 // Or add to package.json: "check:i18n": "tsx scripts/check-translations.mjs"
 
-const localesDir = new URL('../src/i18n/locales/', import.meta.url);
+const localesDir = new URL("../src/i18n/locales/", import.meta.url);
 
 // Dynamically import all locale files
 async function loadLocales() {
   const files = await readdir(localesDir);
   const locales = {};
-  for (const file of files.filter(f => f.endsWith('.ts'))) {
-    const name = file.replace('.ts', '');
+  for (const file of files.filter((f) => f.endsWith(".ts"))) {
+    const name = file.replace(".ts", "");
     const mod = await import(new URL(file, localesDir).href);
     locales[name] = mod[name]; // export const en = ..., export const es = ..., etc.
   }
   return locales;
 }
 
-function flattenObject(obj, prefix = '') {
+function flattenObject(obj, prefix = "") {
   const result = {};
   for (const [key, val] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
     if (Array.isArray(val)) {
       result[fullKey] = val; // keep arrays as-is for placeholder checking
-    } else if (val && typeof val === 'object') {
+    } else if (val && typeof val === "object") {
       Object.assign(result, flattenObject(val, fullKey));
     } else {
       result[fullKey] = val;
@@ -54,43 +54,52 @@ function extractPlaceholders(str) {
 }
 
 function checkPlaceholders(enVal, localeVal, key) {
-  if (typeof enVal !== 'string' || typeof localeVal !== 'string') return [];
+  if (typeof enVal !== "string" || typeof localeVal !== "string") return [];
   const enPH = extractPlaceholders(enVal);
   const localePH = extractPlaceholders(localeVal);
-  const missing = enPH.filter(p => !localePH.includes(p));
-  const extra = localePH.filter(p => !enPH.includes(p));
+  const missing = enPH.filter((p) => !localePH.includes(p));
+  const extra = localePH.filter((p) => !enPH.includes(p));
   const issues = [];
-  if (missing.length) issues.push(`  placeholder missing ${missing.join(', ')}`);
-  if (extra.length) issues.push(`  placeholder extra ${extra.join(', ')}`);
+  if (missing.length)
+    issues.push(`  placeholder missing ${missing.join(", ")}`);
+  if (extra.length) issues.push(`  placeholder extra ${extra.join(", ")}`);
   return issues;
 }
 
 const SKIP_UNTRANSLATED_KEYS = new Set([
-  'locale',
+  "locale",
   // These are proper nouns / brand names that intentionally stay the same
 ]);
 
 // Keys that are expected to be identical across locales (proper nouns, etc.)
-const ALLOWED_IDENTICAL = /^(locale|eggs\.(austin|ban|marianne|goldie|callie))$/;
+const ALLOWED_IDENTICAL =
+  /^(locale|eggs\.(austin|ban|marianne|goldie|callie))$/;
 
 async function main() {
   let locales;
   try {
     locales = await loadLocales();
   } catch (e) {
-    console.error('Failed to load locales. Make sure to run with: npx tsx scripts/check-translations.mjs');
+    console.error(
+      "Failed to load locales. Make sure to run with: npx tsx scripts/check-translations.mjs",
+    );
     console.error(e.message);
     process.exit(1);
   }
 
-  const en = locales['en'];
-  if (!en) { console.error('English locale (en.ts) not found.'); process.exit(1); }
+  const en = locales["en"];
+  if (!en) {
+    console.error("English locale (en.ts) not found.");
+    process.exit(1);
+  }
 
   const enFlat = flattenObject(en);
-  const nonEnLocales = Object.entries(locales).filter(([name]) => name !== 'en');
+  const nonEnLocales = Object.entries(locales).filter(
+    ([name]) => name !== "en",
+  );
 
   if (nonEnLocales.length === 0) {
-    console.warn('No non-English locales found. Nothing to check.');
+    console.warn("No non-English locales found. Nothing to check.");
     process.exit(0);
   }
 
@@ -113,12 +122,14 @@ async function main() {
 
       // Placeholder mismatch (only for string values)
       const phIssues = checkPlaceholders(enVal, localeVal, key);
-      phIssues.forEach(issue => errors.push(`  PLACEHOLDER  ${key}: ${issue.trim()}`));
+      phIssues.forEach((issue) =>
+        errors.push(`  PLACEHOLDER  ${key}: ${issue.trim()}`),
+      );
 
       // Identical to English (possibly untranslated) — warn, not error
       if (
-        typeof enVal === 'string' &&
-        typeof localeVal === 'string' &&
+        typeof enVal === "string" &&
+        typeof localeVal === "string" &&
         enVal === localeVal &&
         !ALLOWED_IDENTICAL.test(key)
       ) {
@@ -134,9 +145,11 @@ async function main() {
     }
 
     if (errors.length || warnings.length) {
-      console.log(`\n── ${localeName.toUpperCase()} ────────────────────────────`);
-      errors.forEach(e => console.error(e));
-      warnings.forEach(w => console.warn(w));
+      console.log(
+        `\n── ${localeName.toUpperCase()} ────────────────────────────`,
+      );
+      errors.forEach((e) => console.error(e));
+      warnings.forEach((w) => console.warn(w));
       totalErrors += errors.length;
       totalWarnings += warnings.length;
     } else {
@@ -146,10 +159,12 @@ async function main() {
 
   console.log(`\n────────────────────────────────────────`);
   if (totalErrors === 0 && totalWarnings === 0) {
-    console.log('All locales complete. No issues found.');
+    console.log("All locales complete. No issues found.");
   } else {
-    if (totalErrors) console.error(`${totalErrors} error(s) found across all locales.`);
-    if (totalWarnings) console.warn(`${totalWarnings} warning(s) found across all locales.`);
+    if (totalErrors)
+      console.error(`${totalErrors} error(s) found across all locales.`);
+    if (totalWarnings)
+      console.warn(`${totalWarnings} warning(s) found across all locales.`);
   }
 
   if (totalErrors > 0) process.exit(1);

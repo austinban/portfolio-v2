@@ -1,11 +1,17 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { MAX_NAME_LENGTH } from '../utils/nameConfig';
-import { isProfane } from '../utils/profanity';
-import type { Translations } from '../i18n/types';
-import { en } from '../i18n';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { MAX_NAME_LENGTH } from "../utils/nameConfig";
+import { isProfane } from "../utils/profanity";
+import type { Translations } from "../i18n/types";
+import { en } from "../i18n";
 
 export const TOTAL_SCENES = 5;
-const STORAGE_KEY = 'portfolio_visitor';
+const STORAGE_KEY = "portfolio_visitor";
 
 type Direction = 1 | -1;
 
@@ -32,8 +38,12 @@ interface SceneProviderProps {
   translations?: Translations;
 }
 
-export function SceneProvider({ children, locale = 'en', translations = en }: SceneProviderProps) {
-  const [visitorName, setVisitorName] = useState('');
+export function SceneProvider({
+  children,
+  locale = "en",
+  translations = en,
+}: SceneProviderProps) {
+  const [visitorName, setVisitorName] = useState("");
   const [isRandomName, setIsRandomName] = useState(false);
   const [currentScene, setCurrentScene] = useState(-1);
   const [direction, setDirection] = useState<Direction>(1);
@@ -42,7 +52,7 @@ export function SceneProvider({ children, locale = 'en', translations = en }: Sc
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     const urlScene = (() => {
-      const p = new URLSearchParams(window.location.search).get('scene');
+      const p = new URLSearchParams(window.location.search).get("scene");
       if (p === null) return null;
       const n = parseInt(p, 10);
       return n >= 0 && n < TOTAL_SCENES ? n : null;
@@ -52,7 +62,7 @@ export function SceneProvider({ children, locale = 'en', translations = en }: Sc
       try {
         const { name, isRandom } = JSON.parse(stored);
         if (
-          typeof name !== 'string' ||
+          typeof name !== "string" ||
           name.trim().length === 0 ||
           name.trim().length > MAX_NAME_LENGTH ||
           isProfane(name)
@@ -73,8 +83,8 @@ export function SceneProvider({ children, locale = 'en', translations = en }: Sc
   useEffect(() => {
     if (currentScene < 0) return;
     const url = new URL(window.location.href);
-    url.searchParams.set('scene', String(currentScene));
-    window.history.replaceState(null, '', url.toString());
+    url.searchParams.set("scene", String(currentScene));
+    window.history.replaceState(null, "", url.toString());
   }, [currentScene]);
 
   const setName = useCallback((name: string, isRandom = false) => {
@@ -88,30 +98,47 @@ export function SceneProvider({ children, locale = 'en', translations = en }: Sc
 
   const advance = useCallback(() => {
     setDirection(1);
-    setCurrentScene(s => Math.min(s + 1, TOTAL_SCENES - 1));
+    setCurrentScene((s) => Math.min(s + 1, TOTAL_SCENES - 1));
   }, []);
 
   const retreat = useCallback(() => {
     setDirection(-1);
-    setCurrentScene(s => Math.max(s - 1, 0));
+    setCurrentScene((s) => Math.max(s - 1, 0));
   }, []);
 
-  const goTo = useCallback((scene: number) => {
-    setDirection(scene > currentScene ? 1 : -1);
-    setCurrentScene(scene);
-  }, [currentScene]);
+  const goTo = useCallback(
+    (scene: number) => {
+      setDirection(scene > currentScene ? 1 : -1);
+      setCurrentScene(scene);
+    },
+    [currentScene],
+  );
 
   const getRandomName = useCallback(
-    () => translations.randomNames[Math.floor(Math.random() * translations.randomNames.length)]!,
-    [translations]
+    () =>
+      translations.randomNames[
+        Math.floor(Math.random() * translations.randomNames.length)
+      ]!,
+    [translations],
   );
 
   return (
-    <SceneContext.Provider value={{
-      visitorName, isRandomName, currentScene, direction, hasEnteredName,
-      locale, t: translations,
-      setName, advance, retreat, goTo, getRandomName,
-    }}>
+    <SceneContext.Provider
+      value={{
+        visitorName,
+        isRandomName,
+        currentScene,
+        direction,
+        hasEnteredName,
+        locale,
+        t: translations,
+        setName,
+        advance,
+        retreat,
+        goTo,
+        getRandomName,
+      }}
+    >
       {children}
     </SceneContext.Provider>
   );
@@ -119,6 +146,6 @@ export function SceneProvider({ children, locale = 'en', translations = en }: Sc
 
 export function useScene() {
   const ctx = useContext(SceneContext);
-  if (!ctx) throw new Error('useScene must be used within SceneProvider');
+  if (!ctx) throw new Error("useScene must be used within SceneProvider");
   return ctx;
 }

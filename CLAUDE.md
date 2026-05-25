@@ -22,6 +22,7 @@ This rule applies unconditionally. Even strings that don't currently contain apo
 ### Never use single quotes for string values. Ever.
 
 The only single quotes allowed in locale files are:
+
 - The TypeScript import statement: `import type { Translations } from '../types';`
 - Object keys: `'amelia-earhart': "..."` — key in single quotes, value in double quotes
 
@@ -29,14 +30,15 @@ The only single quotes allowed in locale files are:
 
 These tokens are used for runtime interpolation and must appear verbatim:
 
-| Token | Used for |
-|---|---|
-| `{name}` | Visitor's name (splits string for `<EditableName />` component) |
+| Token      | Used for                                                                    |
+| ---------- | --------------------------------------------------------------------------- |
+| `{name}`   | Visitor's name (splits string for `<EditableName />` component)             |
 | `{austin}` | Austin's name (splits string for the `<span className="text-yellow">` span) |
-| `{n}` | A number (character count, etc.) |
-| `{max}` | Max character length |
+| `{n}`      | A number (character count, etc.)                                            |
+| `{max}`    | Max character length                                                        |
 
 Rules:
+
 - Copy the token character-for-character including the braces
 - Do not translate, localize, or reformat the token itself
 - Do not add spaces inside: `{ name }` is wrong, `{name}` is correct
@@ -90,6 +92,6 @@ Translations flow through `SceneContext`. Every component that needs translated 
 For strings that contain `{name}` or `{austin}` — these are split at the token boundary to insert React components inline. The pattern is:
 
 ```tsx
-const [before = '', after = ''] = t.scenes.greeting.heading.split('{name}');
+const [before = "", after = ""] = t.scenes.greeting.heading.split("{name}");
 // render: {before}<EditableName />{after}
 ```
