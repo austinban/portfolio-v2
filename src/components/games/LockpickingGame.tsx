@@ -628,7 +628,7 @@ export default function LockpickingGame() {
       </AnimatePresence>
 
       <a
-        href="/portfolio-v2"
+        href="/"
         className="text-muted/35 hover:text-muted/60 text-xs tracking-widest uppercase transition-colors"
       >
         ← Back to portfolio

@@ -8,8 +8,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://austinban.github.io",
-  base: "/portfolio-v2",
+  site: "https://austinban.com",
   integrations: [react(), mdx(), sitemap()],
   i18n: {
     defaultLocale: "en",

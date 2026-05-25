@@ -3,7 +3,7 @@ import { Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SUPPORTED_LOCALES } from "../../i18n";
 
-const BASE = "/portfolio-v2";
+const BASE = "";
 
 function localeHref(locale: string, currentScene: number) {
   const sceneParam = currentScene >= 0 ? `?scene=${currentScene}` : "";

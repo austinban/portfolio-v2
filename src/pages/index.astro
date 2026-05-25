@@ -12,7 +12,7 @@ const personSchema = {
   "@type": "Person",
   name: "Austin Ban",
   jobTitle: "Senior UX Engineer & Frontend Developer",
-  url: "https://austinban.github.io/portfolio-v2",
+  url: "https://austinban.com",
   sameAs: [
     "https://linkedin.com/in/austin-ban-4b719a89",
     "https://github.com/austinban",
@@ -59,7 +59,7 @@ const personSchema = {
         {
           sortedWork.map((entry) => (
             <li>
-              <a href={`/portfolio-v2/work/${entry.id}`}>
+              <a href={`/work/${entry.id}`}>
                 {entry.data.title} — {entry.data.description}
               </a>
             </li>
@@ -93,7 +93,7 @@ const personSchema = {
   (function () {
     const SUPPORTED = ["es", "fr", "it", "de", "zh", "ja", "ar"];
     const PREF_KEY = "portfolio_locale_pref";
-    const BASE = "/portfolio-v2";
+    const BASE = "";
 
     // If user explicitly chose a language via the switcher, never auto-redirect again
     const stored = localStorage.getItem(PREF_KEY);

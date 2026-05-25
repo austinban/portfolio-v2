@@ -21,7 +21,7 @@ const {
   description = "Senior UX Engineer & frontend developer. I build things that are fast, opinionated, and a little hard to forget.",
   ogTitle = title,
   ogDescription = description,
-  ogImage = "/portfolio-v2/og-default.png",
+  ogImage = "/og-default.png",
   ogType = "website",
   schema,
   lang = "en",
@@ -43,7 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/svg+xml" href="/portfolio-v2/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
@@ -76,6 +76,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     {
       schema && (
         <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      )
+    }
+
+    <!-- Cloudflare Web Analytics -->
+    {
+      import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN}"}`}
+        />
       )
     }
   </head>

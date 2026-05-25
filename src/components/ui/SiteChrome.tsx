@@ -8,7 +8,7 @@ interface Props {
   locale: string;
 }
 
-const BASE = "/portfolio-v2";
+const BASE = "";
 
 function goToScene(scene: number) {
   window.location.href = `${BASE}/?scene=${scene}`;

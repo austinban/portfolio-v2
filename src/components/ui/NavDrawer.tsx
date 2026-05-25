@@ -13,7 +13,7 @@ const SCENE_LINKS: { label: string; scene: number }[] = [
 
 // Regular href links
 const HREF_LINKS = [
-  { label: "About this site", href: "/portfolio-v2/about-this-site" },
+  { label: "About this site", href: "/about-this-site" },
 ];
 
 const SOCIAL_LINKS = [
@@ -117,7 +117,7 @@ export default function NavDrawer({ open, onClose, onGoTo }: Props) {
               animate="visible"
             >
               <a
-                href="/portfolio-v2/lockpicking"
+                href="/lockpicking"
                 className="text-muted hover:text-yellow group flex items-center gap-2 leading-none transition-colors duration-150"
               >
                 <Lock

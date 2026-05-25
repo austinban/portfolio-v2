@@ -33,7 +33,7 @@ const links = [
   },
   {
     label: "This site",
-    href: "/portfolio-v2/about-this-site",
+    href: "/about-this-site",
     display: "About this site",
   },
 ];
