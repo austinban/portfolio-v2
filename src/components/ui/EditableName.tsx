@@ -126,7 +126,7 @@ export default function EditableName({ className = "" }: Props) {
                   e.preventDefault();
                   commit();
                 }}
-                className="contents"
+                className="flex flex-col items-center gap-6"
               >
                 <input
                   ref={inputRef}
@@ -145,6 +145,22 @@ export default function EditableName({ className = "" }: Props) {
                   className="border-yellow text-cream border-b-2 bg-transparent text-center text-5xl leading-none font-bold outline-none focus-visible:outline-none md:text-7xl"
                   style={{ width: `${Math.max(draft.length, 6)}ch` }}
                 />
+
+                <div className="flex items-center gap-6">
+                  <button
+                    type="button"
+                    onClick={() => setEditing(false)}
+                    className="text-muted hover:text-pink text-sm underline underline-offset-4 transition-colors duration-200"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-yellow text-dark hover:bg-yellow-light px-6 py-3 text-sm font-bold tracking-wider uppercase transition-colors duration-200"
+                  >
+                    Save
+                  </button>
+                </div>
               </form>
 
               <AnimatePresence mode="wait">
@@ -167,7 +183,8 @@ export default function EditableName({ className = "" }: Props) {
                     animate={{ opacity: 1 }}
                     className="flex flex-col items-center gap-3"
                   >
-                    <span className="text-muted text-xs tracking-widest uppercase">
+                    {/* Desktop keyboard hint — hidden on mobile */}
+                    <span className="text-muted hidden text-xs tracking-widest uppercase md:block">
                       {en.hint}
                     </span>
                     <motion.span

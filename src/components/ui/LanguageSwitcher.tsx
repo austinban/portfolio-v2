@@ -48,7 +48,7 @@ export default function LanguageSwitcher({
         aria-label={label}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="text-muted hover:text-cream flex items-center gap-1.5 text-xs tracking-widest uppercase transition-colors duration-200"
+        className="text-muted hover:text-cream -m-2 flex items-center gap-1.5 p-2 text-xs tracking-widest uppercase transition-colors duration-200"
       >
         <Globe size={14} strokeWidth={1.5} />
         <span>

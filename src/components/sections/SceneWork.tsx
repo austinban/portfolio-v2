@@ -51,7 +51,7 @@ export default function SceneWork() {
     <SceneWrapper variants={container} align="col-center">
       <motion.h1
         variants={card}
-        className="text-cream mb-12 text-5xl leading-none font-bold md:text-7xl"
+        className="text-cream mb-6 text-5xl leading-none font-bold md:mb-12 md:text-7xl"
       >
         {isRandomName ? w.headingRandom : w.headingDefault}
       </motion.h1>

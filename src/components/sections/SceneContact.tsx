@@ -125,12 +125,12 @@ export default function SceneContact() {
                 variants={item}
                 whileHover={{ x: 8 }}
                 onClick={() => setModalOpen(true)}
-                className="border-muted/20 group flex w-full items-center justify-between border-b py-5 transition-colors duration-200"
+                className="border-muted/20 group flex w-full items-center justify-between gap-4 border-b py-5 transition-colors duration-200"
               >
-                <span className="text-muted text-sm tracking-widest uppercase">
+                <span className="text-muted shrink-0 text-sm tracking-widest uppercase">
                   Email
                 </span>
-                <span className="text-cream group-hover:text-yellow text-xl font-medium transition-colors duration-200">
+                <span className="text-cream group-hover:text-yellow min-w-0 truncate text-right text-base font-medium transition-colors duration-200 md:text-xl">
                   {c.emailDisplay} →
                 </span>
               </motion.button>
@@ -142,12 +142,12 @@ export default function SceneContact() {
                   href={href}
                   variants={item}
                   whileHover={{ x: 8 }}
-                  className="border-muted/20 group flex items-center justify-between border-b py-5 transition-colors duration-200"
+                  className="border-muted/20 group flex items-center justify-between gap-4 border-b py-5 transition-colors duration-200"
                 >
-                  <span className="text-muted text-sm tracking-widest uppercase">
+                  <span className="text-muted shrink-0 text-sm tracking-widest uppercase">
                     {label}
                   </span>
-                  <span className="text-cream group-hover:text-yellow text-xl font-medium transition-colors duration-200">
+                  <span className="text-cream group-hover:text-yellow min-w-0 truncate text-right text-base font-medium transition-colors duration-200 md:text-xl">
                     {display} →
                   </span>
                 </motion.a>

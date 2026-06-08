@@ -13,7 +13,7 @@ export default function SceneNav({
   drawerWidth = 0,
   onAdvance,
 }: Props) {
-  const { currentScene, advance, retreat, t } = useScene();
+  const { currentScene, advance, retreat, goTo, t } = useScene();
   const handleAdvance = onAdvance ?? advance;
   const [bouncing, setBouncing] = useState(false);
 
@@ -65,24 +65,37 @@ export default function SceneNav({
         {t.ui.nav.back}
       </button>
 
-      <div
-        role="progressbar"
-        aria-valuenow={currentScene + 1}
-        aria-valuemin={1}
-        aria-valuemax={TOTAL_SCENES}
-        aria-label={`${currentScene + 1} / ${TOTAL_SCENES}`}
-        className="pointer-events-auto flex gap-2"
+      <nav
+        aria-label="Scene navigation"
+        className="pointer-events-auto flex items-center gap-2"
       >
         {Array.from({ length: TOTAL_SCENES }).map((_, i) => (
-          <div
+          <motion.button
             key={i}
-            aria-hidden="true"
-            className={`h-1 transition-all duration-300 ${
-              i === currentScene ? "bg-yellow w-6" : "bg-muted/40 w-2"
-            }`}
+            onClick={() => goTo(i)}
+            aria-label={`Go to scene ${i + 1}`}
+            aria-current={i === currentScene ? "step" : undefined}
+            animate={{
+              width: i === currentScene ? 24 : 8,
+              backgroundColor:
+                i === currentScene
+                  ? "var(--color-yellow)"
+                  : "rgba(122,112,96,0.4)",
+            }}
+            whileHover={{
+              height: 8,
+              width: i === currentScene ? 28 : 14,
+              backgroundColor:
+                i === currentScene
+                  ? "var(--color-yellow)"
+                  : "rgba(122,112,96,0.7)",
+            }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            style={{ height: 4 }}
+            className="-my-2 cursor-pointer py-2"
           />
         ))}
-      </div>
+      </nav>
 
       {!isLast ? (
         <motion.button

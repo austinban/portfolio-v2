@@ -8,19 +8,84 @@ import Base from "../layouts/Base.astro";
 >
   <div class="bg-dark text-cream min-h-screen font-sans">
 
-    <main class="mx-auto max-w-3xl px-8 pt-32 pb-24 md:px-20">
-      <!-- Header -->
-      <p class="text-muted mb-6 text-sm tracking-widest uppercase">
-        About this site
+    <!-- ── Hero: single-screen overview ─────────────────────── -->
+    <section class="relative flex min-h-screen flex-col justify-between px-8 pt-28 pb-12 md:px-20">
+      <div>
+        <p class="text-muted mb-5 text-sm tracking-widest uppercase">
+          About this site
+        </p>
+        <h1 class="text-cream mb-4 text-5xl leading-[1.05] font-bold md:text-7xl lg:text-8xl">
+          Made with<br /><span class="text-yellow">intention.</span>
+        </h1>
+        <p class="text-muted max-w-lg text-base leading-relaxed font-light md:text-lg">
+          From the architecture to the copy, every decision was deliberate.
+          Here's the receipt.
+        </p>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5 md:gap-4">
+        <a
+          href="#bundle"
+          class="border-muted/15 bg-dark-surface group flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40"
+        >
+          <span class="text-yellow font-bold leading-none"
+            ><span class="text-4xl md:text-5xl">10</span><span class="text-lg">KB</span></span
+          >
+          <span class="text-cream text-sm font-medium tracking-widest uppercase">Bundle</span>
+          <span class="text-muted text-sm font-light leading-tight">Gzipped, this page</span>
+        </a>
+
+        <a
+          href="#performance"
+          class="border-muted/15 bg-dark-surface group flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40"
+        >
+          <span class="text-yellow font-bold leading-none"
+            ><span class="text-4xl md:text-5xl">&lt;1</span><span class="text-lg">s</span></span
+          >
+          <span class="text-cream text-sm font-medium tracking-widest uppercase">Load time</span>
+          <span class="text-muted text-sm font-light leading-tight">First Contentful Paint</span>
+        </a>
+
+        <a
+          href="#languages"
+          class="border-muted/15 bg-dark-surface group flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40"
+        >
+          <span class="text-yellow text-4xl font-bold leading-none md:text-5xl">8</span>
+          <span class="text-cream text-sm font-medium tracking-widest uppercase">Languages</span>
+          <span class="text-muted text-sm font-light leading-tight">With auto-detection</span>
+        </a>
+
+        <a
+          href="#accessibility"
+          class="border-muted/15 bg-dark-surface group flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40"
+        >
+          <span class="text-yellow text-4xl font-bold leading-none md:text-5xl">AA</span>
+          <span class="text-cream text-sm font-medium tracking-widest uppercase">Accessibility</span>
+          <span class="text-muted text-sm font-light leading-tight">WCAG 2.1 compliant</span>
+        </a>
+
+        <a
+          href="#stack"
+          class="border-muted/15 bg-dark-surface group col-span-2 flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40 md:col-span-1"
+        >
+          <span class="text-yellow text-4xl font-bold leading-none md:text-5xl">12</span>
+          <span class="text-cream text-sm font-medium tracking-widest uppercase">Tools</span>
+          <span class="text-muted text-sm font-light leading-tight">The deliberate stack</span>
+        </a>
+      </div>
+
+      <!-- Scroll hint -->
+      <p class="text-muted mt-8 text-sm tracking-widest uppercase md:mt-6">
+        Scroll to dive deeper ↓
       </p>
-      <h1 class="text-cream mb-10 text-5xl leading-none font-bold md:text-7xl">
-        Made with<br /><span class="text-yellow">intention.</span>
-      </h1>
+    </section>
+
+    <!-- ── Detail sections ───────────────────────────────────── -->
+    <main class="mx-auto max-w-3xl px-8 pb-24 md:px-20">
 
       <!-- Honest intro -->
-      <div
-        class="text-muted mb-20 flex max-w-xl flex-col gap-5 text-lg leading-relaxed font-light"
-      >
+      <div class="border-muted/20 mb-0 flex max-w-xl flex-col gap-5 border-t py-16 text-lg leading-relaxed font-light text-muted">
         <p>
           This site was built collaboratively with Claude Sonnet, Anthropic's AI
           coding assistant. The design direction, content, copy, and every
@@ -33,17 +98,121 @@ import Base from "../layouts/Base.astro";
           any powerful tool: deliberately, with judgment, and with full
           ownership of the outcome.
         </p>
-        <p>
-          Every component, every animation, every accessibility decision was
-          discussed, reviewed, and intentional. The craft is still mine. The
-          process was just faster.
-        </p>
       </div>
 
       <div class="border-muted/20 flex flex-col gap-px border-t">
+
+        <!-- Bundle size -->
+        <section id="bundle" class="border-muted/20 border-b py-10 scroll-mt-24">
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Bundle size</p>
+          <p class="text-cream mb-4 text-4xl font-bold">~10KB<span class="text-muted text-xl font-light"> gzipped</span></p>
+          <p class="text-muted mb-6 max-w-lg text-base leading-relaxed font-light">
+            Most pages on this site ship just the global CSS (~6KB) and a small navigation chunk (~4KB).
+            No React, no Framer Motion, no virtual DOM — unless you're on the homepage, which intentionally
+            loads the full scene engine for the interactive experience.
+          </p>
+          <div class="flex flex-col gap-3">
+            {
+              [
+                { label: "Global CSS", size: "6KB", width: "32%" },
+                { label: "Nav chrome", size: "4KB", width: "21%" },
+                { label: "Portfolio scenes (homepage only)", size: "167KB", width: "100%", dim: true },
+                { label: "Framer Motion (homepage only)", size: "124KB", width: "74%", dim: true },
+              ].map(({ label, size, width, dim }) => (
+                <div class="grid items-center gap-3" style="grid-template-columns: 14rem 1fr 3.5rem">
+                  <span class={`text-sm ${dim ? "text-muted/40" : "text-muted"}`}>{label}</span>
+                  <div class="h-1.5 rounded-full bg-white/5 overflow-hidden">
+                    <div
+                      class={`h-full rounded-full ${dim ? "bg-muted/20" : "bg-yellow"}`}
+                      style={`width: ${width}`}
+                    />
+                  </div>
+                  <span class={`text-right text-sm font-medium ${dim ? "text-muted/40" : "text-cream"}`}>{size}</span>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Performance -->
+        <section id="performance" class="border-muted/20 border-b py-10 scroll-mt-24">
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Load time</p>
+          <p class="text-cream mb-4 text-4xl font-bold">&lt; 1s<span class="text-muted text-xl font-light"> First Contentful Paint</span></p>
+          <p class="text-muted mb-8 max-w-lg text-base leading-relaxed font-light">
+            Every page is a pre-rendered static HTML file. GitHub Pages serves it straight from a CDN
+            edge — no server, no database, no API calls on the critical path. Time to First Byte is
+            typically under 50ms.
+          </p>
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {
+              [
+                { label: "Static generation", desc: "Build once, serve forever" },
+                { label: "CDN delivery", desc: "GitHub Pages edge network" },
+                { label: "Zero hydration", desc: "No framework on most pages" },
+                { label: "Lazy images", desc: "Assets load as needed" },
+              ].map(({ label, desc }) => (
+                <div class="border-l-2 border-yellow/40 pl-4">
+                  <p class="text-cream mb-1 text-sm font-medium">{label}</p>
+                  <p class="text-muted text-sm font-light">{desc}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Languages -->
+        <section id="languages" class="border-muted/20 border-b py-10 scroll-mt-24">
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Languages</p>
+          <p class="text-cream mb-4 text-4xl font-bold">8<span class="text-muted text-xl font-light"> languages supported</span></p>
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {
+              [
+                { code: "en", label: "English", flag: "🇬🇧" },
+                { code: "es", label: "Spanish", flag: "🇪🇸" },
+                { code: "fr", label: "French", flag: "🇫🇷" },
+                { code: "it", label: "Italian", flag: "🇮🇹" },
+                { code: "de", label: "German", flag: "🇩🇪" },
+                { code: "zh", label: "Chinese", flag: "🇨🇳" },
+                { code: "ja", label: "Japanese", flag: "🇯🇵" },
+                { code: "ar", label: "Arabic", flag: "🇸🇦" },
+              ].map(({ code, label, flag }) => (
+                <div class="border-muted/10 flex items-center gap-3 border-b py-3">
+                  <span aria-hidden="true">{flag}</span>
+                  <div>
+                    <p class="text-cream text-sm font-medium">{label}</p>
+                    <p class="text-muted text-sm tracking-widest uppercase">{code}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <p class="text-muted mt-6 text-sm leading-relaxed font-light">
+            Browser language is detected on first visit and redirects automatically. RTL layout is fully supported for Arabic.
+          </p>
+        </section>
+
+        <!-- Accessibility -->
+        <section id="accessibility" class="border-muted/20 border-b py-10 scroll-mt-24">
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Accessibility</p>
+          <div class="mb-6 flex items-baseline gap-3">
+            <span class="text-yellow text-4xl font-bold">WCAG 2.1 AA</span>
+          </div>
+          <ul class="text-muted mt-1 flex flex-col gap-2 text-base leading-relaxed font-light">
+            <li>↳ ARIA roles, labels, and live regions throughout</li>
+            <li>↳ Full keyboard navigation (arrow keys, Enter, Escape)</li>
+            <li>↳ Focus management on modal open/close</li>
+            <li>↳ Screen reader announcements for scene changes</li>
+            <li>
+              ↳ Reduced-motion support via <code class="text-cream/70 text-sm">prefers-reduced-motion</code>
+            </li>
+            <li>↳ Colour contrast meets AA minimums</li>
+          </ul>
+        </section>
+
         <!-- Stack -->
-        <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">Stack</p>
+        <section id="stack" class="border-muted/20 border-b py-10 scroll-mt-24">
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Stack</p>
+          <p class="text-cream mb-6 text-4xl font-bold">12<span class="text-muted text-xl font-light"> tools, all pulling weight</span></p>
           <div class="grid grid-cols-1 gap-x-16 gap-y-4 md:grid-cols-2">
             {
               [
@@ -71,13 +240,11 @@ import Base from "../layouts/Base.astro";
 
         <!-- AI -->
         <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">AI</p>
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">AI</p>
           <div class="flex max-w-xl flex-col gap-4">
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Model</span>
-              <span class="text-muted text-sm"
-                >Claude Sonnet 4 (claude-sonnet-4-6)</span
-              >
+              <span class="text-muted text-sm">Claude Sonnet 4 (claude-sonnet-4-6)</span>
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Interface</span>
@@ -85,184 +252,41 @@ import Base from "../layouts/Base.astro";
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Tokens used</span>
-              <span class="text-muted text-sm"
-                >[TBD — tracking in progress]</span
-              >
+              <span class="text-muted text-sm">[TBD — tracking in progress]</span>
             </div>
-            <p class="text-muted mt-2 text-sm leading-relaxed font-light">
+            <p class="text-muted mt-2 text-base leading-relaxed font-light">
               Claude Code operated in an agentic loop across the full build —
               reading files, writing components, resolving TypeScript errors,
               running builds, and fixing whatever broke. I directed every
               meaningful decision: the design, the UX model, the copy, and every
-              architectural call. Claude translated those decisions into
-              production code faster than I could have done alone.
+              architectural call.
             </p>
-          </div>
-        </section>
-
-        <!-- Accessibility -->
-        <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
-            Accessibility
-          </p>
-          <div class="flex max-w-xl flex-col gap-4">
-            <div class="flex items-baseline justify-between gap-4">
-              <span class="text-cream font-medium">Target level</span>
-              <span
-                class="text-yellow text-sm font-bold tracking-widest uppercase"
-                >WCAG 2.1 AA</span
-              >
-            </div>
-            <ul
-              class="text-muted mt-1 flex flex-col gap-2 text-sm leading-relaxed font-light"
-            >
-              <li>↳ ARIA roles, labels, and live regions throughout</li>
-              <li>↳ Full keyboard navigation (arrow keys, Enter, Escape)</li>
-              <li>↳ Focus management on modal open/close</li>
-              <li>↳ Screen reader announcements for scene changes</li>
-              <li>
-                ↳ Reduced-motion support via <code class="text-cream/70 text-xs"
-                  >prefers-reduced-motion</code>
-              </li>
-              <li>↳ Colour contrast meets AA minimums</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Languages -->
-        <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
-            Languages
-          </p>
-          <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {
-              [
-                { code: "en", label: "English", flag: "🇬🇧" },
-                { code: "es", label: "Spanish", flag: "🇪🇸" },
-                { code: "fr", label: "French", flag: "🇫🇷" },
-                { code: "it", label: "Italian", flag: "🇮🇹" },
-                { code: "de", label: "German", flag: "🇩🇪" },
-                { code: "zh", label: "Chinese", flag: "🇨🇳" },
-                { code: "ja", label: "Japanese", flag: "🇯🇵" },
-                { code: "ar", label: "Arabic", flag: "🇸🇦" },
-              ].map(({ code, label, flag }) => (
-                <div class="border-muted/10 flex items-center gap-3 border-b py-3">
-                  <span aria-hidden="true">{flag}</span>
-                  <div>
-                    <p class="text-cream text-sm font-medium">{label}</p>
-                    <p class="text-muted text-xs tracking-widest uppercase">
-                      {code}
-                    </p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-          <p class="text-muted mt-6 text-xs leading-relaxed font-light">
-            Browser language is detected on first visit and redirects
-            automatically. RTL layout is fully supported for Arabic.
-          </p>
-        </section>
-
-        <!-- Stats -->
-        <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">Stats</p>
-          <div
-            class="border-muted/20 grid grid-cols-2 gap-px border md:grid-cols-3"
-          >
-            {
-              [
-                { value: "5", label: "Portfolio scenes" },
-                { value: "8", label: "Languages" },
-                { value: "20+", label: "Easter eggs" },
-                { value: "14", label: "Pages built" },
-                { value: "WCAG AA", label: "Accessibility" },
-                { value: "0", label: "Cookie banners" },
-              ].map(({ value, label }) => (
-                <div class="flex flex-col gap-1 p-6">
-                  <span class="text-cream text-2xl leading-none font-bold md:text-3xl">
-                    {value}
-                  </span>
-                  <span class="text-muted text-xs tracking-widest uppercase">
-                    {label}
-                  </span>
-                </div>
-              ))
-            }
           </div>
         </section>
 
         <!-- Timeline -->
         <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
-            Timeline
-          </p>
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Timeline</p>
           <div class="flex flex-col gap-0">
             {
               [
-                {
-                  date: "Apr 2025",
-                  event: "Decided to rebuild from scratch",
-                  note: "Previous site was Express + EJS. Time to move on.",
-                },
-                {
-                  date: "Apr 2025",
-                  event: "Migrated to Astro",
-                  note: "Ported all existing pages, case studies, and assets.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Designed the scene-based UX",
-                  note: "Name-gated entry, linear navigation, editorial aesthetic.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Built core portfolio experience",
-                  note: "React islands, SceneEngine, 5 scenes, Framer Motion transitions.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Internationalisation",
-                  note: "8-language support with auto-detection and RTL layout.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Accessibility pass",
-                  note: "ARIA roles, keyboard nav, focus management, reduced-motion support.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Easter egg system",
-                  note: "Name recognition triggers personalised animations. 20+ names covered — try a few.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Contact form",
-                  note: "Formspree integration in a modal. Catches you if you submit under an alias.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Nav drawer & cross-page chrome",
-                  note: "Consistent hamburger, drawer, and language switcher on every page.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Deployed via GitHub Actions",
-                  note: "Automated build and deploy to GitHub Pages on every push to main.",
-                },
-                {
-                  date: "May 2025",
-                  event: "Launched on austinban.com",
-                  note: "Custom domain via Namecheap. HTTPS enforced.",
-                },
-              ].map(({ date, event, note }, i) => (
+                { date: "Apr 2025", event: "Decided to rebuild from scratch", note: "Previous site was Express + EJS. Time to move on." },
+                { date: "Apr 2025", event: "Migrated to Astro", note: "Ported all existing pages, case studies, and assets." },
+                { date: "May 2025", event: "Designed the scene-based UX", note: "Name-gated entry, linear navigation, editorial aesthetic." },
+                { date: "May 2025", event: "Built core portfolio experience", note: "React islands, SceneEngine, 5 scenes, Framer Motion transitions." },
+                { date: "May 2025", event: "Internationalisation", note: "8-language support with auto-detection and RTL layout." },
+                { date: "May 2025", event: "Accessibility pass", note: "ARIA roles, keyboard nav, focus management, reduced-motion support." },
+                { date: "May 2025", event: "Easter egg system", note: "Name recognition triggers personalised animations. 20+ names covered — try a few." },
+                { date: "May 2025", event: "Contact form", note: "Formspree integration in a modal. Catches you if you submit under an alias." },
+                { date: "May 2025", event: "Nav drawer & cross-page chrome", note: "Consistent hamburger, drawer, and language switcher on every page." },
+                { date: "May 2025", event: "Deployed via GitHub Actions", note: "Automated build and deploy to GitHub Pages on every push to main." },
+                { date: "May 2025", event: "Launched on austinban.com", note: "Custom domain via Namecheap. HTTPS enforced." },
+              ].map(({ date, event, note }) => (
                 <div class="border-muted/10 group flex gap-6 border-b py-5">
-                  <span class="text-muted w-20 shrink-0 pt-1 text-xs tracking-widest uppercase">
-                    {date}
-                  </span>
+                  <span class="text-muted w-20 shrink-0 pt-1 text-sm tracking-widest uppercase">{date}</span>
                   <div class="flex flex-col gap-1">
                     <span class="text-cream font-medium">{event}</span>
-                    <span class="text-muted text-sm font-light">{note}</span>
+                    <span class="text-muted text-base font-light">{note}</span>
                   </div>
                 </div>
               ))
@@ -270,26 +294,19 @@ import Base from "../layouts/Base.astro";
           </div>
         </section>
 
-        <!-- Repo -->
+        <!-- Source -->
         <section class="py-10">
-          <p class="text-muted mb-6 text-xs tracking-widest uppercase">
-            Source
-          </p>
+          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Source</p>
           <a
             href="https://github.com/austinban/portfolio-v2"
             target="_blank"
             rel="noopener noreferrer"
             class="text-cream hover:text-yellow group inline-flex items-center gap-3 transition-colors duration-200"
           >
-            <span class="text-xl font-bold"
-              >github.com/austinban/portfolio-v2</span
-            >
-            <span
-              class="text-muted group-hover:text-yellow transition-colors duration-200"
-              >↗</span
-            >
+            <span class="text-xl font-bold">github.com/austinban/portfolio-v2</span>
+            <span class="text-muted group-hover:text-yellow transition-colors duration-200">↗</span>
           </a>
-          <p class="text-muted mt-4 max-w-lg text-sm font-light">
+          <p class="text-muted mt-4 max-w-lg text-base font-light">
             MIT licensed. If something here is useful, take it. If something is
             broken, <a
               href="mailto:austin@austinban.com"

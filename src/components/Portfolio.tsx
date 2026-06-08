@@ -198,7 +198,7 @@ function PortfolioInner() {
         aria-label={drawerOpen ? "Close navigation" : "Open navigation"}
         aria-expanded={drawerOpen}
         aria-controls="site-nav"
-        className="text-muted hover:text-cream fixed top-6 left-8 z-50 transition-colors duration-150"
+        className="text-muted hover:text-cream fixed top-6 left-8 z-50 -m-2 p-2 transition-colors duration-150"
       >
         <AnimatePresence mode="wait" initial={false}>
           {drawerOpen ? (
