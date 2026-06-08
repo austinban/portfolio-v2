@@ -10,7 +10,7 @@ import { isProfane } from "../utils/profanity";
 import type { Translations } from "../i18n/types";
 import { en } from "../i18n";
 
-export const TOTAL_SCENES = 5;
+export const TOTAL_SCENES = 6;
 const STORAGE_KEY = "portfolio_visitor";
 
 type Direction = 1 | -1;

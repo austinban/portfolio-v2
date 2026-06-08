@@ -9,11 +9,7 @@ const SCENE_LINKS: { label: string; scene: number }[] = [
   { label: "About", scene: 3 },
   { label: "Work", scene: 2 },
   { label: "Contact", scene: 4 },
-];
-
-// Regular href links
-const HREF_LINKS = [
-  { label: "About this site", href: "/about-this-site" },
+  { label: "About this site", scene: 5 },
 ];
 
 const SOCIAL_LINKS = [
@@ -47,14 +43,7 @@ export default function NavDrawer({ open, onClose, onGoTo }: Props) {
     onClose();
   };
 
-  const allNavItems = [
-    ...SCENE_LINKS.map((l, i) => ({ ...l, type: "scene" as const, index: i })),
-    ...HREF_LINKS.map((l, i) => ({
-      ...l,
-      type: "href" as const,
-      index: SCENE_LINKS.length + i,
-    })),
-  ];
+  const allNavItems = SCENE_LINKS.map((l, i) => ({ ...l, index: i }));
 
   return (
     <AnimatePresence>
@@ -91,21 +80,12 @@ export default function NavDrawer({ open, onClose, onGoTo }: Props) {
                 initial="hidden"
                 animate="visible"
               >
-                {item.type === "scene" ? (
-                  <button
-                    onClick={() => handleSceneNav(item.scene)}
-                    className="text-cream hover:text-yellow text-left text-2xl leading-none font-bold transition-colors duration-150"
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <a
-                    href={item.href}
-                    className="text-cream hover:text-yellow text-2xl leading-none font-bold transition-colors duration-150"
-                  >
-                    {item.label}
-                  </a>
-                )}
+                <button
+                  onClick={() => handleSceneNav(item.scene)}
+                  className="text-cream hover:text-yellow text-left text-2xl leading-none font-bold transition-colors duration-150"
+                >
+                  {item.label}
+                </button>
               </motion.li>
             ))}
 

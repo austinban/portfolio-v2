@@ -16,6 +16,7 @@ import SceneWhatIDo from "./sections/SceneWhatIDo";
 import SceneWork from "./sections/SceneWork";
 import SceneAbout from "./sections/SceneAbout";
 import SceneContact from "./sections/SceneContact";
+import SceneAboutSite from "./sections/SceneAboutSite";
 import LanguageSwitcher from "./ui/LanguageSwitcher";
 import NavDrawer, { DRAWER_WIDTH } from "./ui/NavDrawer";
 import NamePeek from "./ui/NamePeek";
@@ -26,6 +27,7 @@ const SCENES = [
   SceneWork,
   SceneAbout,
   SceneContact,
+  SceneAboutSite,
 ];
 
 const sceneVariants: Variants = {

@@ -11,7 +11,7 @@ import Base from "../layouts/Base.astro";
     <!-- ── Hero: single-screen overview ─────────────────────── -->
     <section class="relative flex min-h-screen flex-col justify-between px-8 pt-28 pb-12 md:px-20">
       <div>
-        <p class="text-muted mb-5 text-sm tracking-widest uppercase">
+        <p class="text-muted mb-5 text-base tracking-widest uppercase">
           About this site
         </p>
         <h1 class="text-cream mb-4 text-5xl leading-[1.05] font-bold md:text-7xl lg:text-8xl">
@@ -32,8 +32,8 @@ import Base from "../layouts/Base.astro";
           <span class="text-yellow font-bold leading-none"
             ><span class="text-4xl md:text-5xl">10</span><span class="text-lg">KB</span></span
           >
-          <span class="text-cream text-sm font-medium tracking-widest uppercase">Bundle</span>
-          <span class="text-muted text-sm font-light leading-tight">Gzipped, this page</span>
+          <span class="text-cream text-base font-medium tracking-wider uppercase">Bundle</span>
+          <span class="text-muted text-base font-light leading-tight">Gzipped, this page</span>
         </a>
 
         <a
@@ -43,8 +43,8 @@ import Base from "../layouts/Base.astro";
           <span class="text-yellow font-bold leading-none"
             ><span class="text-4xl md:text-5xl">&lt;1</span><span class="text-lg">s</span></span
           >
-          <span class="text-cream text-sm font-medium tracking-widest uppercase">Load time</span>
-          <span class="text-muted text-sm font-light leading-tight">First Contentful Paint</span>
+          <span class="text-cream text-base font-medium tracking-wider uppercase">Load time</span>
+          <span class="text-muted text-base font-light leading-tight">First Contentful Paint</span>
         </a>
 
         <a
@@ -52,8 +52,8 @@ import Base from "../layouts/Base.astro";
           class="border-muted/15 bg-dark-surface group flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40"
         >
           <span class="text-yellow text-4xl font-bold leading-none md:text-5xl">8</span>
-          <span class="text-cream text-sm font-medium tracking-widest uppercase">Languages</span>
-          <span class="text-muted text-sm font-light leading-tight">With auto-detection</span>
+          <span class="text-cream text-base font-medium tracking-wider uppercase">Languages</span>
+          <span class="text-muted text-base font-light leading-tight">With auto-detection</span>
         </a>
 
         <a
@@ -61,8 +61,8 @@ import Base from "../layouts/Base.astro";
           class="border-muted/15 bg-dark-surface group flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40"
         >
           <span class="text-yellow text-4xl font-bold leading-none md:text-5xl">AA</span>
-          <span class="text-cream text-sm font-medium tracking-widest uppercase">Accessibility</span>
-          <span class="text-muted text-sm font-light leading-tight">WCAG 2.1 compliant</span>
+          <span class="text-cream text-base font-medium tracking-wider uppercase">Accessibility</span>
+          <span class="text-muted text-base font-light leading-tight">WCAG 2.1 compliant</span>
         </a>
 
         <a
@@ -70,13 +70,13 @@ import Base from "../layouts/Base.astro";
           class="border-muted/15 bg-dark-surface group col-span-2 flex flex-col gap-2 rounded-xl border p-5 transition-colors duration-200 hover:border-yellow/40 md:col-span-1"
         >
           <span class="text-yellow text-4xl font-bold leading-none md:text-5xl">12</span>
-          <span class="text-cream text-sm font-medium tracking-widest uppercase">Tools</span>
-          <span class="text-muted text-sm font-light leading-tight">The deliberate stack</span>
+          <span class="text-cream text-base font-medium tracking-wider uppercase">Tools</span>
+          <span class="text-muted text-base font-light leading-tight">The deliberate stack</span>
         </a>
       </div>
 
       <!-- Scroll hint -->
-      <p class="text-muted mt-8 text-sm tracking-widest uppercase md:mt-6">
+      <p class="text-muted mt-8 text-base tracking-widest uppercase md:mt-6">
         Scroll to dive deeper ↓
       </p>
     </section>
@@ -104,9 +104,9 @@ import Base from "../layouts/Base.astro";
 
         <!-- Bundle size -->
         <section id="bundle" class="border-muted/20 border-b py-10 scroll-mt-24">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Bundle size</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Bundle size</p>
           <p class="text-cream mb-4 text-4xl font-bold">~10KB<span class="text-muted text-xl font-light"> gzipped</span></p>
-          <p class="text-muted mb-6 max-w-lg text-base leading-relaxed font-light">
+          <p class="text-muted mb-6 max-w-lg text-lg leading-relaxed font-light">
             Most pages on this site ship just the global CSS (~6KB) and a small navigation chunk (~4KB).
             No React, no Framer Motion, no virtual DOM — unless you're on the homepage, which intentionally
             loads the full scene engine for the interactive experience.
@@ -120,14 +120,14 @@ import Base from "../layouts/Base.astro";
                 { label: "Framer Motion (homepage only)", size: "124KB", width: "74%", dim: true },
               ].map(({ label, size, width, dim }) => (
                 <div class="grid items-center gap-3" style="grid-template-columns: 14rem 1fr 3.5rem">
-                  <span class={`text-sm ${dim ? "text-muted/40" : "text-muted"}`}>{label}</span>
+                  <span class={`text-base ${dim ? "text-muted/40" : "text-muted"}`}>{label}</span>
                   <div class="h-1.5 rounded-full bg-white/5 overflow-hidden">
                     <div
                       class={`h-full rounded-full ${dim ? "bg-muted/20" : "bg-yellow"}`}
                       style={`width: ${width}`}
                     />
                   </div>
-                  <span class={`text-right text-sm font-medium ${dim ? "text-muted/40" : "text-cream"}`}>{size}</span>
+                  <span class={`text-right text-base font-medium ${dim ? "text-muted/40" : "text-cream"}`}>{size}</span>
                 </div>
               ))
             }
@@ -136,9 +136,9 @@ import Base from "../layouts/Base.astro";
 
         <!-- Performance -->
         <section id="performance" class="border-muted/20 border-b py-10 scroll-mt-24">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Load time</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Load time</p>
           <p class="text-cream mb-4 text-4xl font-bold">&lt; 1s<span class="text-muted text-xl font-light"> First Contentful Paint</span></p>
-          <p class="text-muted mb-8 max-w-lg text-base leading-relaxed font-light">
+          <p class="text-muted mb-8 max-w-lg text-lg leading-relaxed font-light">
             Every page is a pre-rendered static HTML file. GitHub Pages serves it straight from a CDN
             edge — no server, no database, no API calls on the critical path. Time to First Byte is
             typically under 50ms.
@@ -152,8 +152,8 @@ import Base from "../layouts/Base.astro";
                 { label: "Lazy images", desc: "Assets load as needed" },
               ].map(({ label, desc }) => (
                 <div class="border-l-2 border-yellow/40 pl-4">
-                  <p class="text-cream mb-1 text-sm font-medium">{label}</p>
-                  <p class="text-muted text-sm font-light">{desc}</p>
+                  <p class="text-cream mb-1 text-base font-medium">{label}</p>
+                  <p class="text-muted text-base font-light">{desc}</p>
                 </div>
               ))
             }
@@ -162,7 +162,7 @@ import Base from "../layouts/Base.astro";
 
         <!-- Languages -->
         <section id="languages" class="border-muted/20 border-b py-10 scroll-mt-24">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Languages</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Languages</p>
           <p class="text-cream mb-4 text-4xl font-bold">8<span class="text-muted text-xl font-light"> languages supported</span></p>
           <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
             {
@@ -179,31 +179,31 @@ import Base from "../layouts/Base.astro";
                 <div class="border-muted/10 flex items-center gap-3 border-b py-3">
                   <span aria-hidden="true">{flag}</span>
                   <div>
-                    <p class="text-cream text-sm font-medium">{label}</p>
-                    <p class="text-muted text-sm tracking-widest uppercase">{code}</p>
+                    <p class="text-cream text-base font-medium">{label}</p>
+                    <p class="text-muted text-base tracking-widest uppercase">{code}</p>
                   </div>
                 </div>
               ))
             }
           </div>
-          <p class="text-muted mt-6 text-sm leading-relaxed font-light">
+          <p class="text-muted mt-6 text-base leading-relaxed font-light">
             Browser language is detected on first visit and redirects automatically. RTL layout is fully supported for Arabic.
           </p>
         </section>
 
         <!-- Accessibility -->
         <section id="accessibility" class="border-muted/20 border-b py-10 scroll-mt-24">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Accessibility</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Accessibility</p>
           <div class="mb-6 flex items-baseline gap-3">
             <span class="text-yellow text-4xl font-bold">WCAG 2.1 AA</span>
           </div>
-          <ul class="text-muted mt-1 flex flex-col gap-2 text-base leading-relaxed font-light">
+          <ul class="text-muted mt-1 flex flex-col gap-2 text-lg leading-relaxed font-light">
             <li>↳ ARIA roles, labels, and live regions throughout</li>
             <li>↳ Full keyboard navigation (arrow keys, Enter, Escape)</li>
             <li>↳ Focus management on modal open/close</li>
             <li>↳ Screen reader announcements for scene changes</li>
             <li>
-              ↳ Reduced-motion support via <code class="text-cream/70 text-sm">prefers-reduced-motion</code>
+              ↳ Reduced-motion support via <code class="text-cream/70 text-base">prefers-reduced-motion</code>
             </li>
             <li>↳ Colour contrast meets AA minimums</li>
           </ul>
@@ -211,7 +211,7 @@ import Base from "../layouts/Base.astro";
 
         <!-- Stack -->
         <section id="stack" class="border-muted/20 border-b py-10 scroll-mt-24">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Stack</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Stack</p>
           <p class="text-cream mb-6 text-4xl font-bold">12<span class="text-muted text-xl font-light"> tools, all pulling weight</span></p>
           <div class="grid grid-cols-1 gap-x-16 gap-y-4 md:grid-cols-2">
             {
@@ -231,7 +231,7 @@ import Base from "../layouts/Base.astro";
               ].map(({ name, role }) => (
                 <div class="border-muted/10 flex items-baseline justify-between gap-4 border-b py-2">
                   <span class="text-cream font-medium">{name}</span>
-                  <span class="text-muted text-right text-sm">{role}</span>
+                  <span class="text-muted text-right text-base">{role}</span>
                 </div>
               ))
             }
@@ -240,21 +240,21 @@ import Base from "../layouts/Base.astro";
 
         <!-- AI -->
         <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">AI</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">AI</p>
           <div class="flex max-w-xl flex-col gap-4">
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Model</span>
-              <span class="text-muted text-sm">Claude Sonnet 4 (claude-sonnet-4-6)</span>
+              <span class="text-muted text-base">Claude Sonnet 4 (claude-sonnet-4-6)</span>
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Interface</span>
-              <span class="text-muted text-sm">Claude Code (CLI)</span>
+              <span class="text-muted text-base">Claude Code (CLI)</span>
             </div>
             <div class="flex items-baseline justify-between gap-4">
               <span class="text-cream font-medium">Tokens used</span>
-              <span class="text-muted text-sm">[TBD — tracking in progress]</span>
+              <span class="text-muted text-base">[TBD — tracking in progress]</span>
             </div>
-            <p class="text-muted mt-2 text-base leading-relaxed font-light">
+            <p class="text-muted mt-2 text-lg leading-relaxed font-light">
               Claude Code operated in an agentic loop across the full build —
               reading files, writing components, resolving TypeScript errors,
               running builds, and fixing whatever broke. I directed every
@@ -266,7 +266,7 @@ import Base from "../layouts/Base.astro";
 
         <!-- Timeline -->
         <section class="border-muted/20 border-b py-10">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Timeline</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Timeline</p>
           <div class="flex flex-col gap-0">
             {
               [
@@ -283,10 +283,10 @@ import Base from "../layouts/Base.astro";
                 { date: "May 2025", event: "Launched on austinban.com", note: "Custom domain via Namecheap. HTTPS enforced." },
               ].map(({ date, event, note }) => (
                 <div class="border-muted/10 group flex gap-6 border-b py-5">
-                  <span class="text-muted w-20 shrink-0 pt-1 text-sm tracking-widest uppercase">{date}</span>
+                  <span class="text-muted w-20 shrink-0 pt-1 text-base tracking-widest uppercase">{date}</span>
                   <div class="flex flex-col gap-1">
                     <span class="text-cream font-medium">{event}</span>
-                    <span class="text-muted text-base font-light">{note}</span>
+                    <span class="text-muted text-lg font-light">{note}</span>
                   </div>
                 </div>
               ))
@@ -296,7 +296,7 @@ import Base from "../layouts/Base.astro";
 
         <!-- Source -->
         <section class="py-10">
-          <p class="text-muted mb-6 text-sm tracking-widest uppercase">Source</p>
+          <p class="text-muted mb-6 text-base tracking-widest uppercase">Source</p>
           <a
             href="https://github.com/austinban/portfolio-v2"
             target="_blank"
@@ -306,7 +306,7 @@ import Base from "../layouts/Base.astro";
             <span class="text-xl font-bold">github.com/austinban/portfolio-v2</span>
             <span class="text-muted group-hover:text-yellow transition-colors duration-200">↗</span>
           </a>
-          <p class="text-muted mt-4 max-w-lg text-base font-light">
+          <p class="text-muted mt-4 max-w-lg text-lg font-light">
             MIT licensed. If something here is useful, take it. If something is
             broken, <a
               href="mailto:austin@austinban.com"
