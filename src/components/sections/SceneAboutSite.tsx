@@ -60,6 +60,7 @@ const TIMELINE = [
   { date: "May 2025", event: "Nav drawer & cross-page chrome", note: "Consistent hamburger, drawer, and language switcher on every page." },
   { date: "May 2025", event: "Deployed via GitHub Actions", note: "Automated build and deploy to GitHub Pages on every push to main." },
   { date: "May 2025", event: "Launched on austinban.com", note: "Custom domain via Namecheap. HTTPS enforced." },
+  { date: "Jun 2026", event: "Scene navigation & mobile polish", note: "Clickable progress indicators, mobile tap targets, About this site as an inline scene, Cloudflare Analytics." },
 ];
 
 export default function SceneAboutSite() {
